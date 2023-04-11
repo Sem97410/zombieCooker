@@ -4,28 +4,37 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    // Variable pour stocker la position du joueur
-    [SerializeField]
-    private Transform player;
 
-    // Variable pour définir la distance entre le joueur et la caméra
     [SerializeField]
-    private float distance;
-        
-    // Variable pour définir la hauteur de la caméra par rapport au joueur
+    private Transform _target;
     [SerializeField]
-    private float height;
+    private float _mouseSensitivity;
+    private float _cameraVerticalRotation;
 
-    void Update()
+
+    
+
+    private void Update()
     {
-        // Calcul de la nouvelle position de la caméra en fonction de la position du joueur
-        Vector3 pos = player.position - player.forward * distance;
-        pos.y += height;
+        MoveCamera();   
+    }
+    private void MoveCamera()
+    {
 
-        // Mise à jour de la position de la caméra
-        transform.position = pos;
+        // Collect Mouse Input
 
-        // Mise à jour de la rotation de la caméra pour qu'elle regarde toujours vers le joueur
-        transform.LookAt(player.position);
+        float inputX = Input.GetAxis("Mouse X") * _mouseSensitivity;
+        float inputY = Input.GetAxis("Mouse Y") * _mouseSensitivity;
+
+        // Rotate the Camera around its local X axis
+
+        _cameraVerticalRotation -= inputY;
+        _cameraVerticalRotation = Mathf.Clamp(_cameraVerticalRotation, -90f, 90f);
+        transform.localEulerAngles = Vector3.right * _cameraVerticalRotation;
+
+
+        // Rotate the Player Object and the Camera around its Y axis
+
+        _target.Rotate(Vector3.up * inputX);
     }
 }
