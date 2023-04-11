@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LivingObject : IDamageable
+public class LivingObject : MonoBehaviour, IDamageable
 {
     private int _maxLife;
     private int _currentLife;
