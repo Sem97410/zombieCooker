@@ -6,7 +6,7 @@ public class Clifford : MonoBehaviour
 {
     void Start()
     {
-        Debug.Log("coucou les copains <3");
+        Debug.Log("coucou les copains !!");
     }
 
 
