@@ -5,7 +5,7 @@ using UnityEngine;
 public class LivingObject : MonoBehaviour, IDamageable
 {
     private int _maxLife;
-    private int _currentLife;
+    protected int _currentLife;
     private bool _isDead;
 
     public int MaxLife { get => _maxLife; set => _maxLife = value; }
