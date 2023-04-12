@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Pistol : Weapon
 {
+
     protected override void OnTriggerEnter(Collider other)
     {
         base.OnTriggerEnter(other);
@@ -17,8 +18,10 @@ public class Pistol : Weapon
     public override void PickUpItem()
     {
         MainCharacter.HavePistol = true;
-        MainCharacter.Weapons.Add(this);
-        Destroy(gameObject);
+        SetGameObject(this.gameObject);
+        MainCharacter.ChoixIndex = MainCharacter.PickUps.Count;
+        MainCharacter.PickUps.Add((PickUp)this);
+        Debug.Log(MainCharacter.PickUps);
     }
     private void Shoot()
     {
@@ -29,6 +32,9 @@ public class Pistol : Weapon
     {
 
     }
+
+    
+    
 
 
 

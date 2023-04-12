@@ -8,13 +8,15 @@ public class mainCharacter : LivingObject
     [SerializeField]
     private float _movementSpeed;
 
-    private List<Weapon> _weapon;
+    private List<PickUp> _pickUp;
 
     [SerializeField]
     private float _runSpeedMultiplication;      //cette variable est multiplié avec la vitesse pour calculer la vitesse de course
 
     private PickUp _itemInteractable;
 
+    private int _choixIndex;
+    [SerializeField] private Transform _itemPos;
 
 
     private float _maxHunger;
@@ -31,7 +33,10 @@ public class mainCharacter : LivingObject
     public bool CanInteract { get => _canInteract; set => _canInteract = value; }
     public PickUp ItemInteractable { get => _itemInteractable; set => _itemInteractable = value; }
     public bool HavePistol { get => _havePistol; set => _havePistol = value; }
-    public List<Weapon> Weapons { get => _weapon; set => _weapon = value; }
+    public List<PickUp> PickUps { get => _pickUp; set => _pickUp = value; }
+    public int ChoixIndex { get => _choixIndex; set => _choixIndex = value; }
+    public Transform ItemPos { get => _itemPos; set => _itemPos = value; }
+
     [SerializeField]
     private float _hungerDecreaseRun; // la perte de faim quand on court
 
@@ -44,11 +49,10 @@ public class mainCharacter : LivingObject
         //lock le cursor pour la caméra
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
-        Weapons = new List<Weapon>();
-
+        PickUps = new List<PickUp>();
         _currentLife = 100;
 
-
+        ChoixIndex = 0;
 
         StartCoroutine("DecreaseHunger");
 
@@ -56,7 +60,7 @@ public class mainCharacter : LivingObject
     private void Update()
     {
         Move();
-
+        ShowItemSelected();
     }
 
     //Crash après l'utilisation de la touche maj si  _runSpeedMultiplication == 0
@@ -95,7 +99,6 @@ public class mainCharacter : LivingObject
     }
 
 
-
     IEnumerator DecreaseHunger()
     {
         while (_currentHunger > 0)
@@ -111,7 +114,6 @@ public class mainCharacter : LivingObject
         }
     }
 
-
     public void Interact()
     {
         if (_canInteract && ItemInteractable != null)
@@ -123,7 +125,49 @@ public class mainCharacter : LivingObject
         else return;
     }
 
+    public void ShowItemSelected()
+    {
+        if (PickUps == null || GetItemSelected()== null) return;
 
+
+        if (Input.GetButtonDown("Item1"))
+        {
+            ChoixIndex = 0;
+            EnleverItemEquipe(GetItemSelected().GetGameObject());
+
+        }
+        if (Input.GetButtonDown("Item2"))
+        {
+            ChoixIndex = 1;
+            EnleverItemEquipe(GetItemSelected().GetGameObject());
+
+        }
+
+        AfficherItemEquipe(GetItemSelected().GetGameObject());
+    }
+
+
+    public PickUp GetItemSelected()
+    {
+        Debug.Log(PickUps.Count +" " + ChoixIndex);
+        if (PickUps != null && PickUps.Count > 0 && ChoixIndex < PickUps.Count)
+            return PickUps[ChoixIndex];
+        else return null;
+    }
+
+    public void AfficherItemEquipe(GameObject go)
+    {
+        if (go == null) return;
+        go.SetActive(true);
+        go.transform.parent = this.ItemPos;
+        go.transform.localPosition = Vector3.zero;
+        go.transform.rotation = Quaternion.Euler(0, 0, 0);
+    }
+    public void EnleverItemEquipe(GameObject go)
+    {
+        if (go == null) return;
+        go.SetActive(false);
+    }
 
 
 }

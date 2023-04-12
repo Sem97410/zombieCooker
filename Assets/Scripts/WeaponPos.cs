@@ -6,7 +6,6 @@ public class WeaponPos : MonoBehaviour
 {
     [SerializeField] private Transform _camera;
 
-
     private void Update()
     {
         transform.localEulerAngles = _camera.localEulerAngles;

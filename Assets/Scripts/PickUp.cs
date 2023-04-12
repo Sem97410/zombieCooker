@@ -6,6 +6,8 @@ public class PickUp : MonoBehaviour
 {
     private mainCharacter _mainCharacter;
     private bool _isPickable;
+    private GameObject _go;
+
 
     public bool IsPickable { get => _isPickable; set => _isPickable = value; }
     public mainCharacter MainCharacter { get => _mainCharacter; set => _mainCharacter = value; }
@@ -38,6 +40,16 @@ public class PickUp : MonoBehaviour
     public virtual void PickUpItem()
     {
 
+    }
+
+    public void SetGameObject(GameObject go)
+    {
+        this._go = go;
+    }
+
+    public GameObject GetGameObject()
+    {
+        return _go;
     }
 
 }
