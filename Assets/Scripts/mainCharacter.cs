@@ -13,7 +13,7 @@ public class mainCharacter : LivingObject
     [SerializeField]
     private float _runSpeedMultiplication;      //cette variable est multiplié avec la vitesse pour calculer la vitesse de course
 
-    private PickUp _itemInteracable;
+    private PickUp _itemInteractable;
 
 
 
@@ -29,7 +29,7 @@ public class mainCharacter : LivingObject
     private float _hungerDecrease;   //la vitesse a laquelle on perd de la faim
 
     public bool CanInteract { get => _canInteract; set => _canInteract = value; }
-    public PickUp ItemInteracable { get => _itemInteracable; set => _itemInteracable = value; }
+    public PickUp ItemInteractable { get => _itemInteractable; set => _itemInteractable = value; }
     public bool HavePistol { get => _havePistol; set => _havePistol = value; }
     public List<Weapon> Weapons { get => _weapon; set => _weapon = value; }
     [SerializeField]
@@ -80,8 +80,6 @@ public class mainCharacter : LivingObject
                 //gameManager.AddFX(_walkFx, this.transform.position, transform.rotation);
 
             }
-
-
         }
         else
         {
@@ -113,13 +111,14 @@ public class mainCharacter : LivingObject
         }
     }
 
-    public void OnInteract()
+
+    public void Interact()
     {
-        if (_canInteract && ItemInteracable != null)
+        if (_canInteract && ItemInteractable != null)
         {
-            ItemInteracable.PickUpItem();
+            ItemInteractable.PickUpItem();
             CanInteract = false;
-            ItemInteracable = null;
+            ItemInteractable = null;
         }
         else return;
     }

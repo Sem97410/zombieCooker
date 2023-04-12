@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class gameManager : MonoBehaviour
@@ -7,7 +8,7 @@ public class gameManager : MonoBehaviour
     [SerializeField]
     private static gameManager _gameManager = null;
 
-
+    //public static List<Food> ingredients = new List<Food>();
 
     private void Awake()
     {

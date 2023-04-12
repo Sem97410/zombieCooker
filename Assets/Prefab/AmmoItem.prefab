@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1066530237568678774}
   - component: {fileID: 1066530237568678775}
-  - component: {fileID: 1066530237568678772}
+  - component: {fileID: 7714184677231425594}
   m_Layer: 0
   m_Name: AmmoItem
   m_TagString: Untagged
@@ -46,7 +46,7 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 2
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1066530237568678772
+--- !u!114 &7714184677231425594
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

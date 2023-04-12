@@ -13,6 +13,7 @@ public class Ammo : PickUp
     {
         base.OnTriggerExit(other);
     }
+
     public override void PickUpItem()
     {
         Debug.Log("+10 Ammo");
