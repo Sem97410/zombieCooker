@@ -7,10 +7,15 @@ public class mainCharacter : LivingObject
     [SerializeField]    
     private float _movementSpeed;
 
+    [SerializeField]
+    private float _runSpeedMultiplication;      //cette variable est multiplié avec la vitesse pour calculer la vitesse de course
    
 
     private float _maxHunger;
     private float _cuurentHunger;
+
+
+    private bool _isRunning;
 
 
     private void Start()
@@ -23,6 +28,7 @@ public class mainCharacter : LivingObject
     private void Update()
     {
         Move();
+        Run();
     }
 
     private void Move()
@@ -33,6 +39,29 @@ public class mainCharacter : LivingObject
         
     }
 
+    private void Run()
+    {
+        if (Input.GetButton("Run"))
+        {
+            if (_isRunning == false)
+            {
+                _movementSpeed = _movementSpeed * _runSpeedMultiplication;
+                     _isRunning = true;
+            }
+           
+            
+        }
+        else
+        {
+            if (_isRunning == true)
+            {
+            _isRunning = false;
+
+            _movementSpeed = _movementSpeed / _runSpeedMultiplication;
+        }
+
+            }
+    }
 
 
     
