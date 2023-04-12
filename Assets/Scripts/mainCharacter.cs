@@ -23,12 +23,15 @@ public class mainCharacter : LivingObject
 
     private bool _isRunning;
 
-
+    [SerializeField]
+    private Fx _walkFx;
     private void Start()
     {
         //lock le cursor pour la caméra
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
+
+        _currentLife = 100;
 
         StartCoroutine("DecreaseHunger");
 
@@ -36,7 +39,8 @@ public class mainCharacter : LivingObject
     private void Update()
     {
         Move();
-        
+        Debug.Log(_currentLife);
+
     }
 
     private void Move()
@@ -44,7 +48,6 @@ public class mainCharacter : LivingObject
         float horizontalInput = Input.GetAxis("Horizontal") * _movementSpeed * Time.deltaTime; ;
         float verticalInput = Input.GetAxis("Vertical") * _movementSpeed * Time.deltaTime; ;
         transform.Translate(horizontalInput, 0, verticalInput);
-
     }
 
     public void Run()  //la méthode est appelé grâce aux event de l'input player
@@ -56,6 +59,8 @@ public class mainCharacter : LivingObject
                 _movementSpeed = _movementSpeed * _runSpeedMultiplication;
                 _hungerDecrease = _hungerDecrease / _hungerDecreaseRun;          //augmente la perte de faim quand on court
                 _isRunning = true;
+                //gameManager.AddFX(_walkFx, this.transform.position, transform.rotation);
+
             }
 
 
@@ -75,13 +80,18 @@ public class mainCharacter : LivingObject
 
 
 
-    IEnumerator  DecreaseHunger()
+    IEnumerator DecreaseHunger()
     {
         while (_currentHunger > 0)
         {
 
-         yield return new WaitForSeconds(_hungerDecrease);
-        _currentHunger -= 1;
+            yield return new WaitForSeconds(_hungerDecrease);
+            _currentHunger -= 1;
+        }
+        while (_currentHunger == 0)
+        {
+                yield return new WaitForSeconds(1f);
+                _currentLife -= 1;
         }
     }
 
