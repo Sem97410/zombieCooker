@@ -43,6 +43,8 @@ public class mainCharacter : LivingObject
 
     }
 
+    //Crash après l'utilisation de la touche maj si  _runSpeedMultiplication == 0
+    //TODO : Rajouter un test pour eviter que ça plante
     private void Move()
     {
         float horizontalInput = Input.GetAxis("Horizontal") * _movementSpeed * Time.deltaTime; ;
