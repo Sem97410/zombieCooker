@@ -48,6 +48,8 @@ public class mainCharacter : LivingObject
 
         _currentLife = 100;
 
+
+
         StartCoroutine("DecreaseHunger");
 
     }
