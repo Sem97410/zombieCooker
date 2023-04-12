@@ -16,4 +16,14 @@ public class Weapon : PickUp
     public float FireRate { get => _fireRate; set => _fireRate = value; }
     public float Range { get => _range; set => _range = value; }
 
+
+    protected override void OnTriggerEnter(Collider other)
+    {
+        base.OnTriggerEnter(other);
+    }
+
+    protected override void OnTriggerExit(Collider other)
+    {
+        base.OnTriggerExit(other);
+    }
 }
