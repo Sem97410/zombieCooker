@@ -60,7 +60,7 @@ public class Zombie : LivingObject
     //    }
     //}
 
-    private void Update()
+    private void FixedUpdate()
     {
         Movement();
     }
@@ -70,10 +70,10 @@ public class Zombie : LivingObject
         if (_isPatrol)
         {
             // Choisi un autre point de destination lorque le zombie arrive proche de sa destination
-            if (!_agent.pathPending && _agent.remainingDistance < 0.5f)
+            if (!_agent.pathPending && _agent.remainingDistance < 0.5f && !_agent.isStopped)
             {
                 _agent.isStopped = true;
-                StopCoroutine(WaitOnDestination());
+                StopCoroutine("WaitOnDestination");
                 StartCoroutine(WaitOnDestination());
             }
         }
@@ -83,9 +83,12 @@ public class Zombie : LivingObject
     {
         if (_waypoints.Length == 0) return;
 
+        _agent.isStopped = false;
+
         _agent.destination = _waypoints[_currentWaypointIndex].position;
 
         _currentWaypointIndex = (_currentWaypointIndex + 1 ) % _waypoints.Length;
+        Debug.Log("Destination : " + _currentWaypointIndex);
     }
 
     IEnumerator WaitOnDestination()
