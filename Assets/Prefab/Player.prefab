@@ -487,7 +487,19 @@ MonoBehaviour:
     m_ActionId: 6d9af1d4-cf1c-4a88-8f5b-4573becc2a4b
     m_ActionName: Player/Fire[/Mouse/leftButton]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6091596465544781638}
+        m_TargetAssemblyTypeName: mainCharacter, Assembly-CSharp
+        m_MethodName: Interact
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 288e61b9-3100-4ce2-96dd-79320138bfea
     m_ActionName: Player/Interact[/Keyboard/e]
   - m_PersistentCalls:

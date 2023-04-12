@@ -56,7 +56,6 @@ public class mainCharacter : LivingObject
     private void Update()
     {
         Move();
-        Debug.Log(_currentLife);
 
     }
 
@@ -112,7 +111,8 @@ public class mainCharacter : LivingObject
         }
     }
 
-    public void OnInteract(InputValue value)
+
+    public void Interact()
     {
         if (_canInteract && ItemInteractable != null)
         {
@@ -123,13 +123,6 @@ public class mainCharacter : LivingObject
         else return;
     }
 
-    public void OnFire(InputValue value)
-    {
-        if (HavePistol)
-        {
-            
-        }
-    }
 
 
 
