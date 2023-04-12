@@ -21,7 +21,7 @@ public class PickUp : MonoBehaviour
         {
             IsPickable = true;
             other.gameObject.GetComponent<mainCharacter>().CanInteract = true;
-            other.gameObject.GetComponent<mainCharacter>().ItemInteracable = this;
+            other.gameObject.GetComponent<mainCharacter>().ItemInteractable = this;
             Debug.Log("Peut prendre");
         }
     }
