@@ -7,7 +7,14 @@ using UnityEngine.AI;
 [RequireComponent(typeof(NavMeshAgent))]
 public class Zombie : LivingObject
 {
+    public enum ZombieState
+    {
+        Guard,
+        Waypoint
+    }
     [Header("Enemy")]
+    public ZombieState _zombieState;
+
     private float _speedWalk = 3;
     private float _speedRun = 5;
 
@@ -16,8 +23,12 @@ public class Zombie : LivingObject
 
     private bool _isPatrol;
 
-    [SerializeField] private Transform _target;
-    [SerializeField] private Transform[] _waypoints;
+    public Vector3 _guardPosition;
+
+    //[SerializeField] private Transform _target;
+    public Transform _target;
+    //[SerializeField] private Transform[] _waypoints;
+    public Transform[] _waypoints;
 
     private NavMeshAgent _agent;
 
@@ -41,6 +52,8 @@ public class Zombie : LivingObject
         _isPatrol = true;
 
         _playerRef = GameObject.FindGameObjectWithTag("Player");
+
+        _guardPosition = this.transform.position;
 
         GotoNextPoint();
         StartCoroutine(FOVRoutine());
@@ -81,14 +94,22 @@ public class Zombie : LivingObject
 
     private void GotoNextPoint()
     {
-        if (_waypoints.Length == 0) return;
+        if (_zombieState == ZombieState.Guard)
+        {
+            _agent.destination = _guardPosition;
+        }
 
-        _agent.isStopped = false;
+        else if (_zombieState == ZombieState.Waypoint)
+        {
+            if (_waypoints.Length == 0) return;
 
-        _agent.destination = _waypoints[_currentWaypointIndex].position;
+            _agent.isStopped = false;
 
-        _currentWaypointIndex = (_currentWaypointIndex + 1 ) % _waypoints.Length;
-        Debug.Log("Destination : " + _currentWaypointIndex);
+            _agent.destination = _waypoints[_currentWaypointIndex].position;
+
+            _currentWaypointIndex = (_currentWaypointIndex + 1) % _waypoints.Length;
+            Debug.Log("Destination : " + _currentWaypointIndex);
+        }
     }
 
     IEnumerator WaitOnDestination()
