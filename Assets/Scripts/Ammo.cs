@@ -4,9 +4,24 @@ using UnityEngine;
 
 public class Ammo : PickUp
 {
-   private void AddAmmo(Pistol pistol, int value)
+    protected override void OnTriggerEnter(Collider other)
     {
-        pistol.CurrentAmmo += value;
-        pistol.CurrentAmmo = Mathf.Clamp(pistol.CurrentAmmo, 0, pistol.MaxAmmo);
+        base.OnTriggerEnter(other);
+    }
+
+    protected override void OnTriggerExit(Collider other)
+    {
+        base.OnTriggerExit(other);
+    }
+    public override void PickUpItem()
+    {
+        Debug.Log("+10 Ammo");
+        Destroy(gameObject);
+        
+    }
+    private void AddAmmo(Pistol pistol, int value)
+    {
+            pistol.CurrentAmmo += value;
+            pistol.CurrentAmmo = Mathf.Clamp(pistol.CurrentAmmo, 0, pistol.MaxAmmo);
     }
 }
