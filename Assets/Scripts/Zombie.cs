@@ -16,7 +16,7 @@ public class Zombie : LivingObject
 
     private bool _isPatrol;
 
-    private Transform _target;
+    [SerializeField] private Transform _target;
     [SerializeField] private Transform[] _waypoints;
 
     private NavMeshAgent _agent;
@@ -90,7 +90,7 @@ public class Zombie : LivingObject
 
     IEnumerator WaitOnDestination()
     {
-        yield return new WaitForSeconds(Random.Range(1f, 3f));
+        yield return new WaitForSeconds(Random.Range(3f, 5f));
 
         _agent.isStopped = false;
         GotoNextPoint();
@@ -128,17 +128,20 @@ public class Zombie : LivingObject
                     Target = target;
                     _agent.speed = _speedRun;
                     _agent.destination = Target.position;
+                    _isPatrol = false;
                 }
                 else
                 {
-                    _agent.speed = _speedWalk;
-                    _agent.destination = _waypoints[_currentWaypointIndex].position;
                     _canSeePlayer = false;
                 }
                    
             }
             else
+            {
                 _canSeePlayer = false;
+                Target = null;
+                _isPatrol = true;
+            }
         }
 
         else if (_canSeePlayer)
