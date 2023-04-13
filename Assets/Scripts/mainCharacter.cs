@@ -130,7 +130,7 @@ public class mainCharacter : LivingObject
 
     public void ShowItemSelected()
     {
-        if (PickUps == null || GetItemSelected()== null) return;
+        if (PickUps == null || GetItemSelected() == null) return;
 
         if (Input.GetButton("Item1"))
         {
@@ -177,11 +177,16 @@ public class mainCharacter : LivingObject
 
     public void ChooseItem(int choixindex)
     {
-        if (PickUps.Count < ChoixIndex) return;
+        ChoixIndex = choixindex;
+        if (PickUps.Count <= ChoixIndex)
+        {
+            Debug.Log("Emplacment inventaire vide"); 
+        }
         else
         {
             EnleverItemEquipe(GetItemSelected().GetGameObject());
             ChoixIndex = choixindex;
+            if (GetItemSelected() == null) return;
             AfficherItemEquipe(GetItemSelected().GetGameObject());
         }
     }
