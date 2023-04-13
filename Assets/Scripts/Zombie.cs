@@ -59,6 +59,9 @@ public class Zombie : LivingObject
 
         _playerRef = GameObject.FindGameObjectWithTag("Player");
 
+        MaxLife = 100;
+        CurrentLife = MaxLife;
+
         _guardPosition = this.transform.position;
         _guardRotation = this.transform.rotation;
 

@@ -185,4 +185,27 @@ public class mainCharacter : LivingObject
             AfficherItemEquipe(GetItemSelected().GetGameObject());
         }
     }
+
+    
+    public void Shoot()
+    {
+        if (GetItemSelected() is Pistol)
+        {
+            Ray ray = Camera.main.ScreenPointToRay(GetItemSelected().gameObject.GetComponent<Pistol>()._firePoint.position);
+
+            Debug.DrawRay(ray.origin, ray.direction * 100, Color.red);
+
+            RaycastHit hit;
+
+            if (Physics.Raycast(ray, out hit))
+            {
+                if (hit.collider.CompareTag("Zombie"))
+                {
+                    GetItemSelected().gameObject.GetComponent<Pistol>().Shoot(this, hit.collider.GetComponent<IDamageable>());
+                }
+            }
+            
+        }
+    }
+
 }
