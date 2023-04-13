@@ -62,7 +62,7 @@ public class mainCharacter : LivingObject
         ChoixIndex = 0;
 
         _shootAction.Enable();
-        _shootAction.performed += Shoot;
+        _shootAction.performed += Attack;
 
         StartCoroutine("DecreaseHunger");
 
@@ -203,7 +203,7 @@ public class mainCharacter : LivingObject
     }
 
     
-    public void Shoot(InputAction.CallbackContext ctx)
+    public void Attack(InputAction.CallbackContext ctx)
     {
         if (GetItemSelected() is Pistol)
         {
@@ -218,10 +218,18 @@ public class mainCharacter : LivingObject
                 Debug.Log(hit.collider.gameObject.name);
                 if (hit.collider.CompareTag("Zombie"))
                 {
-                    GetItemSelected().gameObject.GetComponent<Pistol>().Shoot(this, hit.collider.GetComponent<IDamageable>());
+                    GetItemSelected().gameObject.GetComponent<Pistol>().Attack(this, hit.collider.GetComponent<IDamageable>());
+                    if (hit.collider.GetComponent<LivingObject>().CurrentLife <= 0)
+                    {
+                        hit.collider.GetComponent<IDamageable>().Die(hit.collider.GetComponent<IDamageable>());
+                    }
                 }
             }
-            
+        }
+
+        if (GetItemSelected() is Knife)
+        {
+            //Mettre l'animation d'attaque et le takeDamage au moment ou le couteau touche un enemy
         }
     }
 

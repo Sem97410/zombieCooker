@@ -14,7 +14,8 @@ public class LivingObject : MonoBehaviour, IDamageable
 
     public void Die(IDamageable Cible)
     {
-        throw new System.NotImplementedException();
+        Destroy(this.gameObject);
+        
     }
 
     public void Heal()

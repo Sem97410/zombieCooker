@@ -32,9 +32,10 @@ public class Pistol : Weapon, IShooting
 
         }
     }
-    public void Shoot(IDamageable tireur, IDamageable cible)
+
+    public void Attack(IDamageable attaquant, IDamageable cible)
     {
-        cible.TakeDamage(Damage, tireur);
+        cible.TakeDamage(Damage, attaquant);
     }
 
     private void Reload()

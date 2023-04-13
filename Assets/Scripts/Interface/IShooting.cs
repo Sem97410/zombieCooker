@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface IShooting
 {
-    void Shoot(IDamageable tireur, IDamageable cible);
+    void Attack(IDamageable attaquant, IDamageable cible);
 }
