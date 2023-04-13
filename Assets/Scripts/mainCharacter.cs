@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Data.Common;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -230,6 +231,21 @@ public class mainCharacter : LivingObject
         if (GetItemSelected() is Knife)
         {
             //Mettre l'animation d'attaque et le takeDamage au moment ou le couteau touche un enemy
+
+            Collider[] hitColliders = Physics.OverlapSphere(transform.position, 2);
+
+            foreach (Collider collider in hitColliders)
+            {
+                if (collider.CompareTag("Zombie"))
+                {
+                    GetItemSelected().gameObject.GetComponent<Knife>().Attack(this, collider.GetComponent<IDamageable>());
+                    if (collider.GetComponent<LivingObject>().CurrentLife <= 0)
+                    {
+                        collider.GetComponent <IDamageable>().Die(collider.GetComponent<IDamageable>());
+                    }
+                }
+            }
+
         }
     }
 
