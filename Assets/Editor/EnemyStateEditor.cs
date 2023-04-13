@@ -59,6 +59,7 @@ public class EnemyStateEditor : Editor
                     EditorGUILayout.PropertyField(m_zombieRadius, new GUIContent("Radius"));
                     EditorGUILayout.Slider(m_zombieAngle, 0, 360, new GUIContent("Angle"));
                     EditorGUILayout.PropertyField(m_zombiePlayerRef, new GUIContent("PlayerRef"));
+                    serializedObject.ApplyModifiedProperties();
                     break;
                 }
         }
