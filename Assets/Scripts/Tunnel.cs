@@ -19,8 +19,6 @@ public class Tunnel : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("J'entre dans le tunnel" + other.gameObject.tag);
-
         if (other.gameObject.CompareTag("Player"))
         {
            
