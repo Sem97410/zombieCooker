@@ -11,8 +11,9 @@ public class CameraController : MonoBehaviour
     private float _mouseSensitivity;
     private float _cameraVerticalRotation;
 
-
-    
+    public Transform Target { get => _target; set => _target = value; }
+    public float MouseSensitivity { get => _mouseSensitivity; set => _mouseSensitivity = value; }
+    public float CameraVerticalRotation { get => _cameraVerticalRotation; set => _cameraVerticalRotation = value; }
 
     private void Update()
     {

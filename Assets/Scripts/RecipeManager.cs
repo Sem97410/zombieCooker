@@ -19,7 +19,13 @@ public class RecipeManager : MonoBehaviour
         Hamburger.Id = 30;
         Hamburger.NumberOfIngredients = 3;
         _recipes.Add(Hamburger.Id, Hamburger);
-        Debug.Log(_recipes[30]);
+        
+
+        Recipe SoupeDeViande = new Recipe();
+        SoupeDeViande.Name = "SoupeDeViande";
+        SoupeDeViande.Id = 10;
+        SoupeDeViande.NumberOfIngredients = 2;
+        _recipes.Add(SoupeDeViande.Id, SoupeDeViande);
         
     }
     public  Recipe RecipeValid(List<Food> ingredients)
