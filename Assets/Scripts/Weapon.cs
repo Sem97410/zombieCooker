@@ -26,4 +26,13 @@ public class Weapon : PickUp
     {
         base.OnTriggerExit(other);
     }
+
+    public override void PickUpItem()
+    {
+        SetGameObject(this.gameObject);
+        MainCharacter.PickUps.Add((PickUp)this);
+        MainCharacter.EnleverItemEquipe(MainCharacter.GetItemSelected().GetGameObject());
+        MainCharacter.ChoixIndex = MainCharacter.PickUps.Count -1;
+        MainCharacter.AfficherItemEquipe(MainCharacter.GetItemSelected().GetGameObject());
+    }
 }

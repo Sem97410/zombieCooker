@@ -25,13 +25,10 @@ public class Food : PickUp
     }
     public override void PickUpItem()
     {
-        
-        Oven.ingredients.Add(this);
-        //gameManager.ingredients.Add(this);
-        //RecipeManager.RecipeValid(gameManager.ingredients);
-        //Debug.Log(RecipeManager.RecipeValid(gameManager.ingredients));
-        Destroy(gameObject);
-
-
+        SetGameObject(this.gameObject);
+        MainCharacter.PickUps.Add((PickUp)this);
+        MainCharacter.EnleverItemEquipe(MainCharacter.GetItemSelected().GetGameObject());
+        MainCharacter.ChoixIndex = MainCharacter.PickUps.Count - 1;
+        MainCharacter.AfficherItemEquipe(MainCharacter.GetItemSelected().GetGameObject());
     }
 }
