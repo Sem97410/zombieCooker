@@ -7,7 +7,7 @@ using UnityEngine;
 public class Recipe 
 {
     private string _name;
-    private int     _id;
+    private int _id;
     private int _numberOfIngredients;
 
     public string Name { get => _name; set => _name = value; }
@@ -18,4 +18,6 @@ public class Recipe
     {
         return this._name;
     }
+    
+    
 }

@@ -27,8 +27,7 @@ public class Food : PickUp
     {
         SetGameObject(this.gameObject);
         MainCharacter.PickUps.Add((PickUp)this);
-        MainCharacter.EnleverItemEquipe(MainCharacter.GetItemSelected().GetGameObject());
-        MainCharacter.ChoixIndex = MainCharacter.PickUps.Count - 1;
-        MainCharacter.AfficherItemEquipe(MainCharacter.GetItemSelected().GetGameObject());
+        MainCharacter.ChooseItem(MainCharacter.PickUps.Count - 1);
+
     }
 }
