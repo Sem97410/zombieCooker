@@ -12,6 +12,7 @@ public class Oven : MonoBehaviour
     private mainCharacter _mainCharacter;
     private CameraController _cameraControllerCharacter;
 
+    private RecipeManager recipeManager;
 
     private float ActualMovementSpeed;
     private float ActualMouseSensitivity;
@@ -79,7 +80,7 @@ public class Oven : MonoBehaviour
         if (_recipeManager.RecipeValid(ingredients).Name == "Hamburger")
         {
             Debug.Log("HAMBURGER");
-           //Oven.ingredients.Remove(Food.);
+            Oven.ingredients.Clear();
         }
     }
 
