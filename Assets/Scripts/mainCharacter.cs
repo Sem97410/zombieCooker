@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class mainCharacter : LivingObject
 {
@@ -46,6 +47,10 @@ public class mainCharacter : LivingObject
 
     [SerializeField]
     private Fx _walkFx;
+
+    [SerializeField] private InputAction _shootAction;
+
+    [SerializeField] private LayerMask _IgnoreLayer;
     private void Start()
     {
         //lock le cursor pour la caméra
@@ -55,6 +60,9 @@ public class mainCharacter : LivingObject
         _currentLife = 100;
 
         ChoixIndex = 0;
+
+        _shootAction.Enable();
+        _shootAction.performed += Shoot;
 
         StartCoroutine("DecreaseHunger");
 
@@ -195,18 +203,19 @@ public class mainCharacter : LivingObject
     }
 
     
-    public void Shoot()
+    public void Shoot(InputAction.CallbackContext ctx)
     {
         if (GetItemSelected() is Pistol)
         {
-            Ray ray = Camera.main.ScreenPointToRay(GetItemSelected().gameObject.GetComponent<Pistol>()._firePoint.position);
+            Ray ray = Camera.main.ScreenPointToRay(new Vector3 (Screen.width/2, Screen.height/2, 0));
 
-            Debug.DrawRay(ray.origin, ray.direction * 100, Color.red);
+            Debug.DrawRay(ray.origin, Camera.main.transform.forward * 50, Color.red);
 
             RaycastHit hit;
 
-            if (Physics.Raycast(ray, out hit))
+            if (Physics.Raycast(ray, out hit, 150, ~_IgnoreLayer))
             {
+                Debug.Log(hit.collider.gameObject.name);
                 if (hit.collider.CompareTag("Zombie"))
                 {
                     GetItemSelected().gameObject.GetComponent<Pistol>().Shoot(this, hit.collider.GetComponent<IDamageable>());

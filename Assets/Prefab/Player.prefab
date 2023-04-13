@@ -362,7 +362,7 @@ GameObject:
   - component: {fileID: 6091596465544781633}
   - component: {fileID: 1727342848}
   - component: {fileID: 8922790049970536494}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -563,6 +563,22 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: bec864ff-7f19-46f3-b913-5437036edbee
     m_ActionName: Player/Item5[/Keyboard/5]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6091596465544781638}
+        m_TargetAssemblyTypeName: mainCharacter, Assembly-CSharp
+        m_MethodName: Shoot
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: c0b24cc3-8295-4026-b213-e27ffb758068
+    m_ActionName: Player/Shoot[/Mouse/leftButton]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
