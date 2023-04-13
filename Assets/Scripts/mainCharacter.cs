@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class mainCharacter : LivingObject
 {
@@ -24,9 +23,10 @@ public class mainCharacter : LivingObject
     [SerializeField]
     private float _currentHunger;
 
-    
+
     private bool _canInteract;
     private bool _havePistol;
+    private bool _haveKnife;
     [SerializeField]
     private float _hungerDecrease;   //la vitesse a laquelle on perd de la faim
 
@@ -37,6 +37,7 @@ public class mainCharacter : LivingObject
     public int ChoixIndex { get => _choixIndex; set => _choixIndex = value; }
     public Transform ItemPos { get => _itemPos; set => _itemPos = value; }
     public float MovementSpeed { get => _movementSpeed; set => _movementSpeed = value; }
+    public bool HaveKnife { get => _haveKnife; set => _haveKnife = value; }
 
     [SerializeField]
     private float _hungerDecreaseRun; // la perte de faim quand on court
@@ -110,8 +111,8 @@ public class mainCharacter : LivingObject
         }
         while (_currentHunger == 0)
         {
-                yield return new WaitForSeconds(1f);
-                _currentLife -= 1;
+            yield return new WaitForSeconds(1f);
+            _currentLife -= 1;
         }
     }
 
@@ -128,29 +129,33 @@ public class mainCharacter : LivingObject
 
     public void ShowItemSelected()
     {
-        if (PickUps == null || GetItemSelected()== null) return;
+        if (PickUps == null) return;
 
 
-        if (Input.GetButtonDown("Item1"))
+        if (Input.GetButton("Item1"))
         {
-            ChoixIndex = 0;
-            EnleverItemEquipe(GetItemSelected().GetGameObject());
-
+            ChooseItem(0);
         }
-        if (Input.GetButtonDown("Item2"))
+        if (Input.GetButton("Item2"))
         {
-            ChoixIndex = 1;
-            EnleverItemEquipe(GetItemSelected().GetGameObject());
-
+            ChooseItem(1);
         }
-
-        AfficherItemEquipe(GetItemSelected().GetGameObject());
+        if (Input.GetButton("Item3"))
+        {
+            ChooseItem(2);
+        }
+        if (Input.GetButton("Item4"))
+        {
+            ChooseItem(3);
+        }
+        if (Input.GetButton("Item5"))
+        {
+            ChooseItem(4);
+        }
     }
-
 
     public PickUp GetItemSelected()
     {
-        Debug.Log(PickUps.Count +" " + ChoixIndex);
         if (PickUps != null && PickUps.Count > 0 && ChoixIndex < PickUps.Count)
             return PickUps[ChoixIndex];
         else return null;
@@ -162,7 +167,7 @@ public class mainCharacter : LivingObject
         go.SetActive(true);
         go.transform.parent = this.ItemPos;
         go.transform.localPosition = Vector3.zero;
-        go.transform.rotation = Quaternion.Euler(0, 0, 0);
+        go.transform.rotation = ItemPos.rotation * Quaternion.Euler(0, 90, 0);
     }
     public void EnleverItemEquipe(GameObject go)
     {
@@ -170,5 +175,22 @@ public class mainCharacter : LivingObject
         go.SetActive(false);
     }
 
+    public void ChooseItem(int choixindex)
+    {
+        
+       
+            if (GetItemSelected() != null)
+            {
+                EnleverItemEquipe(GetItemSelected().GetGameObject());
 
+            }
+            ChoixIndex = choixindex;
+
+            if (GetItemSelected() != null)
+            {
+                AfficherItemEquipe(GetItemSelected().GetGameObject());
+
+            }
+        
+    }
 }

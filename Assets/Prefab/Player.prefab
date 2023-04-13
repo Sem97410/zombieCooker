@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 849881854}
-  - component: {fileID: 849881855}
   m_Layer: 0
   m_Name: ItemPos
   m_TagString: Untagged
@@ -31,19 +30,6 @@ Transform:
   m_Father: {fileID: 6091596465581650488}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &849881855
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 849881853}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d592eeb57e531448b3305a72f0e2289, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _camera: {fileID: 6091596465581650488}
 --- !u!1 &627847421434255051
 GameObject:
   m_ObjectHideFlags: 0
@@ -413,7 +399,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _movementSpeed: 5
   _runSpeedMultiplication: 2
-  _itemPos: {fileID: 0}
+  _itemPos: {fileID: 849881854}
   _currentHunger: 100
   _hungerDecrease: 1
   _hungerDecreaseRun: 2
@@ -557,6 +543,26 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 89b015bd-1f42-4a00-a405-d81296467d7b
     m_ActionName: Player/Run[/Keyboard/shift]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 7d456517-fd8c-4479-8cb0-22c018580616
+    m_ActionName: Player/Item1[/Keyboard/1]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 9414ea0f-c979-4842-ad07-3973a5abf557
+    m_ActionName: Player/Item2[/Keyboard/2]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: f4009803-bd0a-4bc2-9887-7bd054aad440
+    m_ActionName: Player/Item3[/Keyboard/3]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 3244b5a4-5b05-4393-acf3-547d6ef537c7
+    m_ActionName: Player/Item4[/Keyboard/4]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: bec864ff-7f19-46f3-b913-5437036edbee
+    m_ActionName: Player/Item5[/Keyboard/5]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player

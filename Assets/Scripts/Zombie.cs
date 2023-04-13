@@ -27,7 +27,9 @@ public class Zombie : LivingObject
 
     public float _walkRadius;
 
-    public Vector3 _guardPosition;
+    private Vector3 _guardPosition;
+
+    private Quaternion _guardRotation;
 
     //[SerializeField] private Transform _target;
     public Transform _target;
@@ -58,6 +60,7 @@ public class Zombie : LivingObject
         _playerRef = GameObject.FindGameObjectWithTag("Player");
 
         _guardPosition = this.transform.position;
+        _guardRotation = this.transform.rotation;
 
         GotoNextPoint();
         StartCoroutine(FOVRoutine());
@@ -101,6 +104,7 @@ public class Zombie : LivingObject
         if (_zombieState == ZombieState.Guard)
         {
             _agent.destination = _guardPosition;
+            transform.rotation = _guardRotation;
         }
 
         else if (_zombieState == ZombieState.Waypoint)

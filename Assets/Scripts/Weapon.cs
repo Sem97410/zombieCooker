@@ -26,4 +26,21 @@ public class Weapon : PickUp
     {
         base.OnTriggerExit(other);
     }
+
+    public override void PickUpItem()
+    {
+        if (MainCharacter.PickUps.Count >= 5)
+        {
+            Debug.Log("Inventaire plein");
+            return;
+        }
+        else
+        {
+            SetGameObject(this.gameObject);
+            MainCharacter.PickUps.Add((PickUp)this);
+            MainCharacter.EnleverItemEquipe(MainCharacter.GetItemSelected().GetGameObject());
+            MainCharacter.ChoixIndex = MainCharacter.PickUps.Count - 1;
+            MainCharacter.AfficherItemEquipe(MainCharacter.GetItemSelected().GetGameObject());
+        }
+    }
 }

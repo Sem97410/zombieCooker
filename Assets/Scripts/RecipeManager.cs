@@ -7,10 +7,7 @@ using UnityEngine;
 public class RecipeManager : MonoBehaviour
 {
     Dictionary<int, Recipe> _recipes = new Dictionary<int, Recipe>();
-
-
-
-
+    //Dictionary<Recipe, List<int>> _recipes = new Dictionary<Recipe, List<int>>();
 
     private void Start()
     {
@@ -28,13 +25,13 @@ public class RecipeManager : MonoBehaviour
         _recipes.Add(SoupeDeViande.Id, SoupeDeViande);
         
     }
-    public  Recipe RecipeValid(List<Food> ingredients)
+    public Recipe RecipeValid(List<Food> ingredients)
     {
         Recipe tmp = null;
         int result = 1;
         foreach (Food ingredient in ingredients)
         {
-            result = result * ingredient.Id;        
+            result = result * ingredient.Id;       
         }
         if (_recipes.ContainsKey(result))
         {
