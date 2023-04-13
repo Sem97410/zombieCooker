@@ -44,7 +44,7 @@ public class Oven : MonoBehaviour
                 {
                     Destroy(_foodOven[i]);
 
-
+                    
                 }
                 _foodOven.Clear();
                 Debug.Log("coucou");

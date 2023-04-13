@@ -98,7 +98,7 @@ GameObject:
   - component: {fileID: 6137604990950288302}
   m_Layer: 0
   m_Name: Zombie
-  m_TagString: Untagged
+  m_TagString: Zombie
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -183,7 +183,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _zombieState: 1
-  _guardPosition: {x: 0, y: 0, z: 0}
+  _walkRadius: 0
   _target: {fileID: 0}
   _waypoints: []
   _radius: 10

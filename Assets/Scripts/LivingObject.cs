@@ -14,7 +14,8 @@ public class LivingObject : MonoBehaviour, IDamageable
 
     public void Die(IDamageable Cible)
     {
-        throw new System.NotImplementedException();
+        Destroy(this.gameObject);
+        
     }
 
     public void Heal()
@@ -22,8 +23,9 @@ public class LivingObject : MonoBehaviour, IDamageable
         throw new System.NotImplementedException();
     }
 
-    public void TakeDamage(float damage, IDamageable Attaquant)
+    public void TakeDamage(int damage, IDamageable Attaquant)
     {
-        throw new System.NotImplementedException();
+        _currentLife -= damage;
+        Debug.Log(this.gameObject.name + _currentLife);
     }
 }
