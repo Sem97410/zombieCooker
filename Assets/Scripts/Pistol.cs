@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.PackageManager;
 using UnityEngine;
 
-public class Pistol : Weapon
+public class Pistol : Weapon, IShooting
 {
+    public Transform _firePoint;
 
     protected override void OnTriggerEnter(Collider other)
     {
@@ -30,9 +32,9 @@ public class Pistol : Weapon
 
         }
     }
-    private void Shoot()
+    public void Shoot(IDamageable tireur, IDamageable cible)
     {
-
+        cible.TakeDamage(Damage, tireur);
     }
 
     private void Reload()
