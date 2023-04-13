@@ -12,6 +12,8 @@ public class Oven : MonoBehaviour
     private mainCharacter _mainCharacter;
     private CameraController _cameraControllerCharacter;
 
+    private Food _food;
+
     private RecipeManager recipeManager;
 
     private float ActualMovementSpeed;
@@ -68,6 +70,14 @@ public class Oven : MonoBehaviour
 
 
 
+        }
+
+
+        if (other.CompareTag("Food"))
+        {
+            _food = other.GetComponent<Food>();
+            Debug.Log(_food.Id);
+            //int RecipeIp += _food.Id;
         }
     }
 
