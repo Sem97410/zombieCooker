@@ -25,10 +25,17 @@ public class Food : PickUp
     }
     public override void PickUpItem()
     {
-        SetGameObject(this.gameObject);
-        MainCharacter.PickUps.Add((PickUp)this);
-        MainCharacter.EnleverItemEquipe(MainCharacter.GetItemSelected().GetGameObject());
-        MainCharacter.ChoixIndex = MainCharacter.PickUps.Count - 1;
-        MainCharacter.AfficherItemEquipe(MainCharacter.GetItemSelected().GetGameObject());
+        if (MainCharacter.PickUps.Count >= 5)
+        {
+            Debug.Log("Inventaire plein");
+            return;
+        }
+        else
+        {
+            SetGameObject(this.gameObject);
+            MainCharacter.PickUps.Add((PickUp)this);
+            MainCharacter.ChooseItem(MainCharacter.PickUps.Count - 1);
+        }
+
     }
 }

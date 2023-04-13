@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class mainCharacter : LivingObject
 {
@@ -24,7 +23,7 @@ public class mainCharacter : LivingObject
     [SerializeField]
     private float _currentHunger;
 
-    
+
     private bool _canInteract;
     private bool _havePistol;
     private bool _haveKnife;
@@ -112,8 +111,8 @@ public class mainCharacter : LivingObject
         }
         while (_currentHunger == 0)
         {
-                yield return new WaitForSeconds(1f);
-                _currentLife -= 1;
+            yield return new WaitForSeconds(1f);
+            _currentLife -= 1;
         }
     }
 
@@ -130,7 +129,8 @@ public class mainCharacter : LivingObject
 
     public void ShowItemSelected()
     {
-        if (PickUps == null || GetItemSelected()== null) return;
+        if (PickUps == null) return;
+
 
         if (Input.GetButton("Item1"))
         {
@@ -177,13 +177,21 @@ public class mainCharacter : LivingObject
 
     public void ChooseItem(int choixindex)
     {
-        if (PickUps.Count < ChoixIndex) return;
-        else
-        {
-            EnleverItemEquipe(GetItemSelected().GetGameObject());
+        
+       
+            if (GetItemSelected() != null)
+            {
+                EnleverItemEquipe(GetItemSelected().GetGameObject());
+
+            }
             ChoixIndex = choixindex;
-            AfficherItemEquipe(GetItemSelected().GetGameObject());
-        }
+
+            if (GetItemSelected() != null)
+            {
+                AfficherItemEquipe(GetItemSelected().GetGameObject());
+
+            }
+        
     }
 
     
