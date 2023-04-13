@@ -10,10 +10,12 @@ public class Zombie : LivingObject
     public enum ZombieState
     {
         Guard,
-        Waypoint
+        Waypoint,
+        Random
     }
+
     [Header("Enemy")]
-    public ZombieState _zombieState;
+     public ZombieState _zombieState;
 
     private float _speedWalk = 3;
     private float _speedRun = 5;
@@ -22,6 +24,8 @@ public class Zombie : LivingObject
     private int _currentWaypointIndex = 0;
 
     private bool _isPatrol;
+
+    public float _walkRadius;
 
     public Vector3 _guardPosition;
 
@@ -109,6 +113,19 @@ public class Zombie : LivingObject
 
             _currentWaypointIndex = (_currentWaypointIndex + 1) % _waypoints.Length;
             Debug.Log("Destination : " + _currentWaypointIndex);
+        }
+
+        else if (_zombieState == ZombieState.Random)
+        {
+            Vector3 randomDirection = Random.insideUnitSphere * _walkRadius;
+            randomDirection += transform.position;
+            NavMeshHit hit;
+            Vector3 finalposition = Vector3.zero;
+            if (NavMesh.SamplePosition(randomDirection, out hit, _walkRadius, 1))
+            {
+                finalposition = hit.position;
+            }
+            _agent.destination = finalposition;
         }
     }
 
