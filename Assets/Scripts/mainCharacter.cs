@@ -36,6 +36,7 @@ public class mainCharacter : LivingObject
     public List<PickUp> PickUps { get => _pickUp; set => _pickUp = value; }
     public int ChoixIndex { get => _choixIndex; set => _choixIndex = value; }
     public Transform ItemPos { get => _itemPos; set => _itemPos = value; }
+    public float MovementSpeed { get => _movementSpeed; set => _movementSpeed = value; }
 
     [SerializeField]
     private float _hungerDecreaseRun; // la perte de faim quand on court

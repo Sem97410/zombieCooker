@@ -59,6 +59,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _satiety: 0
+  _oven: {fileID: 0}
   _id: 5
 --- !u!1 &8868058802282036052
 GameObject:
