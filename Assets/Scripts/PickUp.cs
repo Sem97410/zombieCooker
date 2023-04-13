@@ -39,7 +39,6 @@ public class PickUp : MonoBehaviour
 
     public virtual void PickUpItem()
     {
-
     }
 
     public void SetGameObject(GameObject go)

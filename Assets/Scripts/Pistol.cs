@@ -18,8 +18,17 @@ public class Pistol : Weapon
     public override void PickUpItem()
     {
         base.PickUpItem();
-        MainCharacter.HavePistol = true;
-        Debug.Log("A pris le pistol");
+        if (MainCharacter.PickUps.Count >= 5)
+        {
+            Debug.Log("Inventaire plein");
+            return;
+        }
+        else
+        {
+            MainCharacter.HavePistol = true;
+            Debug.Log("A pris le pistol");
+
+        }
     }
     private void Shoot()
     {

@@ -17,8 +17,17 @@ public class Knife : Weapon
     public override void PickUpItem()
     {
         base.PickUpItem();
-        MainCharacter.HaveKnife = true;
-        Debug.Log("A pris le couteau");
+        if (MainCharacter.PickUps.Count >= 5)
+        {
+            Debug.Log("Inventaire plein");
+            return;
+        }
+        else
+        {
+            MainCharacter.HaveKnife = true;
+            Debug.Log("A pris le couteau");
+        }
+        
     }
     private void Attack()
     {
