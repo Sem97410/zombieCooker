@@ -1,10 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class OvenButton : Oven
+public class OvenButton : MonoBehaviour
 {
-    public Oven _oven;
+    [SerializeField]
+    private Oven _oven;
 
 
     private void Start()
@@ -13,24 +12,50 @@ public class OvenButton : Oven
     }
 
 
+    public void Update()
+    {
+        Debug.Log(_oven.recipeIp);
+        
+        
+    }
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            if (RecipeIp == 30)
+            Debug.Log(other);
+            if (_oven.recipeIp == 30)
             {
-                MakeThePlate(_hamburger, _spawnHamburgerPosition);
+                _oven.MakeThePlate(_oven.Hamburger, _oven.SpawnHamburgerPosition);
             }
-            if (RecipeIp == 5005)
+            if (_oven.recipeIp == 5005)
             {
-                MakeThePlate(_salade, _spawnSaladePosition);
+                _oven.MakeThePlate(_oven.Salade, _oven.SpawnSaladePosition);
             }
-            if (RecipeIp == 10)
+            if (_oven.recipeIp == 10)
             {
-                MakeThePlate(_soupeViande, _spawnSoupeViandePosition);
+                _oven.MakeThePlate(_oven.SoupeViande, _oven.SpawnSoupeViandePosition);
             }
-        } 
+        }
     }
 
+    //private void OnCollisionEnter(Collision collision)
+    //{
+    //    if (collision.gameObject.CompareTag("Player"))
+    //    {
+    //        Debug.Log(collision);
+    //        if (RecipeIp == 30)
+    //        {
+    //            MakeThePlate(_hamburger, _spawnHamburgerPosition);
+    //        }
+    //        if (RecipeIp == 5005)
+    //        {
+    //            MakeThePlate(_salade, _spawnSaladePosition);
+    //        }
+    //        if (RecipeIp == 10)
+    //        {
+    //            MakeThePlate(_soupeViande, _spawnSoupeViandePosition);
+    //        }
+    //    }
+    //}
 
 }

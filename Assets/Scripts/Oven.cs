@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class Oven : MonoBehaviour
 {
@@ -15,28 +14,31 @@ public class Oven : MonoBehaviour
 
     protected int RecipeIp = 1;
 
-    
+
 
 
 
     [Header("GameObject des plats")]
 
-    [SerializeField] protected GameObject _hamburger;
-    [SerializeField] protected GameObject _salade;
-    [SerializeField] protected GameObject _soupeViande;
+    [SerializeField] private GameObject _hamburger;
+    [SerializeField] private GameObject _salade;
+    [SerializeField] private GameObject _soupeViande;
 
 
 
     [Header("Position de spawn des plats")]
 
-    [SerializeField] protected Transform _spawnHamburgerPosition;
-    [SerializeField] protected Transform _spawnSaladePosition;
-    [SerializeField] protected Transform _spawnSoupeViandePosition;
+    [SerializeField] private Transform _spawnHamburgerPosition;
+    [SerializeField] private Transform _spawnSaladePosition;
+    [SerializeField] private Transform _spawnSoupeViandePosition;
 
-
-
-
-
+    public int recipeIp { get => RecipeIp; set => RecipeIp = value; }
+    public GameObject Hamburger { get => _hamburger; set => _hamburger = value; }
+    public GameObject Salade { get => _salade; set => _salade = value; }
+    public GameObject SoupeViande { get => _soupeViande; set => _soupeViande = value; }
+    public Transform SpawnHamburgerPosition { get => _spawnHamburgerPosition; set => _spawnHamburgerPosition = value; }
+    public Transform SpawnSaladePosition { get => _spawnSaladePosition; set => _spawnSaladePosition = value; }
+    public Transform SpawnSoupeViandePosition { get => _spawnSoupeViandePosition; set => _spawnSoupeViandePosition = value; }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -53,20 +55,9 @@ public class Oven : MonoBehaviour
             }
 
 
-            if (RecipeIp == 30)
-            {
-                MakeThePlate(_hamburger, _spawnHamburgerPosition);
-            }
-            if (RecipeIp == 5005)
-            {
-                MakeThePlate(_salade, _spawnSaladePosition);
-            }
-            if (RecipeIp == 10)
-            {
-                MakeThePlate(_soupeViande, _spawnSoupeViandePosition);
-            }
+
         }
-       
+
     }
 
     private void OnTriggerExit(Collider other)
