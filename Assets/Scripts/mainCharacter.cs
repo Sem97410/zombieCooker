@@ -238,6 +238,7 @@ public class mainCharacter : LivingObject
                 if (hit.collider.CompareTag("Zombie"))
                 {
                     GetItemSelected().gameObject.GetComponent<Pistol>().Attack(this, hit.collider.GetComponent<IDamageable>());
+                    hit.collider.GetComponent<Zombie>().SetTarget(this.transform);
                     if (hit.collider.GetComponent<LivingObject>().CurrentLife <= 0)
                     {
                         hit.collider.GetComponent<IDamageable>().Die(hit.collider.GetComponent<IDamageable>());
