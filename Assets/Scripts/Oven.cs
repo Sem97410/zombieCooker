@@ -17,18 +17,30 @@ public class Oven : MonoBehaviour
 
 
 
-    [SerializeField]
-    private GameObject _hamburger;
-    [SerializeField]
-    private Transform _spawnPlatePosition;
+    [Header("GameObject des plats")]
+
+    [SerializeField] private GameObject _hamburger;
+    [SerializeField] private GameObject _salade;
+    [SerializeField] private GameObject _soupeViande;
+
+
+
+    [Header("Position de spawn des plats")]
+
+    [SerializeField] private Transform _spawnHamburgerPosition;
+    [SerializeField] private Transform _spawnSaladePosition;
+    [SerializeField] private Transform _spawnSoupeViandePosition;
+
+
+
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Food"))
+        if (other.CompareTag("FoodMesh"))
         {
             RecipeIp = 1;
-            _food = other.GetComponent<Food>();
-            _foodOven.Add(other.gameObject);
+            _food = other.GetComponentInParent<Food>();
+            _foodOven.Add(other.transform.parent.gameObject);
             _foodIdOven.Add(_food);
             for (var i = 0; i < _foodIdOven.Count; i++)
             {
@@ -37,37 +49,46 @@ public class Oven : MonoBehaviour
             }
 
 
-
             if (RecipeIp == 30)
             {
-                for (var i = 0; i < _foodOven.Count; i++)
-                {
-                    Destroy(_foodOven[i]);
-
-                    
-                }
-                _foodOven.Clear();
-                Debug.Log("coucou");
-                Instantiate(_hamburger, _spawnPlatePosition.position, transform.rotation);
+                MakeThePlate(_hamburger, _spawnHamburgerPosition);
             }
-
+            if (RecipeIp == 5005)
+            {
+                MakeThePlate(_salade, _spawnSaladePosition);
+            }
+            if (RecipeIp == 10)
+            {
+                MakeThePlate(_soupeViande, _spawnSoupeViandePosition);
+            }
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Food"))
+        if (other.CompareTag("FoodMesh"))
         {
-            _food = other.GetComponent<Food>();
+            _food = other.GetComponentInParent<Food>();
             _foodOven.Remove(other.gameObject);
             _foodIdOven.Remove(_food);
 
             RecipeIp /= _food.Id;
-          Debug.Log(RecipeIp);
         }
     }
 
 
+    private void MakeThePlate(GameObject plate, Transform spawnPosition)
+    {
+        for (var i = 0; i < _foodOven.Count; i++)
+        {
+            Destroy(_foodOven[i]);
 
+
+        }
+        _foodOven.Clear();
+        _foodIdOven.Clear();
+        Instantiate(plate, spawnPosition.position, transform.rotation);
+        RecipeIp = 1;
+    }
 
 }

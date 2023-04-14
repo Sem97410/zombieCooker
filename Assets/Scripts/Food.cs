@@ -6,7 +6,7 @@ public class Food : PickUp
 {
     [SerializeField] private float _satiety;
 
-    [SerializeField] private Oven _oven;
+    
 
     public float Satiety { get => _satiety; set => _satiety = value; }
     public int Id { get => _id; set => _id = value; }
