@@ -13,23 +13,27 @@ public class Oven : MonoBehaviour
 
     private Food _food;
 
-    private int RecipeIp = 1;
+    protected int RecipeIp = 1;
+
+    
 
 
 
     [Header("GameObject des plats")]
 
-    [SerializeField] private GameObject _hamburger;
-    [SerializeField] private GameObject _salade;
-    [SerializeField] private GameObject _soupeViande;
+    [SerializeField] protected GameObject _hamburger;
+    [SerializeField] protected GameObject _salade;
+    [SerializeField] protected GameObject _soupeViande;
 
 
 
     [Header("Position de spawn des plats")]
 
-    [SerializeField] private Transform _spawnHamburgerPosition;
-    [SerializeField] private Transform _spawnSaladePosition;
-    [SerializeField] private Transform _spawnSoupeViandePosition;
+    [SerializeField] protected Transform _spawnHamburgerPosition;
+    [SerializeField] protected Transform _spawnSaladePosition;
+    [SerializeField] protected Transform _spawnSoupeViandePosition;
+
+
 
 
 
@@ -62,6 +66,7 @@ public class Oven : MonoBehaviour
                 MakeThePlate(_soupeViande, _spawnSoupeViandePosition);
             }
         }
+       
     }
 
     private void OnTriggerExit(Collider other)
@@ -77,7 +82,7 @@ public class Oven : MonoBehaviour
     }
 
 
-    private void MakeThePlate(GameObject plate, Transform spawnPosition)
+    public void MakeThePlate(GameObject plate, Transform spawnPosition)
     {
         for (var i = 0; i < _foodOven.Count; i++)
         {
@@ -90,5 +95,7 @@ public class Oven : MonoBehaviour
         Instantiate(plate, spawnPosition.position, transform.rotation);
         RecipeIp = 1;
     }
+
+
 
 }
