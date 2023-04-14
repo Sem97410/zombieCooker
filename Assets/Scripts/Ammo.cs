@@ -16,9 +16,23 @@ public class Ammo : PickUp
 
     public override void PickUpItem()
     {
-        Debug.Log("+10 Ammo");
-        Destroy(gameObject);
         
+        if (MainCharacter.HavePistol == true)
+        {
+            if (MainCharacter.GetItemSelected() is Pistol)
+            {
+                MainCharacter.GetItemSelected().GetComponent<Pistol>().CurrentAmmo += 10;
+                MainCharacter.GetItemSelected().GetComponent<Pistol>().CurrentAmmo = Mathf.Clamp(MainCharacter.GetItemSelected().GetComponent<Pistol>().CurrentAmmo, 0, MainCharacter.GetItemSelected().GetComponent<Pistol>().MaxAmmo);
+                Destroy(gameObject);
+            }
+            
+        }
+        else
+        {
+            Debug.Log("Take the pistol");
+        }
+
+
     }
     private void AddAmmo(Pistol pistol, int value)
     {

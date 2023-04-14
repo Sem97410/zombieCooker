@@ -27,6 +27,12 @@ public class Weapon : PickUp
     {
         base.OnTriggerExit(other);
     }
+    protected override void Start()
+    {
+        base.Start();
+        CurrentAmmo = MaxAmmo;
+        
+    }
 
     public override void PickUpItem()
     {
