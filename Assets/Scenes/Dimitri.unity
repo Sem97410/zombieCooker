@@ -394,6 +394,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Zombie (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 6137604990950288299, guid: a1b4b3decd4fec2448fdd713347b68dc, type: 3}
+      propertyPath: m_TagString
+      value: Zombie
+      objectReference: {fileID: 0}
     - target: {fileID: 6137604990950288302, guid: a1b4b3decd4fec2448fdd713347b68dc, type: 3}
       propertyPath: _walkRadius
       value: 10
@@ -639,6 +643,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Zombie2Test
       objectReference: {fileID: 0}
+    - target: {fileID: 6137604990950288299, guid: a1b4b3decd4fec2448fdd713347b68dc, type: 3}
+      propertyPath: m_TagString
+      value: Zombie
+      objectReference: {fileID: 0}
     - target: {fileID: 6137604990950288302, guid: a1b4b3decd4fec2448fdd713347b68dc, type: 3}
       propertyPath: _angle
       value: 100
@@ -650,6 +658,10 @@ PrefabInstance:
     - target: {fileID: 6137604990950288302, guid: a1b4b3decd4fec2448fdd713347b68dc, type: 3}
       propertyPath: _zombieState
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6137604990950288302, guid: a1b4b3decd4fec2448fdd713347b68dc, type: 3}
+      propertyPath: _targetMask.m_Bits
+      value: 64
       objectReference: {fileID: 0}
     - target: {fileID: 6137604990950288302, guid: a1b4b3decd4fec2448fdd713347b68dc, type: 3}
       propertyPath: _waypoints.Array.size
