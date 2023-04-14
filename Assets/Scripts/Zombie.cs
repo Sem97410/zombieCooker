@@ -24,6 +24,7 @@ public class Zombie : LivingObject
     private int _currentWaypointIndex = 0;
 
     private bool _isPatrol;
+    private bool _isAttacked = false;
 
     public float _walkRadius;
 
@@ -39,6 +40,7 @@ public class Zombie : LivingObject
     private NavMeshAgent _agent;
 
     public Transform Target { get => _target; set => _target = value; }
+    public bool IsAttacked { get => _isAttacked; set => _isAttacked = value; }
 
     [Header("Field Of View")]
     public float _radius;
@@ -91,7 +93,7 @@ public class Zombie : LivingObject
     private void Movement()
     {
         if (_isPatrol)
-        {
+        { 
             // Choisi un autre point de destination lorque le zombie arrive proche de sa destination
             if (!_agent.pathPending && _agent.remainingDistance < 0.5f && !_agent.isStopped)
             {
@@ -161,7 +163,7 @@ public class Zombie : LivingObject
     {
         Collider[] rangeChecks = Physics.OverlapSphere(transform.position, _radius, _targetMask);
 
-        if (rangeChecks.Length != 0)
+        if (rangeChecks.Length != 0 && !IsAttacked)
         {
             Transform target = rangeChecks[0].transform;
             Vector3 directionToTarget = (target.position - transform.position).normalized;

@@ -253,6 +253,7 @@ public class mainCharacter : LivingObject
                 Debug.Log(hit.collider.gameObject.name);
                 if (hit.collider.CompareTag("Zombie"))
                 {
+                    hit.collider.GetComponent<Zombie>().SetTarget(this.transform);
                     pistol.Attack(this, hit.collider.GetComponent<IDamageable>());
                     if (hit.collider.GetComponent<LivingObject>().CurrentLife <= 0)
                     {
@@ -262,7 +263,7 @@ public class mainCharacter : LivingObject
             }
         }
 
-        if (GetItemSelected() is Knife)
+        else if (GetItemSelected() is Knife)
         {
             //Mettre l'animation d'attaque et le takeDamage au moment ou le couteau touche un enemy
 
@@ -279,8 +280,6 @@ public class mainCharacter : LivingObject
                     }
                 }
             }
-
         }
     }
-
 }
