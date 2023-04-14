@@ -425,6 +425,14 @@ MonoBehaviour:
       m_Groups: 
       m_Action: Interact
       m_Flags: 0
+  _buttonAction:
+    m_Name: Button
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 840a24ab-92a4-4aad-8365-c3df437de7ae
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
   _IgnoreLayer:
     serializedVersion: 2
     m_Bits: 0

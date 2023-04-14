@@ -42,6 +42,7 @@ public class mainCharacter : LivingObject
     public Transform ItemPos { get => _itemPos; set => _itemPos = value; }
     public float MovementSpeed { get => _movementSpeed; set => _movementSpeed = value; }
     public bool HaveKnife { get => _haveKnife; set => _haveKnife = value; }
+    public InputAction ButtonAction { get => _buttonAction; set => _buttonAction = value; }
 
     [SerializeField]
     private float _hungerDecreaseRun; // la perte de faim quand on court
@@ -55,8 +56,12 @@ public class mainCharacter : LivingObject
 
     [SerializeField] private InputAction _interactAction;
 
+    [SerializeField] private InputAction _buttonAction;
 
     [SerializeField] private LayerMask _IgnoreLayer;
+
+
+    
     private void Start()
     {
         //lock le cursor pour la caméra
@@ -76,6 +81,8 @@ public class mainCharacter : LivingObject
 
         _interactAction.Enable();
         _interactAction.performed += Interact;
+
+        _buttonAction.Enable();
 
     }
     private void Update()
