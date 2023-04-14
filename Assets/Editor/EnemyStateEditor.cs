@@ -13,6 +13,8 @@ public class EnemyStateEditor : Editor
     SerializedProperty m_zombiePlayerRef;
     SerializedProperty m_zombieWaypoints;
     SerializedProperty m_zombieWalkRadius;
+    SerializedProperty m_zombieTargetMask;
+    SerializedProperty m_zombieObstructionMask;
     
     private void OnEnable()
     {
@@ -23,6 +25,8 @@ public class EnemyStateEditor : Editor
         m_zombieAngle = serializedObject.FindProperty("_angle");
         m_zombiePlayerRef = serializedObject.FindProperty("_playerRef");
         m_zombieWalkRadius = serializedObject.FindProperty("_walkRadius");
+        m_zombieTargetMask = serializedObject.FindProperty("_targetMask");
+        m_zombieObstructionMask = serializedObject.FindProperty("_ObstructionMask");
     }
 
     public override void OnInspectorGUI()
@@ -39,6 +43,8 @@ public class EnemyStateEditor : Editor
                     EditorGUILayout.PropertyField(m_zombieRadius, new GUIContent("Radius"));
                     EditorGUILayout.Slider(m_zombieAngle, 0, 360, new GUIContent("Angle"));
                     EditorGUILayout.PropertyField(m_zombiePlayerRef, new GUIContent("PlayerRef"));
+                    EditorGUILayout.PropertyField(m_zombieTargetMask, new GUIContent("Target Mask"));
+                    EditorGUILayout.PropertyField(m_zombieObstructionMask, new GUIContent("Obstruction Mask"));
                     serializedObject.ApplyModifiedProperties();
                     break;
                 }
@@ -49,6 +55,8 @@ public class EnemyStateEditor : Editor
                     EditorGUILayout.Slider(m_zombieAngle, 0, 360, new GUIContent("Angle"));
                     EditorGUILayout.PropertyField(m_zombiePlayerRef, new GUIContent("PlayerRef"));
                     EditorGUILayout.PropertyField(m_zombieWaypoints, new GUIContent("Waypoints"));
+                    EditorGUILayout.PropertyField(m_zombieTargetMask, new GUIContent("Target Mask"));
+                    EditorGUILayout.PropertyField(m_zombieObstructionMask, new GUIContent("Obstruction Mask"));
                     serializedObject.ApplyModifiedProperties();
                     break;
                 }
@@ -59,6 +67,8 @@ public class EnemyStateEditor : Editor
                     EditorGUILayout.PropertyField(m_zombieRadius, new GUIContent("Radius"));
                     EditorGUILayout.Slider(m_zombieAngle, 0, 360, new GUIContent("Angle"));
                     EditorGUILayout.PropertyField(m_zombiePlayerRef, new GUIContent("PlayerRef"));
+                    EditorGUILayout.PropertyField(m_zombieTargetMask, new GUIContent("Target Mask"));
+                    EditorGUILayout.PropertyField(m_zombieObstructionMask, new GUIContent("Obstruction Mask"));
                     serializedObject.ApplyModifiedProperties();
                     break;
                 }

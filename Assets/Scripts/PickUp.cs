@@ -1,3 +1,4 @@
+using Newtonsoft.Json.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -33,12 +34,16 @@ public class PickUp : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             IsPickable = false;
+            other.gameObject.GetComponent<mainCharacter>().CanInteract = false;
+            other.gameObject.GetComponent<mainCharacter>().ItemInteractable = null;
+
             Debug.Log("Peut plus prendre");
         }
     }
 
     public virtual void PickUpItem()
     {
+
     }
 
     public void SetGameObject(GameObject go)
@@ -50,5 +55,9 @@ public class PickUp : MonoBehaviour
     {
         return _go;
     }
+
+    
+
+    
 
 }

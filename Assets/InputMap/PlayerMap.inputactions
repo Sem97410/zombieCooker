@@ -86,6 +86,14 @@
                     "interactions": ""
                 },
                 {
+                    "name": "DropItem",
+                    "type": "Button",
+                    "id": "9e4a6ac7-00f2-449b-9f63-f8ba976bb60b",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
                     "name": "Shoot",
                     "type": "Button",
                     "id": "c0b24cc3-8295-4026-b213-e27ffb758068",
@@ -317,17 +325,6 @@
                 },
                 {
                     "name": "",
-                    "id": "89330e84-e891-4705-923d-e82daffd9800",
-                    "path": "<Keyboard>/e",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard&Mouse",
-                    "action": "Interact",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "8d69b1e2-6636-42e9-a75a-29219da2160c",
                     "path": "<Keyboard>/shift",
                     "interactions": "",
@@ -394,12 +391,34 @@
                 },
                 {
                     "name": "",
+                    "id": "0bc59e89-c9a8-4b06-b033-6b28e2214048",
+                    "path": "<Keyboard>/f",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "",
+                    "action": "DropItem",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "1d6caa4f-a898-4425-9eeb-74b29de5cee5",
                     "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
                     "action": "Shoot",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "15ab7b9d-3842-4fda-acbb-6f6b812ede67",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Interact",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

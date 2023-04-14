@@ -5,7 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Food
+  - Zombie
   - FoodMesh
+
   layers:
   - Default
   - TransparentFX
@@ -13,8 +15,8 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
+  - Target
+  - Obstruction
   - 
   - 
   - 
