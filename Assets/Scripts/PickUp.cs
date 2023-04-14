@@ -13,9 +13,9 @@ public class PickUp : MonoBehaviour
     public bool IsPickable { get => _isPickable; set => _isPickable = value; }
     public mainCharacter MainCharacter { get => _mainCharacter; set => _mainCharacter = value; }
 
-    private void Start()
+    protected virtual void Start()
     {
-        _mainCharacter = GameObject.Find("Player").GetComponent<mainCharacter>();
+        _mainCharacter = GameObject.FindGameObjectWithTag("Player").GetComponent<mainCharacter>();
     }
 
     protected virtual void OnTriggerEnter(Collider other)

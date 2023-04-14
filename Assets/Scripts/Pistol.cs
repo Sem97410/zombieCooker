@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class Pistol : Weapon, IShooting
 {
-    public Transform _firePoint;
 
     protected override void OnTriggerEnter(Collider other)
     {

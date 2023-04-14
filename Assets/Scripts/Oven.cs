@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class Oven : MonoBehaviour
 {
@@ -13,7 +12,9 @@ public class Oven : MonoBehaviour
 
     private Food _food;
 
-    private int RecipeIp = 1;
+    protected int RecipeIp = 1;
+
+
 
 
 
@@ -31,8 +32,13 @@ public class Oven : MonoBehaviour
     [SerializeField] private Transform _spawnSaladePosition;
     [SerializeField] private Transform _spawnSoupeViandePosition;
 
-
-
+    public int recipeIp { get => RecipeIp; set => RecipeIp = value; }
+    public GameObject Hamburger { get => _hamburger; set => _hamburger = value; }
+    public GameObject Salade { get => _salade; set => _salade = value; }
+    public GameObject SoupeViande { get => _soupeViande; set => _soupeViande = value; }
+    public Transform SpawnHamburgerPosition { get => _spawnHamburgerPosition; set => _spawnHamburgerPosition = value; }
+    public Transform SpawnSaladePosition { get => _spawnSaladePosition; set => _spawnSaladePosition = value; }
+    public Transform SpawnSoupeViandePosition { get => _spawnSoupeViandePosition; set => _spawnSoupeViandePosition = value; }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -49,19 +55,9 @@ public class Oven : MonoBehaviour
             }
 
 
-            if (RecipeIp == 30)
-            {
-                MakeThePlate(_hamburger, _spawnHamburgerPosition);
-            }
-            if (RecipeIp == 5005)
-            {
-                MakeThePlate(_salade, _spawnSaladePosition);
-            }
-            if (RecipeIp == 10)
-            {
-                MakeThePlate(_soupeViande, _spawnSoupeViandePosition);
-            }
+
         }
+
     }
 
     private void OnTriggerExit(Collider other)
@@ -77,7 +73,7 @@ public class Oven : MonoBehaviour
     }
 
 
-    private void MakeThePlate(GameObject plate, Transform spawnPosition)
+    public void MakeThePlate(GameObject plate, Transform spawnPosition)
     {
         for (var i = 0; i < _foodOven.Count; i++)
         {
@@ -90,5 +86,7 @@ public class Oven : MonoBehaviour
         Instantiate(plate, spawnPosition.position, transform.rotation);
         RecipeIp = 1;
     }
+
+
 
 }
