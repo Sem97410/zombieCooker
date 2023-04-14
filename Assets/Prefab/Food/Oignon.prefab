@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 8868058800949055251}
   - component: {fileID: 8868058800949055248}
   - component: {fileID: 8868058800949055249}
+  - component: {fileID: 3832767610089462366}
   m_Layer: 0
   m_Name: Oignon
-  m_TagString: Untagged
+  m_TagString: Food
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -61,6 +62,22 @@ MonoBehaviour:
   _satiety: 0
   _oven: {fileID: 0}
   _id: 5
+--- !u!54 &3832767610089462366
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8868058800949055262}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &8868058802282036052
 GameObject:
   m_ObjectHideFlags: 0
@@ -72,7 +89,6 @@ GameObject:
   - component: {fileID: 8868058802282036055}
   - component: {fileID: 8868058802282036072}
   - component: {fileID: 8868058802282036073}
-  - component: {fileID: 8868058802282036054}
   m_Layer: 0
   m_Name: Mesh
   m_TagString: Untagged
@@ -88,7 +104,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8868058802282036052}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0.69}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8868058800949055251}
@@ -143,16 +159,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &8868058802282036054
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8868058802282036052}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 1.66
-  m_Center: {x: 0, y: 0, z: 0}

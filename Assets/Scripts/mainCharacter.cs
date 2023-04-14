@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Data.Common;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -49,6 +50,10 @@ public class mainCharacter : LivingObject
 
     [SerializeField]
     private Fx _walkFx;
+
+    [SerializeField] private InputAction _shootAction;
+
+    [SerializeField] private LayerMask _IgnoreLayer;
     private void Start()
     {
         //lock le cursor pour la caméra
@@ -61,6 +66,9 @@ public class mainCharacter : LivingObject
 
         _dropItemAction.Enable();
         _dropItemAction.performed += DropItem;
+        _shootAction.Enable();
+        _shootAction.performed += Attack;
+
         StartCoroutine("DecreaseHunger");
 
     }
@@ -210,4 +218,53 @@ public class mainCharacter : LivingObject
         }
         
     }
+            
+        
+
+    
+    public void Attack(InputAction.CallbackContext ctx)
+    {
+        if (GetItemSelected() is Pistol)
+        {
+            Ray ray = Camera.main.ScreenPointToRay(new Vector3 (Screen.width/2, Screen.height/2, 0));
+
+            Debug.DrawRay(ray.origin, Camera.main.transform.forward * 50, Color.red);
+
+            RaycastHit hit;
+
+            if (Physics.Raycast(ray, out hit, 150, ~_IgnoreLayer))
+            {
+                Debug.Log(hit.collider.gameObject.name);
+                if (hit.collider.CompareTag("Zombie"))
+                {
+                    GetItemSelected().gameObject.GetComponent<Pistol>().Attack(this, hit.collider.GetComponent<IDamageable>());
+                    if (hit.collider.GetComponent<LivingObject>().CurrentLife <= 0)
+                    {
+                        hit.collider.GetComponent<IDamageable>().Die(hit.collider.GetComponent<IDamageable>());
+                    }
+                }
+            }
+        }
+
+        if (GetItemSelected() is Knife)
+        {
+            //Mettre l'animation d'attaque et le takeDamage au moment ou le couteau touche un enemy
+
+            Collider[] hitColliders = Physics.OverlapSphere(transform.position, 2);
+
+            foreach (Collider collider in hitColliders)
+            {
+                if (collider.CompareTag("Zombie"))
+                {
+                    GetItemSelected().gameObject.GetComponent<Knife>().Attack(this, collider.GetComponent<IDamageable>());
+                    if (collider.GetComponent<LivingObject>().CurrentLife <= 0)
+                    {
+                        collider.GetComponent <IDamageable>().Die(collider.GetComponent<IDamageable>());
+                    }
+                }
+            }
+
+        }
+    }
+
 }

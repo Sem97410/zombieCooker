@@ -7,81 +7,67 @@ public class Oven : MonoBehaviour
     [SerializeField]
     private RecipeManager _recipeManager;
     public static List<Food> ingredients = new List<Food>();
-    private Button _hamburgerButton;
-    private Canvas _canvas;
-    private mainCharacter _mainCharacter;
-    private CameraController _cameraControllerCharacter;
 
-    private RecipeManager recipeManager;
+    private List<GameObject> _foodOven = new List<GameObject>();
+    private List<Food> _foodIdOven = new List<Food>();
 
-    private float ActualMovementSpeed;
-    private float ActualMouseSensitivity;
+    private Food _food;
 
-    public void Start()
+    private int RecipeIp = 1;
+
+
+
+    [SerializeField]
+    private GameObject _hamburger;
+    [SerializeField]
+    private Transform _spawnPlatePosition;
+
+    private void OnTriggerEnter(Collider other)
     {
-        _canvas = GetComponentInChildren<Canvas>();
-        _canvas.enabled = false;
-        _mainCharacter = FindObjectOfType<mainCharacter>();
-        _cameraControllerCharacter = _mainCharacter.GetComponentInChildren<CameraController>();
-
-
-
-    }
-
-    private void OnTriggerStay(Collider other)
-    {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Food"))
         {
-            if (_canvas.enabled == false)
+            RecipeIp = 1;
+            _food = other.GetComponent<Food>();
+            _foodOven.Add(other.gameObject);
+            _foodIdOven.Add(_food);
+            for (var i = 0; i < _foodIdOven.Count; i++)
             {
-             ActualMovementSpeed = _mainCharacter.MovementSpeed;
-             ActualMouseSensitivity = _cameraControllerCharacter.MouseSensitivity;
-
-            }
-            Debug.Log("Dedans");
-
-            if (Input.GetKey(KeyCode.E))
-            {
-                if (_canvas.enabled == false)
-                {
-                    _canvas.enabled = true;
-                    _mainCharacter.MovementSpeed = 0;
-                    Cursor.visible = true;
-                    Cursor.lockState = CursorLockMode.None;
-
-                    _cameraControllerCharacter.MouseSensitivity = 0;
-                    return;
-                }
-                else if (_canvas.enabled == true)
-                {
-
-                    _canvas.enabled = false;
-                    _mainCharacter.MovementSpeed = ActualMovementSpeed;
-                    Cursor.visible = false;
-                    Cursor.lockState = CursorLockMode.None;
-                    _cameraControllerCharacter.MouseSensitivity = ActualMouseSensitivity;
-
-                }
+                RecipeIp *= _foodIdOven[i].Id;
 
             }
 
 
 
+            if (RecipeIp == 30)
+            {
+                for (var i = 0; i < _foodOven.Count; i++)
+                {
+                    Destroy(_foodOven[i]);
+
+                    
+                }
+                _foodOven.Clear();
+                Debug.Log("coucou");
+                Instantiate(_hamburger, _spawnPlatePosition.position, transform.rotation);
+            }
 
         }
     }
 
-    public void Hamburger()
+    private void OnTriggerExit(Collider other)
     {
-
-        if (_recipeManager.RecipeValid(ingredients) == null) return;
-
-
-        if (_recipeManager.RecipeValid(ingredients).Name == "Hamburger")
+        if (other.CompareTag("Food"))
         {
-            Debug.Log("HAMBURGER");
-            Oven.ingredients.Clear();
+            _food = other.GetComponent<Food>();
+            _foodOven.Remove(other.gameObject);
+            _foodIdOven.Remove(_food);
+
+            RecipeIp /= _food.Id;
+          Debug.Log(RecipeIp);
         }
     }
+
+
+
 
 }

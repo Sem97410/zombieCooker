@@ -72,7 +72,6 @@ GameObject:
   - component: {fileID: 6091596464867043383}
   - component: {fileID: 6091596464867043370}
   - component: {fileID: 6091596464867043381}
-  - component: {fileID: 6091596464867043380}
   m_Layer: 0
   m_Name: eyeL
   m_TagString: Untagged
@@ -143,19 +142,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &6091596464867043380
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6091596464867043382}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &6091596465444063636
 GameObject:
   m_ObjectHideFlags: 0
@@ -167,7 +153,6 @@ GameObject:
   - component: {fileID: 6091596465444063637}
   - component: {fileID: 6091596465444063624}
   - component: {fileID: 6091596465444063627}
-  - component: {fileID: 6091596465444063626}
   m_Layer: 0
   m_Name: eyeR
   m_TagString: Untagged
@@ -238,19 +223,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &6091596465444063626
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6091596465444063636}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &6091596465505227720
 GameObject:
   m_ObjectHideFlags: 0
@@ -301,7 +273,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6091596465505227720}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -362,7 +334,7 @@ GameObject:
   - component: {fileID: 6091596465544781633}
   - component: {fileID: 1727342848}
   - component: {fileID: 8922790049970536494}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -401,9 +373,37 @@ MonoBehaviour:
   _runSpeedMultiplication: 2
   _itemPos: {fileID: 849881854}
   _currentHunger: 100
+  _canInteract: 0
   _hungerDecrease: 1
+  _dropItemAction:
+    m_Name: Drop Item
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 7b05d87a-f903-40c0-a775-0c6cf2a76b77
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 64b3bd00-3f7d-4067-a988-0cd519928080
+      m_Path: <Keyboard>/f
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Drop Item
+      m_Flags: 0
   _hungerDecreaseRun: 2
   _walkFx: {fileID: -4932167650510407165, guid: b3ea1da61d563f547b07229b4ce11d3d, type: 3}
+  _shootAction:
+    m_Name: Shoot
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 8b6a757e-d4a3-467b-9e9e-3c25cd307414
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+  _IgnoreLayer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!54 &6091596465544781633
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -412,7 +412,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6091596465544781632}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 50
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
@@ -576,21 +576,13 @@ MonoBehaviour:
     m_ActionId: bec864ff-7f19-46f3-b913-5437036edbee
     m_ActionName: Player/Item5[/Keyboard/5]
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6091596465544781638}
-        m_TargetAssemblyTypeName: mainCharacter, Assembly-CSharp
-        m_MethodName: DropItem
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_ActionId: 9e4a6ac7-00f2-449b-9f63-f8ba976bb60b
-    m_ActionName: Player/New action
+    m_ActionName: Player/DropItem[/Keyboard/f]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: c0b24cc3-8295-4026-b213-e27ffb758068
+    m_ActionName: Player/Shoot[/Mouse/leftButton]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player

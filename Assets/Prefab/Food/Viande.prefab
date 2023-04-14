@@ -109,7 +109,7 @@ GameObject:
   - component: {fileID: 345320976188824070}
   m_Layer: 0
   m_Name: Viande
-  m_TagString: Untagged
+  m_TagString: Food
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -156,7 +156,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _satiety: 0
   _oven: {fileID: 0}
-  _id: 0
+  _id: 2
 --- !u!54 &345320976188824070
 Rigidbody:
   m_ObjectHideFlags: 0

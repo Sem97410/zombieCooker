@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Knife : Weapon
+public class Knife : Weapon, IShooting
 {
     protected override void OnTriggerEnter(Collider other)
     {
@@ -29,8 +29,9 @@ public class Knife : Weapon
         }
         
     }
-    private void Attack()
-    {
 
+    public void Attack(IDamageable attaquant, IDamageable cible)
+    {
+        cible.TakeDamage(Damage, attaquant);
     }
 }
