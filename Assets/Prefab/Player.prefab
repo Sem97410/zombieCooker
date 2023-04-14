@@ -362,7 +362,7 @@ GameObject:
   - component: {fileID: 6091596465544781633}
   - component: {fileID: 1727342848}
   - component: {fileID: 8922790049970536494}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -544,7 +544,19 @@ MonoBehaviour:
     m_ActionId: 89b015bd-1f42-4a00-a405-d81296467d7b
     m_ActionName: Player/Run[/Keyboard/shift]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6091596465544781638}
+        m_TargetAssemblyTypeName: mainCharacter, Assembly-CSharp
+        m_MethodName: ShowItemSelected
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 7d456517-fd8c-4479-8cb0-22c018580616
     m_ActionName: Player/Item1[/Keyboard/1]
   - m_PersistentCalls:
@@ -563,6 +575,22 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: bec864ff-7f19-46f3-b913-5437036edbee
     m_ActionName: Player/Item5[/Keyboard/5]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6091596465544781638}
+        m_TargetAssemblyTypeName: mainCharacter, Assembly-CSharp
+        m_MethodName: DropItem
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 9e4a6ac7-00f2-449b-9f63-f8ba976bb60b
+    m_ActionName: Player/New action
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player

@@ -1,3 +1,4 @@
+using Newtonsoft.Json.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -40,7 +41,11 @@ public class Weapon : PickUp
             MainCharacter.PickUps.Add((PickUp)this);
             MainCharacter.EnleverItemEquipe(MainCharacter.GetItemSelected().GetGameObject());
             MainCharacter.ChoixIndex = MainCharacter.PickUps.Count - 1;
+            MainCharacter.GetItemSelected().GetComponent<Rigidbody>().isKinematic = true;
+            MainCharacter.GetItemSelected().GetComponentInChildren<BoxCollider>().enabled = false;
             MainCharacter.AfficherItemEquipe(MainCharacter.GetItemSelected().GetGameObject());
+            MainCharacter.GetItemSelected().GetComponent<SphereCollider>().enabled = false;
+
         }
     }
 }

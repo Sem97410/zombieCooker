@@ -35,6 +35,11 @@ public class Food : PickUp
             SetGameObject(this.gameObject);
             MainCharacter.PickUps.Add((PickUp)this);
             MainCharacter.ChooseItem(MainCharacter.PickUps.Count - 1);
+            MainCharacter.GetItemSelected().GetComponent<Rigidbody>().isKinematic = true;
+            MainCharacter.GetItemSelected().GetComponent<SphereCollider>().enabled = false;
+            this.GetComponentInChildren<BoxCollider>().enabled = false;
+
+
         }
 
     }

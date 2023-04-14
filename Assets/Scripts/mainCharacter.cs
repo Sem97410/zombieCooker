@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class mainCharacter : LivingObject
 {
@@ -24,11 +25,13 @@ public class mainCharacter : LivingObject
     private float _currentHunger;
 
 
-    private bool _canInteract;
+    [SerializeField] private bool _canInteract;
     private bool _havePistol;
     private bool _haveKnife;
     [SerializeField]
     private float _hungerDecrease;   //la vitesse a laquelle on perd de la faim
+
+    [SerializeField] private InputAction _dropItemAction;
 
     public bool CanInteract { get => _canInteract; set => _canInteract = value; }
     public PickUp ItemInteractable { get => _itemInteractable; set => _itemInteractable = value; }
@@ -56,6 +59,8 @@ public class mainCharacter : LivingObject
 
         ChoixIndex = 0;
 
+        _dropItemAction.Enable();
+        _dropItemAction.performed += DropItem;
         StartCoroutine("DecreaseHunger");
 
     }
@@ -177,8 +182,6 @@ public class mainCharacter : LivingObject
 
     public void ChooseItem(int choixindex)
     {
-        
-       
             if (GetItemSelected() != null)
             {
                 EnleverItemEquipe(GetItemSelected().GetGameObject());
@@ -191,6 +194,20 @@ public class mainCharacter : LivingObject
                 AfficherItemEquipe(GetItemSelected().GetGameObject());
 
             }
+    }
+
+
+    public void DropItem(InputAction.CallbackContext ctx)
+    {
+        if (GetItemSelected() != null)
+        {
+            GetItemSelected().transform.parent = null;
+            GetItemSelected().GetComponent<Rigidbody>().isKinematic = false;
+            GetItemSelected().GetComponent<Rigidbody>().AddForce(gameObject.transform.forward * 10, ForceMode.Impulse);
+            GetItemSelected().GetComponent<SphereCollider>().enabled = true;
+            GetItemSelected().GetComponentInChildren<BoxCollider>().enabled = true;
+            PickUps.Remove(GetItemSelected());
+        }
         
     }
 }
