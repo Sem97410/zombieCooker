@@ -1,9 +1,12 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class OvenButton : MonoBehaviour
 {
     [SerializeField]
     private Oven _oven;
+
+    [SerializeField] private mainCharacter _player;
 
 
     private void Start()
@@ -12,30 +15,62 @@ public class OvenButton : MonoBehaviour
     }
 
 
-    public void Update()
+    private void Update()
     {
-        Debug.Log(_oven.recipeIp);
-        
-        
+        Debug.Log("Recipe ip : "+_oven.recipeIp );
     }
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            Debug.Log(other);
-            if (_oven.recipeIp == 30)
-            {
-                _oven.MakeThePlate(_oven.Hamburger, _oven.SpawnHamburgerPosition);
-            }
-            if (_oven.recipeIp == 5005)
-            {
-                _oven.MakeThePlate(_oven.Salade, _oven.SpawnSaladePosition);
-            }
-            if (_oven.recipeIp == 10)
-            {
-                _oven.MakeThePlate(_oven.SoupeViande, _oven.SpawnSoupeViandePosition);
-            }
+
+            _player.ButtonAction.performed += ValidRecipes;
+
+
         }
+    }
+
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+
+            _player.ButtonAction.performed -= ValidRecipes;
+
+
+        }
+    }
+
+    public void ValidRecipes(InputAction.CallbackContext ctx)
+    {
+        if (_oven.recipeIp == 30)
+        {
+            _oven.MakeThePlate(_oven.Hamburger, _oven.SpawnHamburgerPosition);
+        }
+        if (_oven.recipeIp == 5005)
+        {
+            _oven.MakeThePlate(_oven.Salade, _oven.SpawnSaladePosition);
+        }
+        if (_oven.recipeIp == 10)
+        {
+            _oven.MakeThePlate(_oven.SoupeViande, _oven.SpawnSoupeViandePosition);
+        }
+
+        else
+        {
+            Debug.Log("coucou");
+            for (var i = 0; i < _oven.FoodOven.Count; i++)
+            {
+                Rigidbody rb = _oven.FoodOven[i].GetComponent<Rigidbody>();
+                rb.AddForce(250 * transform.up);
+
+            }
+            
+
+
+        }
+
     }
 
     //private void OnCollisionEnter(Collision collision)
