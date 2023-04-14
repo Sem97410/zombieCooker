@@ -88,9 +88,7 @@ GameObject:
   - component: {fileID: 8868058802282036055}
   - component: {fileID: 8868058802282036072}
   - component: {fileID: 8868058802282036073}
-
-  - component: {fileID: 877619441098094996}
-
+  - component: {fileID: 479554786295413247}
   m_Layer: 0
   m_Name: Mesh
   m_TagString: FoodMesh
@@ -161,9 +159,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
-
---- !u!65 &877619441098094996
-
+--- !u!65 &479554786295413247
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

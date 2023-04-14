@@ -53,6 +53,9 @@ public class mainCharacter : LivingObject
 
     [SerializeField] private InputAction _shootAction;
 
+    [SerializeField] private InputAction _interactAction;
+
+
     [SerializeField] private LayerMask _IgnoreLayer;
     private void Start()
     {
@@ -70,6 +73,9 @@ public class mainCharacter : LivingObject
         _shootAction.performed += Attack;
 
         StartCoroutine("DecreaseHunger");
+
+        _interactAction.Enable();
+        _interactAction.performed += Interact;
 
     }
     private void Update()
@@ -129,7 +135,7 @@ public class mainCharacter : LivingObject
         }
     }
 
-    public void Interact()
+    public void Interact(InputAction.CallbackContext ctx)
     {
         if (_canInteract && ItemInteractable != null)
         {
@@ -226,18 +232,21 @@ public class mainCharacter : LivingObject
     {
         if (GetItemSelected() is Pistol)
         {
+            Pistol pistol = GetItemSelected().GetComponent<Pistol>();
+            if (pistol.CurrentAmmo <= 0) return;
             Ray ray = Camera.main.ScreenPointToRay(new Vector3 (Screen.width/2, Screen.height/2, 0));
 
             Debug.DrawRay(ray.origin, Camera.main.transform.forward * 50, Color.red);
 
             RaycastHit hit;
+            pistol.CurrentAmmo--;
 
             if (Physics.Raycast(ray, out hit, 150, ~_IgnoreLayer))
             {
                 Debug.Log(hit.collider.gameObject.name);
                 if (hit.collider.CompareTag("Zombie"))
                 {
-                    GetItemSelected().gameObject.GetComponent<Pistol>().Attack(this, hit.collider.GetComponent<IDamageable>());
+                    pistol.Attack(this, hit.collider.GetComponent<IDamageable>());
                     if (hit.collider.GetComponent<LivingObject>().CurrentLife <= 0)
                     {
                         hit.collider.GetComponent<IDamageable>().Die(hit.collider.GetComponent<IDamageable>());

@@ -385,7 +385,31 @@ MonoBehaviour:
     m_Id: 8b6a757e-d4a3-467b-9e9e-3c25cd307414
     m_Processors: 
     m_Interactions: 
-    m_SingletonActionBindings: []
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: e70fc002-f534-4729-8ed1-ff92affe5566
+      m_Path: <Mouse>/leftButton
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Shoot
+      m_Flags: 0
+  _interactAction:
+    m_Name: Interact
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 8bd10ff1-7987-481d-8751-16a6f77d1295
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 9797eb0e-a4ba-4dc3-827d-1da24941589e
+      m_Path: <Keyboard>/e
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Interact
+      m_Flags: 0
   _IgnoreLayer:
     serializedVersion: 2
     m_Bits: 0
@@ -457,19 +481,7 @@ MonoBehaviour:
     m_ActionId: 6d9af1d4-cf1c-4a88-8f5b-4573becc2a4b
     m_ActionName: Player/Fire[/Mouse/leftButton]
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6091596465544781638}
-        m_TargetAssemblyTypeName: mainCharacter, Assembly-CSharp
-        m_MethodName: Interact
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_ActionId: 288e61b9-3100-4ce2-96dd-79320138bfea
     m_ActionName: Player/Interact[/Keyboard/e]
   - m_PersistentCalls:
