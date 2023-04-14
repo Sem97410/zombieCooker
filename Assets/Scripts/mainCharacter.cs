@@ -57,6 +57,7 @@ public class mainCharacter : LivingObject
 
 
     [SerializeField] private LayerMask _IgnoreLayer;
+
     private void Start()
     {
         //lock le cursor pour la caméra
@@ -256,7 +257,7 @@ public class mainCharacter : LivingObject
             }
         }
 
-        if (GetItemSelected() is Knife)
+        else if (GetItemSelected() is Knife)
         {
             //Mettre l'animation d'attaque et le takeDamage au moment ou le couteau touche un enemy
 
@@ -273,8 +274,6 @@ public class mainCharacter : LivingObject
                     }
                 }
             }
-
         }
     }
-
 }
