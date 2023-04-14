@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Oven : MonoBehaviour
 {
@@ -12,9 +13,7 @@ public class Oven : MonoBehaviour
 
     private Food _food;
 
-    protected int RecipeIp = 1;
-
-
+    private int RecipeIp = 1;
 
 
 
@@ -41,6 +40,8 @@ public class Oven : MonoBehaviour
     public Transform SpawnSoupeViandePosition { get => _spawnSoupeViandePosition; set => _spawnSoupeViandePosition = value; }
     public List<GameObject> FoodOven { get => _foodOven; set => _foodOven = value; }
 
+
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("FoodMesh"))
@@ -57,9 +58,19 @@ public class Oven : MonoBehaviour
             }
 
 
-
+            if (RecipeIp == 30)
+            {
+                MakeThePlate(_hamburger, _spawnHamburgerPosition);
+            }
+            if (RecipeIp == 5005)
+            {
+                MakeThePlate(_salade, _spawnSaladePosition);
+            }
+            if (RecipeIp == 10)
+            {
+                MakeThePlate(_soupeViande, _spawnSoupeViandePosition);
+            }
         }
-
     }
 
     private void OnTriggerExit(Collider other)
@@ -92,7 +103,5 @@ public class Oven : MonoBehaviour
         Instantiate(plate, spawnPosition.position, transform.rotation);
         RecipeIp = 1;
     }
-
-
 
 }
