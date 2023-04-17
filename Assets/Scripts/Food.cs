@@ -39,6 +39,10 @@ public class Food : PickUp
             MainCharacter.GetItemSelected().GetComponent<SphereCollider>().enabled = false;
             this.GetComponentInChildren<BoxCollider>().enabled = false;
             UiManager.UpdateSpriteOfInventory(MainCharacter);
+            BoxCollider _box = GetComponentInChildren<BoxCollider>();
+            CapsuleCollider _capsule = MainCharacter.GetComponent<CapsuleCollider>();
+            Physics.IgnoreCollision(_box, _capsule);
+            //this.GetComponentInChildren<BoxCollider>().enabled = false;
 
 
         }

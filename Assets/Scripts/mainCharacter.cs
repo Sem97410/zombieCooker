@@ -45,6 +45,7 @@ public class mainCharacter : LivingObject
     public float MovementSpeed { get => _movementSpeed; set => _movementSpeed = value; }
     public bool HaveKnife { get => _haveKnife; set => _haveKnife = value; }
     public UiManager UiManager { get => uiManager; set => uiManager = value; }
+    public InputAction ButtonAction { get => _buttonAction; set => _buttonAction = value; }
 
     [SerializeField]
     private float _hungerDecreaseRun; // la perte de faim quand on court
@@ -58,8 +59,12 @@ public class mainCharacter : LivingObject
 
     [SerializeField] private InputAction _interactAction;
 
+    [SerializeField] private InputAction _buttonAction;
 
     [SerializeField] private LayerMask _IgnoreLayer;
+
+
+    
     private void Start()
     {
         //lock le cursor pour la caméra
@@ -81,6 +86,8 @@ public class mainCharacter : LivingObject
         _interactAction.performed += Interact;
 
         UiManager = GameObject.FindGameObjectWithTag("UiManager").GetComponent<UiManager>();
+
+        _buttonAction.Enable();
 
     }
     private void Update()
@@ -253,6 +260,7 @@ public class mainCharacter : LivingObject
                 Debug.Log(hit.collider.gameObject.name);
                 if (hit.collider.CompareTag("Zombie"))
                 {
+                    hit.collider.GetComponent<Zombie>().SetTarget(this.transform);
                     pistol.Attack(this, hit.collider.GetComponent<IDamageable>());
                     if (hit.collider.GetComponent<LivingObject>().CurrentLife <= 0)
                     {
@@ -262,7 +270,7 @@ public class mainCharacter : LivingObject
             }
         }
 
-        if (GetItemSelected() is Knife)
+        else if (GetItemSelected() is Knife)
         {
             //Mettre l'animation d'attaque et le takeDamage au moment ou le couteau touche un enemy
 
@@ -279,8 +287,6 @@ public class mainCharacter : LivingObject
                     }
                 }
             }
-
         }
     }
-
 }

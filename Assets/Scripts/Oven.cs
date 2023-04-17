@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Oven : MonoBehaviour
 {
@@ -12,9 +13,7 @@ public class Oven : MonoBehaviour
 
     private Food _food;
 
-    protected int RecipeIp = 1;
-
-
+    private int RecipeIp = 1;
 
 
 
@@ -39,6 +38,9 @@ public class Oven : MonoBehaviour
     public Transform SpawnHamburgerPosition { get => _spawnHamburgerPosition; set => _spawnHamburgerPosition = value; }
     public Transform SpawnSaladePosition { get => _spawnSaladePosition; set => _spawnSaladePosition = value; }
     public Transform SpawnSoupeViandePosition { get => _spawnSoupeViandePosition; set => _spawnSoupeViandePosition = value; }
+    public List<GameObject> FoodOven { get => _foodOven; set => _foodOven = value; }
+
+
 
     private void OnTriggerEnter(Collider other)
     {
@@ -48,6 +50,7 @@ public class Oven : MonoBehaviour
             _food = other.GetComponentInParent<Food>();
             _foodOven.Add(other.transform.parent.gameObject);
             _foodIdOven.Add(_food);
+            _food.enabled = false;
             for (var i = 0; i < _foodIdOven.Count; i++)
             {
                 RecipeIp *= _foodIdOven[i].Id;
@@ -55,9 +58,8 @@ public class Oven : MonoBehaviour
             }
 
 
-
+ 
         }
-
     }
 
     private void OnTriggerExit(Collider other)
@@ -65,10 +67,14 @@ public class Oven : MonoBehaviour
         if (other.CompareTag("FoodMesh"))
         {
             _food = other.GetComponentInParent<Food>();
-            _foodOven.Remove(other.gameObject);
+            _foodOven.Remove(other.transform.parent.gameObject);
             _foodIdOven.Remove(_food);
 
             RecipeIp /= _food.Id;
+            if (_foodIdOven.Count < 0)
+            {
+                RecipeIp = 1;
+            }
         }
     }
 
@@ -86,7 +92,5 @@ public class Oven : MonoBehaviour
         Instantiate(plate, spawnPosition.position, transform.rotation);
         RecipeIp = 1;
     }
-
-
 
 }

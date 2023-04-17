@@ -410,6 +410,16 @@ MonoBehaviour:
       m_Groups: 
       m_Action: Interact
       m_Flags: 0
+  _buttonAction:
+    m_Name: Button
+    m_Type: 0
+    m_ExpectedControlType: 
+
+    m_Id: e12f2da7-dc48-483b-98e7-7b795ab7fa59
+
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
   _IgnoreLayer:
     serializedVersion: 2
     m_Bits: 0
@@ -436,11 +446,11 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6091596465544781632}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: b3daa68befbe55847ab30ec951590126, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5
-  m_Height: 2
+  m_Height: 1
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &8922790049970536494
