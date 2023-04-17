@@ -376,6 +376,7 @@ MonoBehaviour:
       m_Groups: 
       m_Action: Drop Item
       m_Flags: 0
+  uiManager: {fileID: 0}
   _hungerDecreaseRun: 2
   _walkFx: {fileID: -4932167650510407165, guid: b3ea1da61d563f547b07229b4ce11d3d, type: 3}
   _shootAction:
@@ -414,9 +415,7 @@ MonoBehaviour:
     m_Name: Button
     m_Type: 0
     m_ExpectedControlType: 
-
-    m_Id: e12f2da7-dc48-483b-98e7-7b795ab7fa59
-
+    m_Id: 3e53ecf2-f77c-4f3b-879c-a450c04e8dbd
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []
@@ -450,7 +449,7 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5
-  m_Height: 1
+  m_Height: 1.8
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &8922790049970536494
