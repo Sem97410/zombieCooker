@@ -1,0 +1,15 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class ZombieEvents 
+{
+    public delegate void OnHungerChanged(float value);
+    public static OnHungerChanged onHungerChanged;
+
+    public delegate void OnLifeChanged(float value);
+    public static OnLifeChanged onLifeChanged;
+
+    public delegate void OnAmmoChanged(int currentAmmo, int maxAmmo);
+    public static OnAmmoChanged onAmmoChanged;
+}

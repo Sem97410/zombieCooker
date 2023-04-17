@@ -7,6 +7,7 @@ TagManager:
   - Food
   - Zombie
   - FoodMesh
+  - UiManager
   layers:
   - Default
   - TransparentFX

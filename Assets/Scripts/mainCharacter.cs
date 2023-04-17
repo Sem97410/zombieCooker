@@ -34,6 +34,8 @@ public class mainCharacter : LivingObject
 
     [SerializeField] private InputAction _dropItemAction;
 
+    [SerializeField] private UiManager uiManager;
+
     public bool CanInteract { get => _canInteract; set => _canInteract = value; }
     public PickUp ItemInteractable { get => _itemInteractable; set => _itemInteractable = value; }
     public bool HavePistol { get => _havePistol; set => _havePistol = value; }
@@ -42,6 +44,7 @@ public class mainCharacter : LivingObject
     public Transform ItemPos { get => _itemPos; set => _itemPos = value; }
     public float MovementSpeed { get => _movementSpeed; set => _movementSpeed = value; }
     public bool HaveKnife { get => _haveKnife; set => _haveKnife = value; }
+    public UiManager UiManager { get => uiManager; set => uiManager = value; }
     public InputAction ButtonAction { get => _buttonAction; set => _buttonAction = value; }
 
     [SerializeField]
@@ -63,7 +66,7 @@ public class mainCharacter : LivingObject
 
     [SerializeField] private LayerMask _IgnoreLayer;
 
-
+    [SerializeField] private Animator _playerAnimator;
     
     private void Start()
     {
@@ -71,7 +74,7 @@ public class mainCharacter : LivingObject
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
         PickUps = new List<PickUp>();
-        _currentLife = 100;
+        CurrentLife = MaxLife;
 
         ChoixIndex = 0;
 
@@ -87,7 +90,11 @@ public class mainCharacter : LivingObject
         _interactAction.Enable();
         _interactAction.performed += Interact;
 
+        UiManager = GameObject.FindGameObjectWithTag("UiManager").GetComponent<UiManager>();
+
         _buttonAction.Enable();
+
+        _playerAnimator = this.GetComponentInChildren<Animator>();
 
     }
     private void Update()
@@ -104,6 +111,12 @@ public class mainCharacter : LivingObject
         float horizontalInput = Input.GetAxis("Horizontal") * _movementSpeed * Time.deltaTime; ;
         float verticalInput = Input.GetAxis("Vertical") * _movementSpeed * Time.deltaTime; ;
         transform.Translate(horizontalInput, 0, verticalInput);
+        if (horizontalInput == 0 && verticalInput == 0)
+        {
+            _playerAnimator.SetBool("isWalking", false);
+        }
+        else
+            _playerAnimator.SetBool("isWalking", true);
     }
 
 
@@ -132,6 +145,8 @@ public class mainCharacter : LivingObject
                 _movementSpeed = _movementSpeed * _runSpeedMultiplication;
                 _hungerDecrease = _hungerDecrease / _hungerDecreaseRun;          //augmente la perte de faim quand on court
                 _isRunning = true;
+                _playerAnimator.SetBool("isSprinting", true);
+                _playerAnimator.SetBool("isWalking", false);
                 //gameManager.AddFX(_walkFx, this.transform.position, transform.rotation);
 
             }
@@ -141,6 +156,8 @@ public class mainCharacter : LivingObject
             if (_isRunning == true)
             {
                 _isRunning = false;
+
+                _playerAnimator.SetBool("isSprinting", false) ;
 
                 _movementSpeed = _movementSpeed / _runSpeedMultiplication;
                 _hungerDecrease = _hungerDecrease * _hungerDecreaseRun;
@@ -157,11 +174,13 @@ public class mainCharacter : LivingObject
 
             yield return new WaitForSeconds(_hungerDecrease);
             _currentHunger -= 1;
+            ZombieEvents.onHungerChanged(_currentHunger);
         }
         while (_currentHunger == 0)
         {
             yield return new WaitForSeconds(1f);
             _currentLife -= 1;
+            ZombieEvents.onLifeChanged(_currentLife);
         }
     }
 
@@ -217,7 +236,7 @@ public class mainCharacter : LivingObject
         go.SetActive(true);
         go.transform.parent = this.ItemPos;
         go.transform.localPosition = Vector3.zero;
-        go.transform.rotation = ItemPos.rotation * Quaternion.Euler(0, 90, 0);
+        //go.transform.rotation = ItemPos.rotation * Quaternion.Euler(0, 90, 0);
     }
     public void EnleverItemEquipe(GameObject go)
     {
@@ -252,8 +271,10 @@ public class mainCharacter : LivingObject
             GetItemSelected().GetComponent<SphereCollider>().enabled = true;
             GetItemSelected().GetComponentInChildren<BoxCollider>().enabled = true;
             PickUps.Remove(GetItemSelected());
+            UiManager.UpdateSpriteOfInventory(this);
+
         }
-        
+
     }
             
         
@@ -271,6 +292,7 @@ public class mainCharacter : LivingObject
 
             RaycastHit hit;
             pistol.CurrentAmmo--;
+            ZombieEvents.onAmmoChanged(pistol.CurrentAmmo, pistol.MaxAmmo);
 
             if (Physics.Raycast(ray, out hit, 150, ~_IgnoreLayer))
             {

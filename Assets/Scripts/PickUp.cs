@@ -2,6 +2,7 @@ using Newtonsoft.Json.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PickUp : MonoBehaviour
 {
@@ -9,13 +10,19 @@ public class PickUp : MonoBehaviour
     private bool _isPickable;
     private GameObject _go;
 
+    [SerializeField] private Sprite _sprite;
+    [SerializeField] private UiManager uiManager;
+
 
     public bool IsPickable { get => _isPickable; set => _isPickable = value; }
     public mainCharacter MainCharacter { get => _mainCharacter; set => _mainCharacter = value; }
+    public UiManager UiManager { get => uiManager; set => uiManager = value; }
+    public Sprite Sprite { get => _sprite; set => _sprite = value; }
 
     protected virtual void Start()
     {
         _mainCharacter = GameObject.FindGameObjectWithTag("Player").GetComponent<mainCharacter>();
+        UiManager = GameObject.FindGameObjectWithTag("UiManager").GetComponent<UiManager>();
     }
 
     protected virtual void OnTriggerEnter(Collider other)
@@ -43,7 +50,7 @@ public class PickUp : MonoBehaviour
 
     public virtual void PickUpItem()
     {
-
+        
     }
 
     public void SetGameObject(GameObject go)
