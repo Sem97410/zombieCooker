@@ -414,9 +414,7 @@ MonoBehaviour:
     m_Name: Button
     m_Type: 0
     m_ExpectedControlType: 
-
-    m_Id: e12f2da7-dc48-483b-98e7-7b795ab7fa59
-
+    m_Id: 6da8b0ab-faab-4a0c-ba32-d61d130d9664
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []
