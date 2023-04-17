@@ -1,6 +1,6 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class Oven : MonoBehaviour
 {
@@ -40,43 +40,64 @@ public class Oven : MonoBehaviour
     public Transform SpawnSoupeViandePosition { get => _spawnSoupeViandePosition; set => _spawnSoupeViandePosition = value; }
     public List<GameObject> FoodOven { get => _foodOven; set => _foodOven = value; }
 
+    
+    
+    private void Start()
+    {
+        RecipeIp = 1;
+        
+    }
 
-
+    private void Update()
+    {
+        Debug.Log("Recipe ip : " +recipeIp);
+    }
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("FoodMesh"))
         {
-            RecipeIp = 1;
+            
             _food = other.GetComponentInParent<Food>();
-            _foodOven.Add(other.transform.parent.gameObject);
-            _foodIdOven.Add(_food);
-            _food.enabled = false;
-            for (var i = 0; i < _foodIdOven.Count; i++)
+            if (_foodOven.Count >= 0 && !_foodOven.Contains(_food.gameObject))
             {
-                RecipeIp *= _foodIdOven[i].Id;
 
+                _foodOven.Add(_food.gameObject);
+
+                _foodIdOven.Add(_food);
+                RecipeIp = 1;
+                for (var i = 0; i <= _foodIdOven.Count - 1; i++)
+                {
+                    RecipeIp *= _foodIdOven[i].Id;
+
+                }
             }
 
+            
+            
 
- 
+
+
         }
     }
+
+
 
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("FoodMesh"))
         {
+             Debug.Log("Exit");
             _food = other.GetComponentInParent<Food>();
-            _foodOven.Remove(other.transform.parent.gameObject);
+            _foodOven.Remove(_food.gameObject);
             _foodIdOven.Remove(_food);
 
             RecipeIp /= _food.Id;
-            if (_foodIdOven.Count < 0)
+            if (_foodIdOven.Count <= 0)
             {
                 RecipeIp = 1;
             }
         }
-    }
+   }
 
 
     public void MakeThePlate(GameObject plate, Transform spawnPosition)

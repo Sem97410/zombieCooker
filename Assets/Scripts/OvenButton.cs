@@ -9,21 +9,14 @@ public class OvenButton : MonoBehaviour
     [SerializeField] private mainCharacter _player;
 
 
-    public void FixedUpdate()
-    {
-        Debug.Log(_oven.recipeIp);
-    }
 
     private void Start()
     {
-        _oven = GetComponentInParent<Oven>();
+        //_oven = GetComponentInParent<Oven>();
     }
 
 
-    private void Update()
-    {
-        Debug.Log("Recipe ip : "+_oven.recipeIp );
-    }
+    
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
