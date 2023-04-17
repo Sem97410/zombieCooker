@@ -27,6 +27,7 @@ public class Pistol : Weapon, IShooting
         else
         {
             MainCharacter.HavePistol = true;
+            ZombieEvents.onAmmoChanged(CurrentAmmo,MaxAmmo);
             Debug.Log("A pris le pistol");
 
         }
