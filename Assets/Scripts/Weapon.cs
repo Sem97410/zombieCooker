@@ -51,6 +51,7 @@ public class Weapon : PickUp
             MainCharacter.GetItemSelected().GetComponentInChildren<BoxCollider>().enabled = false;
             MainCharacter.AfficherItemEquipe(MainCharacter.GetItemSelected().GetGameObject());
             MainCharacter.GetItemSelected().GetComponent<SphereCollider>().enabled = false;
+            UiManager.UpdateSpriteOfInventory(MainCharacter);
 
         }
     }

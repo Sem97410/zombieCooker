@@ -34,6 +34,8 @@ public class mainCharacter : LivingObject
 
     [SerializeField] private InputAction _dropItemAction;
 
+    [SerializeField] private UiManager uiManager;
+
     public bool CanInteract { get => _canInteract; set => _canInteract = value; }
     public PickUp ItemInteractable { get => _itemInteractable; set => _itemInteractable = value; }
     public bool HavePistol { get => _havePistol; set => _havePistol = value; }
@@ -42,6 +44,7 @@ public class mainCharacter : LivingObject
     public Transform ItemPos { get => _itemPos; set => _itemPos = value; }
     public float MovementSpeed { get => _movementSpeed; set => _movementSpeed = value; }
     public bool HaveKnife { get => _haveKnife; set => _haveKnife = value; }
+    public UiManager UiManager { get => uiManager; set => uiManager = value; }
     public InputAction ButtonAction { get => _buttonAction; set => _buttonAction = value; }
 
     [SerializeField]
@@ -81,6 +84,8 @@ public class mainCharacter : LivingObject
 
         _interactAction.Enable();
         _interactAction.performed += Interact;
+
+        UiManager = GameObject.FindGameObjectWithTag("UiManager").GetComponent<UiManager>();
 
         _buttonAction.Enable();
 
@@ -228,8 +233,10 @@ public class mainCharacter : LivingObject
             GetItemSelected().GetComponent<SphereCollider>().enabled = true;
             GetItemSelected().GetComponentInChildren<BoxCollider>().enabled = true;
             PickUps.Remove(GetItemSelected());
+            UiManager.UpdateSpriteOfInventory(this);
+
         }
-        
+
     }
             
         
