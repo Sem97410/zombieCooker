@@ -51,3 +51,5 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   _defaultSprite: {fileID: 10917, guid: 0000000000000000f000000000000000, type: 0}
+  _foodBar: {fileID: 0}
+  _HealthBar: {fileID: 0}

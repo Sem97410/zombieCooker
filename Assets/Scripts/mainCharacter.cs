@@ -71,7 +71,7 @@ public class mainCharacter : LivingObject
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
         PickUps = new List<PickUp>();
-        _currentLife = 100;
+        CurrentLife = MaxLife;
 
         ChoixIndex = 0;
 
@@ -139,11 +139,13 @@ public class mainCharacter : LivingObject
 
             yield return new WaitForSeconds(_hungerDecrease);
             _currentHunger -= 1;
+            ZombieEvents.onHungerChanged(_currentHunger);
         }
         while (_currentHunger == 0)
         {
             yield return new WaitForSeconds(1f);
             _currentLife -= 1;
+            ZombieEvents.onLifeChanged(_currentLife);
         }
     }
 
@@ -254,6 +256,7 @@ public class mainCharacter : LivingObject
 
             RaycastHit hit;
             pistol.CurrentAmmo--;
+            ZombieEvents.onAmmoChanged(pistol.CurrentAmmo, pistol.MaxAmmo);
 
             if (Physics.Raycast(ray, out hit, 150, ~_IgnoreLayer))
             {
