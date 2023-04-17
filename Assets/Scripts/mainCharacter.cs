@@ -58,6 +58,9 @@ public class mainCharacter : LivingObject
 
     [SerializeField] private InputAction _buttonAction;
 
+    [SerializeField] private InputAction _eatAction;
+
+
     [SerializeField] private LayerMask _IgnoreLayer;
 
 
@@ -76,6 +79,8 @@ public class mainCharacter : LivingObject
         _dropItemAction.performed += DropItem;
         _shootAction.Enable();
         _shootAction.performed += Attack;
+        _eatAction.Enable();
+        _eatAction.performed += Eat;
 
         StartCoroutine("DecreaseHunger");
 
@@ -89,6 +94,7 @@ public class mainCharacter : LivingObject
     {
         Move();
         ShowItemSelected();
+       
     }
 
     //Crash après l'utilisation de la touche maj si  _runSpeedMultiplication == 0
@@ -98,6 +104,23 @@ public class mainCharacter : LivingObject
         float horizontalInput = Input.GetAxis("Horizontal") * _movementSpeed * Time.deltaTime; ;
         float verticalInput = Input.GetAxis("Vertical") * _movementSpeed * Time.deltaTime; ;
         transform.Translate(horizontalInput, 0, verticalInput);
+    }
+
+
+    public void Eat(InputAction.CallbackContext ctx)
+    {
+        if (GetItemSelected() == null) return;
+        if (GetItemSelected() is Food)
+        {
+            Debug.Log("food dans mains");
+            Food _food = GetItemSelected().gameObject.GetComponent<Food>();
+            Debug.Log(_food.Satiety);
+            _currentHunger += _food.Satiety;
+            Destroy(GetItemSelected().gameObject, 0.1f);
+            EnleverItemEquipe(GetItemSelected().gameObject);
+            PickUps.Remove(GetItemSelected());
+
+        }
     }
 
     public void Run()  //la méthode est appelé grâce aux event de l'input player
@@ -185,6 +208,7 @@ public class mainCharacter : LivingObject
         if (PickUps != null && PickUps.Count > 0 && ChoixIndex < PickUps.Count)
             return PickUps[ChoixIndex];
         else return null;
+
     }
 
     public void AfficherItemEquipe(GameObject go)

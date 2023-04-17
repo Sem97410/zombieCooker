@@ -48,10 +48,7 @@ public class Oven : MonoBehaviour
         
     }
 
-    private void Update()
-    {
-        Debug.Log("Recipe ip : " +recipeIp);
-    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("FoodMesh"))

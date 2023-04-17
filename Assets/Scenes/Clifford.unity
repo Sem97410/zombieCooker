@@ -357,16 +357,40 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 6091596465544781638, guid: 02aeff198577d7843b7431daa2271bd2, type: 3}
+      propertyPath: _eatAction.m_Id
+      value: a151288b-ebbc-435e-8656-07d2ecdf09f6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6091596465544781638, guid: 02aeff198577d7843b7431daa2271bd2, type: 3}
+      propertyPath: _eatAction.m_Name
+      value: Eat
+      objectReference: {fileID: 0}
+    - target: {fileID: 6091596465544781638, guid: 02aeff198577d7843b7431daa2271bd2, type: 3}
       propertyPath: _buttonAction.m_Id
       value: c9425c40-0a94-4333-9db4-31929fdf2eb7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6091596465544781638, guid: 02aeff198577d7843b7431daa2271bd2, type: 3}
+      propertyPath: _eatAction.m_SingletonActionBindings.Array.size
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6091596465544781638, guid: 02aeff198577d7843b7431daa2271bd2, type: 3}
       propertyPath: _buttonAction.m_SingletonActionBindings.Array.size
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6091596465544781638, guid: 02aeff198577d7843b7431daa2271bd2, type: 3}
+      propertyPath: _eatAction.m_SingletonActionBindings.Array.data[0].m_Id
+      value: 3e06c622-6cb7-424c-8b71-e56bbcf7adc7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6091596465544781638, guid: 02aeff198577d7843b7431daa2271bd2, type: 3}
+      propertyPath: _eatAction.m_SingletonActionBindings.Array.data[0].m_Path
+      value: <Mouse>/leftButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 6091596465544781638, guid: 02aeff198577d7843b7431daa2271bd2, type: 3}
       propertyPath: _buttonAction.m_SingletonActionBindings.Array.data[0].m_Id
       value: b3ddfad1-af7f-45b2-80df-70b9a478e92f
+      objectReference: {fileID: 0}
+    - target: {fileID: 6091596465544781638, guid: 02aeff198577d7843b7431daa2271bd2, type: 3}
+      propertyPath: _eatAction.m_SingletonActionBindings.Array.data[0].m_Action
+      value: Eat
       objectReference: {fileID: 0}
     - target: {fileID: 6091596465544781638, guid: 02aeff198577d7843b7431daa2271bd2, type: 3}
       propertyPath: _buttonAction.m_SingletonActionBindings.Array.data[0].m_Path
@@ -375,6 +399,10 @@ PrefabInstance:
     - target: {fileID: 6091596465544781638, guid: 02aeff198577d7843b7431daa2271bd2, type: 3}
       propertyPath: _buttonAction.m_SingletonActionBindings.Array.data[0].m_Action
       value: Button
+      objectReference: {fileID: 0}
+    - target: {fileID: 6091596465544781638, guid: 02aeff198577d7843b7431daa2271bd2, type: 3}
+      propertyPath: _eatAction.m_SingletonActionBindings.Array.data[0].m_Interactions
+      value: Hold(duration=2)
       objectReference: {fileID: 0}
     - target: {fileID: 6091596465544781639, guid: 02aeff198577d7843b7431daa2271bd2, type: 3}
       propertyPath: m_RootOrder
@@ -419,6 +447,46 @@ PrefabInstance:
     - target: {fileID: 6091596465544781639, guid: 02aeff198577d7843b7431daa2271bd2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8922790049970536494, guid: 02aeff198577d7843b7431daa2271bd2, type: 3}
+      propertyPath: m_ActionEvents.Array.size
+      value: 23
+      objectReference: {fileID: 0}
+    - target: {fileID: 8922790049970536494, guid: 02aeff198577d7843b7431daa2271bd2, type: 3}
+      propertyPath: m_ActionEvents.Array.data[22].m_ActionId
+      value: 63b0d166-b18b-4241-afb2-22016417f969
+      objectReference: {fileID: 0}
+    - target: {fileID: 8922790049970536494, guid: 02aeff198577d7843b7431daa2271bd2, type: 3}
+      propertyPath: m_ActionEvents.Array.data[22].m_ActionName
+      value: Player/New action
+      objectReference: {fileID: 0}
+    - target: {fileID: 8922790049970536494, guid: 02aeff198577d7843b7431daa2271bd2, type: 3}
+      propertyPath: m_ActionEvents.Array.data[22].m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8922790049970536494, guid: 02aeff198577d7843b7431daa2271bd2, type: 3}
+      propertyPath: m_ActionEvents.Array.data[22].m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8922790049970536494, guid: 02aeff198577d7843b7431daa2271bd2, type: 3}
+      propertyPath: m_ActionEvents.Array.data[22].m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 298705117}
+    - target: {fileID: 8922790049970536494, guid: 02aeff198577d7843b7431daa2271bd2, type: 3}
+      propertyPath: m_ActionEvents.Array.data[22].m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8922790049970536494, guid: 02aeff198577d7843b7431daa2271bd2, type: 3}
+      propertyPath: m_ActionEvents.Array.data[22].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Eat
+      objectReference: {fileID: 0}
+    - target: {fileID: 8922790049970536494, guid: 02aeff198577d7843b7431daa2271bd2, type: 3}
+      propertyPath: m_ActionEvents.Array.data[22].m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: mainCharacter, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8922790049970536494, guid: 02aeff198577d7843b7431daa2271bd2, type: 3}
+      propertyPath: m_ActionEvents.Array.data[22].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 02aeff198577d7843b7431daa2271bd2, type: 3}
@@ -477,8 +545,7 @@ PrefabInstance:
       propertyPath: m_Name
       value: Viande (1)
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 1899631294, guid: 5e9efe174a3131c43aebaa6127bed789, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5e9efe174a3131c43aebaa6127bed789, type: 3}
 --- !u!114 &995270958 stripped
 MonoBehaviour:

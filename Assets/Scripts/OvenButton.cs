@@ -57,7 +57,6 @@ public class OvenButton : MonoBehaviour
 
         else
         {
-            Debug.Log("coucou");
             for (var i = 0; i < _oven.FoodOven.Count; i++)
             {
                 Rigidbody rb = _oven.FoodOven[i].GetComponent<Rigidbody>();
