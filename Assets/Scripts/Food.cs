@@ -38,6 +38,7 @@ public class Food : PickUp
             MainCharacter.GetItemSelected().GetComponent<Rigidbody>().isKinematic = true;
             MainCharacter.GetItemSelected().GetComponent<SphereCollider>().enabled = false;
             this.GetComponentInChildren<BoxCollider>().enabled = false;
+            UiManager.UpdateSpriteOfInventory(MainCharacter);
 
 
         }
