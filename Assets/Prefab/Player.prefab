@@ -272,7 +272,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6091596465505227720}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -284,7 +284,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 17529e8d34438144fa391a8d82b845c4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -335,7 +335,7 @@ Transform:
   m_GameObject: {fileID: 6091596465544781632}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1.8, z: 1}
   m_Children:
   - {fileID: 6091596465505227721}
   - {fileID: 1863726144075638388}
@@ -414,9 +414,7 @@ MonoBehaviour:
     m_Name: Button
     m_Type: 0
     m_ExpectedControlType: 
-
-    m_Id: e12f2da7-dc48-483b-98e7-7b795ab7fa59
-
+    m_Id: 169f12c4-60db-4838-b391-ac3931006f8d
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []
@@ -449,8 +447,8 @@ CapsuleCollider:
   m_Material: {fileID: 13400000, guid: b3daa68befbe55847ab30ec951590126, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 1
+  m_Radius: 0.79
+  m_Height: 2.48
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &8922790049970536494
