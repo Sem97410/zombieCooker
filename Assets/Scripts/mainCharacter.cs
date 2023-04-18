@@ -220,7 +220,7 @@ public class mainCharacter : LivingObject
         go.SetActive(true);
         go.transform.parent = this.ItemPos;
         go.transform.localPosition = Vector3.zero;
-        go.transform.rotation = ItemPos.rotation * Quaternion.Euler(0, 90, 0);
+        go.transform.rotation = ItemPos.rotation * Quaternion.Euler(0, -90, 0);
     }
     public void EnleverItemEquipe(GameObject go)
     {
