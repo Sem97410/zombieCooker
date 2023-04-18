@@ -42,10 +42,4 @@ public class Pistol : Weapon, IShooting
     {
 
     }
-
-    
-    
-
-
-
 }

@@ -32,9 +32,34 @@ public class mainCharacter : LivingObject
     [SerializeField]
     private float _hungerDecrease;   //la vitesse a laquelle on perd de la faim
 
-    [SerializeField] private InputAction _dropItemAction;
+    [SerializeField]
+    private float _hungerDecreaseRun; // la perte de faim quand on court
 
     [SerializeField] private UiManager uiManager;
+
+    [SerializeField] private InputAction _dropItemAction;
+
+    private bool _isRunning;
+
+    [SerializeField]
+    private Fx _walkFx;
+
+    [Header("Inputs")]
+    [SerializeField] private InputAction _shootAction;
+
+    [SerializeField] private InputAction _interactAction;
+
+    [SerializeField] private InputAction _buttonAction;
+
+    [SerializeField] private InputAction _eatAction;
+
+
+    [SerializeField] private LayerMask _IgnoreLayer;
+
+
+    [Header("Audio Player")]
+    [SerializeField] private AudioSource _playerAudioSource;
+    [SerializeField] private AudioClip _shootClip;
 
     public bool CanInteract { get => _canInteract; set => _canInteract = value; }
     public PickUp ItemInteractable { get => _itemInteractable; set => _itemInteractable = value; }
@@ -46,26 +71,8 @@ public class mainCharacter : LivingObject
     public bool HaveKnife { get => _haveKnife; set => _haveKnife = value; }
     public UiManager UiManager { get => uiManager; set => uiManager = value; }
     public InputAction ButtonAction { get => _buttonAction; set => _buttonAction = value; }
+    public AudioSource PlayerAudioSource { get => _playerAudioSource; set => _playerAudioSource = value; }
 
-    [SerializeField]
-    private float _hungerDecreaseRun; // la perte de faim quand on court
-
-    private bool _isRunning;
-
-    [SerializeField]
-    private Fx _walkFx;
-
-    [SerializeField] private InputAction _shootAction;
-
-    [SerializeField] private InputAction _interactAction;
-
-    [SerializeField] private InputAction _buttonAction;
-
-    [SerializeField] private InputAction _eatAction;
-
-
-    [SerializeField] private LayerMask _IgnoreLayer;
-    
     private void Start()
     {
         //lock le cursor pour la caméra
@@ -89,6 +96,8 @@ public class mainCharacter : LivingObject
         _interactAction.performed += Interact;
 
         _buttonAction.Enable();
+
+        _playerAudioSource = this.GetComponent<AudioSource>();
 
     }
     private void Update()
@@ -282,6 +291,9 @@ public class mainCharacter : LivingObject
             RaycastHit hit;
             pistol.CurrentAmmo--;
             ZombieEvents.onAmmoChanged(pistol.CurrentAmmo, pistol.MaxAmmo);
+
+            _playerAudioSource.clip = _shootClip;
+            _playerAudioSource.Play();
 
             if (Physics.Raycast(ray, out hit, 150, ~_IgnoreLayer))
             {
