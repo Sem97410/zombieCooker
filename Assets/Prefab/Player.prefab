@@ -360,6 +360,8 @@ MonoBehaviour:
   _currentHunger: 100
   _canInteract: 0
   _hungerDecrease: 1
+  _hungerDecreaseRun: 2
+  uiManager: {fileID: 0}
   _dropItemAction:
     m_Name: Drop Item
     m_Type: 0
@@ -376,8 +378,6 @@ MonoBehaviour:
       m_Groups: 
       m_Action: Drop Item
       m_Flags: 0
-  uiManager: {fileID: 0}
-  _hungerDecreaseRun: 2
   _walkFx: {fileID: -4932167650510407165, guid: b3ea1da61d563f547b07229b4ce11d3d, type: 3}
   _shootAction:
     m_Name: Shoot
@@ -419,10 +419,19 @@ MonoBehaviour:
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []
+  _eatAction:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: dcd5a277-a210-4a23-9167-b488eaf9a248
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
   _IgnoreLayer:
     serializedVersion: 2
     m_Bits: 64
-  _playerAnimator: {fileID: 0}
+  _playerAudioSource: {fileID: 0}
+  _shootClip: {fileID: 0}
 --- !u!54 &6091596465544781633
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -590,6 +599,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: c0b24cc3-8295-4026-b213-e27ffb758068
     m_ActionName: Player/Shoot[/Mouse/leftButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 63b0d166-b18b-4241-afb2-22016417f969
+    m_ActionName: Player/Eat[/Mouse/leftButton]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
