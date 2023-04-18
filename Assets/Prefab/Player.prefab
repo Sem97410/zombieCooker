@@ -420,12 +420,8 @@ MonoBehaviour:
     m_SingletonActionBindings: []
   _IgnoreLayer:
     serializedVersion: 2
-<<<<<<< HEAD
-    m_Bits: 0
-=======
     m_Bits: 64
   _playerAnimator: {fileID: 0}
---- !u!54 &6091596465544781633
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
