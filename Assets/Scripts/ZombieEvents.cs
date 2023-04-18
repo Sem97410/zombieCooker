@@ -12,4 +12,7 @@ public class ZombieEvents
 
     public delegate void OnAmmoChanged(int currentAmmo, int maxAmmo);
     public static OnAmmoChanged onAmmoChanged;
+
+    public delegate void OnItemChanged(mainCharacter player);
+    public static OnItemChanged onItemChanged;
 }

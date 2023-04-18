@@ -7,23 +7,16 @@ public class OvenButton : MonoBehaviour
     private Oven _oven;
 
     [SerializeField] private mainCharacter _player;
+    [SerializeField] private gameManager _gameManager;
 
-
-    public void FixedUpdate()
-    {
-        Debug.Log(_oven.recipeIp);
-    }
 
     private void Start()
     {
-        _oven = GetComponentInParent<Oven>();
+        //_oven = GetComponentInParent<Oven>();
     }
 
 
-    private void Update()
-    {
-        Debug.Log("Recipe ip : "+_oven.recipeIp );
-    }
+    
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
@@ -52,19 +45,23 @@ public class OvenButton : MonoBehaviour
         if (_oven.recipeIp == 30)
         {
             _oven.MakeThePlate(_oven.Hamburger, _oven.SpawnHamburgerPosition);
+            _gameManager.WinCondition();
         }
         if (_oven.recipeIp == 5005)
         {
             _oven.MakeThePlate(_oven.Salade, _oven.SpawnSaladePosition);
+            _gameManager.WinCondition();
+
         }
         if (_oven.recipeIp == 10)
         {
             _oven.MakeThePlate(_oven.SoupeViande, _oven.SpawnSoupeViandePosition);
+            _gameManager.WinCondition();
+
         }
 
         else
         {
-            Debug.Log("coucou");
             for (var i = 0; i < _oven.FoodOven.Count; i++)
             {
                 Rigidbody rb = _oven.FoodOven[i].GetComponent<Rigidbody>();

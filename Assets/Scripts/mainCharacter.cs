@@ -61,9 +61,10 @@ public class mainCharacter : LivingObject
 
     [SerializeField] private InputAction _buttonAction;
 
-    [SerializeField] private LayerMask _IgnoreLayer;
+    [SerializeField] private InputAction _eatAction;
 
-    [SerializeField] private Animator _playerAnimator;
+
+    [SerializeField] private LayerMask _IgnoreLayer;
     
     private void Start()
     {
@@ -79,23 +80,22 @@ public class mainCharacter : LivingObject
         _dropItemAction.performed += DropItem;
         _shootAction.Enable();
         _shootAction.performed += Attack;
+        _eatAction.Enable();
+        _eatAction.performed += Eat;
 
         StartCoroutine("DecreaseHunger");
 
         _interactAction.Enable();
         _interactAction.performed += Interact;
 
-        UiManager = GameObject.FindGameObjectWithTag("UiManager").GetComponent<UiManager>();
-
         _buttonAction.Enable();
-
-        _playerAnimator = this.GetComponentInChildren<Animator>();
 
     }
     private void Update()
     {
         Move();
         ShowItemSelected();
+       
     }
 
     //Crash après l'utilisation de la touche maj si  _runSpeedMultiplication == 0
@@ -105,12 +105,28 @@ public class mainCharacter : LivingObject
         float horizontalInput = Input.GetAxis("Horizontal") * _movementSpeed * Time.deltaTime; ;
         float verticalInput = Input.GetAxis("Vertical") * _movementSpeed * Time.deltaTime; ;
         transform.Translate(horizontalInput, 0, verticalInput);
-        if (horizontalInput == 0 && verticalInput == 0)
+    }
+
+
+    public void Eat(InputAction.CallbackContext ctx)
+    {
+        if (GetItemSelected() == null) return;
+        if (GetItemSelected() is Food)
         {
-            _playerAnimator.SetBool("isWalking", false);
+            Debug.Log("food dans mains");
+            Food _food = GetItemSelected().gameObject.GetComponent<Food>();
+            Debug.Log(_food.Satiety);
+            _currentHunger += _food.Satiety;
+            Destroy(GetItemSelected().gameObject, 0.1f);
+            EnleverItemEquipe(GetItemSelected().gameObject);
+            PickUps.Remove(GetItemSelected());
+            if (_currentHunger >= 100)
+            {
+                _currentHunger = 100;
+            }
+           
+
         }
-        else
-            _playerAnimator.SetBool("isWalking", true);
     }
 
     public void Run()  //la méthode est appelé grâce aux event de l'input player
@@ -122,8 +138,6 @@ public class mainCharacter : LivingObject
                 _movementSpeed = _movementSpeed * _runSpeedMultiplication;
                 _hungerDecrease = _hungerDecrease / _hungerDecreaseRun;          //augmente la perte de faim quand on court
                 _isRunning = true;
-                _playerAnimator.SetBool("isSprinting", true);
-                _playerAnimator.SetBool("isWalking", false);
                 //gameManager.AddFX(_walkFx, this.transform.position, transform.rotation);
 
             }
@@ -133,8 +147,6 @@ public class mainCharacter : LivingObject
             if (_isRunning == true)
             {
                 _isRunning = false;
-
-                _playerAnimator.SetBool("isSprinting", false) ;
 
                 _movementSpeed = _movementSpeed / _runSpeedMultiplication;
                 _hungerDecrease = _hungerDecrease * _hungerDecreaseRun;
@@ -204,6 +216,7 @@ public class mainCharacter : LivingObject
         if (PickUps != null && PickUps.Count > 0 && ChoixIndex < PickUps.Count)
             return PickUps[ChoixIndex];
         else return null;
+
     }
 
     public void AfficherItemEquipe(GameObject go)
@@ -212,7 +225,7 @@ public class mainCharacter : LivingObject
         go.SetActive(true);
         go.transform.parent = this.ItemPos;
         go.transform.localPosition = Vector3.zero;
-        //go.transform.rotation = ItemPos.rotation * Quaternion.Euler(0, 90, 0);
+        go.transform.rotation = ItemPos.rotation * Quaternion.Euler(0, -90, 0);
     }
     public void EnleverItemEquipe(GameObject go)
     {
@@ -247,7 +260,7 @@ public class mainCharacter : LivingObject
             GetItemSelected().GetComponent<SphereCollider>().enabled = true;
             GetItemSelected().GetComponentInChildren<BoxCollider>().enabled = true;
             PickUps.Remove(GetItemSelected());
-            UiManager.UpdateSpriteOfInventory(this);
+            ZombieEvents.onItemChanged(this);
 
         }
 
