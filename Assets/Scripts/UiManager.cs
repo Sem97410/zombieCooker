@@ -23,16 +23,25 @@ public class UiManager : MonoBehaviour
     public void OnEnable()
     {
         ZombieEvents.onHungerChanged += UpdateHungerBar;
+
         ZombieEvents.onLifeChanged += UpdateLifeBar;
+
         ZombieEvents.onAmmoChanged += UpdateAmmoText;
+
+        ZombieEvents.onItemChanged += UpdateSpriteOfInventory;
 
     }
 
     public void OnDisable()
     {
         ZombieEvents.onHungerChanged -= UpdateHungerBar;
+
         ZombieEvents.onLifeChanged -= UpdateLifeBar;
+
         ZombieEvents.onAmmoChanged -= UpdateAmmoText;
+
+        ZombieEvents.onItemChanged -= UpdateSpriteOfInventory;
+
 
 
     }
