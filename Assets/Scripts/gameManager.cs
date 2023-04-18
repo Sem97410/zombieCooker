@@ -1,12 +1,14 @@
+using JetBrains.Annotations;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class gameManager : MonoBehaviour
 {
 
-    private Transform _FXs = null;
+    private Transform _FXs ;
     [SerializeField]
-    private static gameManager _gameManager = null;
+    private static gameManager _gameManager;
+    private int _numberOfPlate;
 
     //public static List<Food> ingredients = new List<Food>();
 
@@ -36,4 +38,14 @@ public class gameManager : MonoBehaviour
         }
         return null;
     }
+
+    public void WinCondition()
+    {
+        _numberOfPlate++;
+        if (_numberOfPlate == 3)
+        {
+            Debug.Log("Victoire");
+        }
+    }
+
 }

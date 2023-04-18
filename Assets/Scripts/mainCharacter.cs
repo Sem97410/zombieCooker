@@ -120,6 +120,11 @@ public class mainCharacter : LivingObject
             Destroy(GetItemSelected().gameObject, 0.1f);
             EnleverItemEquipe(GetItemSelected().gameObject);
             PickUps.Remove(GetItemSelected());
+            if (_currentHunger >= 100)
+            {
+                _currentHunger = 100;
+            }
+           
 
         }
     }
