@@ -59,6 +59,12 @@ public class OvenButton : MonoBehaviour
             _gameManager.WinCondition();
 
         }
+        if (_oven.recipeIp == 2431)
+        {
+            _oven.MakeThePlate(_oven.Poisson, _oven.SpawnPoissonPosition);
+            _gameManager.WinCondition();
+
+        }
 
         else
         {

@@ -22,6 +22,8 @@ public class Oven : MonoBehaviour
     [SerializeField] private GameObject _hamburger;
     [SerializeField] private GameObject _salade;
     [SerializeField] private GameObject _soupeViande;
+    [SerializeField] private GameObject _poisson;
+
 
 
 
@@ -30,6 +32,7 @@ public class Oven : MonoBehaviour
     [SerializeField] private Transform _spawnHamburgerPosition;
     [SerializeField] private Transform _spawnSaladePosition;
     [SerializeField] private Transform _spawnSoupeViandePosition;
+    [SerializeField] private Transform _spawnPoissonPosition;
 
     public int recipeIp { get => RecipeIp; set => RecipeIp = value; }
     public GameObject Hamburger { get => _hamburger; set => _hamburger = value; }
@@ -39,9 +42,9 @@ public class Oven : MonoBehaviour
     public Transform SpawnSaladePosition { get => _spawnSaladePosition; set => _spawnSaladePosition = value; }
     public Transform SpawnSoupeViandePosition { get => _spawnSoupeViandePosition; set => _spawnSoupeViandePosition = value; }
     public List<GameObject> FoodOven { get => _foodOven; set => _foodOven = value; }
+    public GameObject Poisson { get => _poisson; set => _poisson = value; }
+    public Transform SpawnPoissonPosition { get => _spawnPoissonPosition; set => _spawnPoissonPosition = value; }
 
-    
-    
     private void Start()
     {
         RecipeIp = 1;
