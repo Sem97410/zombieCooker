@@ -5,6 +5,11 @@ using UnityEngine;
 
 public class Pistol : Weapon, IShooting
 {
+    [SerializeField] private Transform _muzzlePoint;
+    [SerializeField] private Fx _muzzleFx;
+
+    public Transform MuzzlePoint { get => _muzzlePoint; set => _muzzlePoint = value; }
+    public Fx MuzzleFx { get => _muzzleFx; set => _muzzleFx = value; }
 
     protected override void OnTriggerEnter(Collider other)
     {

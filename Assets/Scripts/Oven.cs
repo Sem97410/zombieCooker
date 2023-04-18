@@ -22,14 +22,27 @@ public class Oven : MonoBehaviour
     [SerializeField] private GameObject _hamburger;
     [SerializeField] private GameObject _salade;
     [SerializeField] private GameObject _soupeViande;
+    [SerializeField] private GameObject _poisson;
 
 
 
-    [Header("Position de spawn des plats")]
+
+    [Header("Position de spawn des plats et des particules")]
 
     [SerializeField] private Transform _spawnHamburgerPosition;
     [SerializeField] private Transform _spawnSaladePosition;
     [SerializeField] private Transform _spawnSoupeViandePosition;
+    [SerializeField] private Transform _spawnPoissonPosition;
+    [SerializeField] private Transform _spawnRecipeParticulePosition;
+    [SerializeField] private Transform _spawnIngredientParticulePosition;
+
+
+    [Header("Les particules")]
+    [SerializeField] private Fx _ingredientFx;
+    [SerializeField] private Fx _recipeFx;
+    [SerializeField] private Fx _ejectFx;
+
+
 
     public int recipeIp { get => RecipeIp; set => RecipeIp = value; }
     public GameObject Hamburger { get => _hamburger; set => _hamburger = value; }
@@ -39,9 +52,9 @@ public class Oven : MonoBehaviour
     public Transform SpawnSaladePosition { get => _spawnSaladePosition; set => _spawnSaladePosition = value; }
     public Transform SpawnSoupeViandePosition { get => _spawnSoupeViandePosition; set => _spawnSoupeViandePosition = value; }
     public List<GameObject> FoodOven { get => _foodOven; set => _foodOven = value; }
+    public GameObject Poisson { get => _poisson; set => _poisson = value; }
+    public Transform SpawnPoissonPosition { get => _spawnPoissonPosition; set => _spawnPoissonPosition = value; }
 
-    
-    
     private void Start()
     {
         RecipeIp = 1;
@@ -67,6 +80,7 @@ public class Oven : MonoBehaviour
                     RecipeIp *= _foodIdOven[i].Id;
 
                 }
+                gameManager.AddFX(_ingredientFx, _spawnIngredientParticulePosition.position, Quaternion.identity);
             }
 
             
@@ -107,7 +121,19 @@ public class Oven : MonoBehaviour
         _foodOven.Clear();
         _foodIdOven.Clear();
         Instantiate(plate, spawnPosition.position, transform.rotation);
+        gameManager.AddFX(_recipeFx, _spawnRecipeParticulePosition.position, Quaternion.identity);  
         RecipeIp = 1;
+    }
+
+    public void EjectIngredient()
+    {
+        for (var i = 0; i < _foodOven.Count; i++)
+        {
+            Rigidbody rb = _foodOven[i].GetComponent<Rigidbody>();
+            rb.AddForce(300 * transform.up);
+
+        }
+        gameManager.AddFX(_ejectFx, _spawnRecipeParticulePosition.position, Quaternion.identity);
     }
 
 }

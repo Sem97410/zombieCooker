@@ -93,7 +93,7 @@ public class gameManager : MonoBehaviour
     public void WinCondition()
     {
         _numberOfPlate++;
-        if (_numberOfPlate == 3)
+        if (_numberOfPlate == 4)
         {
             Debug.Log("Victoire");
         }
