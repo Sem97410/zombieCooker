@@ -156,46 +156,6 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 1340795289}
-    - target: {fileID: 4508696602816206, guid: ffd2238ddca2b1c4d9f0346a1b30e656, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -0.058
-      objectReference: {fileID: 0}
-    - target: {fileID: 4508696602816206, guid: ffd2238ddca2b1c4d9f0346a1b30e656, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -0.711
-      objectReference: {fileID: 0}
-    - target: {fileID: 4508696602816206, guid: ffd2238ddca2b1c4d9f0346a1b30e656, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.7090355
-      objectReference: {fileID: 0}
-    - target: {fileID: 4508696602816206, guid: ffd2238ddca2b1c4d9f0346a1b30e656, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0.002255529
-      objectReference: {fileID: 0}
-    - target: {fileID: 4508696602816206, guid: ffd2238ddca2b1c4d9f0346a1b30e656, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0.7051567
-      objectReference: {fileID: 0}
-    - target: {fileID: 4508696602816206, guid: ffd2238ddca2b1c4d9f0346a1b30e656, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0.004212781
-      objectReference: {fileID: 0}
-    - target: {fileID: 4508696602816206, guid: ffd2238ddca2b1c4d9f0346a1b30e656, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: -0.157
-      objectReference: {fileID: 0}
-    - target: {fileID: 4508696602816206, guid: ffd2238ddca2b1c4d9f0346a1b30e656, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: -89.685
-      objectReference: {fileID: 0}
-    - target: {fileID: 4508696602816206, guid: ffd2238ddca2b1c4d9f0346a1b30e656, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: -0.525
-      objectReference: {fileID: 0}
-    - target: {fileID: 3578898779606346548, guid: ffd2238ddca2b1c4d9f0346a1b30e656, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -0.079
-      objectReference: {fileID: 0}
     - target: {fileID: 4836271517113575417, guid: ffd2238ddca2b1c4d9f0346a1b30e656, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -204,10 +164,6 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 1340795289}
-    - target: {fileID: 4836271517933209757, guid: ffd2238ddca2b1c4d9f0346a1b30e656, type: 3}
-      propertyPath: _ejectFx
-      value: 
-      objectReference: {fileID: 6010485701568584820, guid: 89574d1411c10ff4e90bf65535ff8d8b, type: 3}
     - target: {fileID: 4836271517933209758, guid: ffd2238ddca2b1c4d9f0346a1b30e656, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -7703,6 +7659,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a23b057400c26d4799de382072a443b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _foodCount: 0
+  _maxFoodSpawn: 0
+  _zombieCount: 0
+  _maxZombieSpawn: 0
+  _zombieSpawners: []
+  _foodSpawners: []
 --- !u!1001 &3863507617296453018
 PrefabInstance:
   m_ObjectHideFlags: 0
