@@ -17,7 +17,7 @@ public class Knife : Weapon, IShooting
     public override void PickUpItem()
     {
         base.PickUpItem();
-        if (MainCharacter.PickUps.Count >= 5)
+        if (MainCharacter.PickUps.Count >= 6)
         {
             Debug.Log("Inventaire plein");
             return;

@@ -256,10 +256,11 @@ public class mainCharacter : LivingObject
         {
             GetItemSelected().transform.parent = null;
             GetItemSelected().GetComponent<Rigidbody>().isKinematic = false;
-            GetItemSelected().GetComponent<Rigidbody>().AddForce(gameObject.transform.forward * 10, ForceMode.Impulse);
+            GetItemSelected().GetComponent<Rigidbody>().AddForce(gameObject.transform.forward * 15, ForceMode.Impulse);
             GetItemSelected().GetComponent<SphereCollider>().enabled = true;
             GetItemSelected().GetComponentInChildren<BoxCollider>().enabled = true;
             PickUps.Remove(GetItemSelected());
+            ChooseItem(0);
             ZombieEvents.onItemChanged(this);
 
         }
