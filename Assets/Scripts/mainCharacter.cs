@@ -111,12 +111,12 @@ public class mainCharacter : LivingObject
         float horizontalInput = Input.GetAxis("Horizontal") * _movementSpeed * Time.deltaTime; ;
         float verticalInput = Input.GetAxis("Vertical") * _movementSpeed * Time.deltaTime; ;
         transform.Translate(horizontalInput, 0, verticalInput);
-        if (horizontalInput == 0 && verticalInput == 0)
-        {
-            _playerAnimator.SetBool("isWalking", false);
-        }
-        else
-            _playerAnimator.SetBool("isWalking", true);
+        //if (horizontalInput == 0 && verticalInput == 0)
+        //{
+        //    _playerAnimator.SetBool("isWalking", false);
+        //}
+        //else
+        //    _playerAnimator.SetBool("isWalking", true);
     }
 
 
@@ -132,6 +132,11 @@ public class mainCharacter : LivingObject
             Destroy(GetItemSelected().gameObject, 0.1f);
             EnleverItemEquipe(GetItemSelected().gameObject);
             PickUps.Remove(GetItemSelected());
+            if (_currentHunger >= 100)
+            {
+                _currentHunger = 100;
+            }
+           
 
         }
     }

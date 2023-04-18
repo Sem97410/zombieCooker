@@ -83,7 +83,6 @@ public class Oven : MonoBehaviour
     {
         if (other.CompareTag("FoodMesh"))
         {
-             Debug.Log("Exit");
             _food = other.GetComponentInParent<Food>();
             _foodOven.Remove(_food.gameObject);
             _foodIdOven.Remove(_food);
