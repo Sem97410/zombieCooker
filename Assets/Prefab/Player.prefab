@@ -418,26 +418,17 @@ MonoBehaviour:
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []
+  _eatAction:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 22bae2b4-c88e-4362-86c7-9dc7dc83509a
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
   _IgnoreLayer:
     serializedVersion: 2
     m_Bits: 64
-  _playerAnimator: {fileID: 0}
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6091596465544781632}
-  serializedVersion: 2
-  m_Mass: 50
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 112
-  m_CollisionDetection: 0
->>>>>>> ec54a2058c8e1629931031260a8ffdff42d96b1c
 --- !u!136 &1727342848
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -589,6 +580,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: c0b24cc3-8295-4026-b213-e27ffb758068
     m_ActionName: Player/Shoot[/Mouse/leftButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 63b0d166-b18b-4241-afb2-22016417f969
+    m_ActionName: Player/Eat[/Mouse/leftButton]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
