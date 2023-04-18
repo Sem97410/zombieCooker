@@ -186,7 +186,7 @@ MonoBehaviour:
   _walkRadius: 9
   _target: {fileID: 0}
   _waypoints: []
-  _radius: 10
+  _radius: 30
   _angle: 100
   _playerRef: {fileID: 0}
   _targetMask:
