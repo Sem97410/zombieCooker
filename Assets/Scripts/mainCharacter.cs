@@ -218,6 +218,10 @@ public class mainCharacter : LivingObject
         {
             ChooseItem(4);
         }
+        if (Input.GetButton("Item6"))
+        {
+            ChooseItem(5);
+        }
     }
 
     public PickUp GetItemSelected()
