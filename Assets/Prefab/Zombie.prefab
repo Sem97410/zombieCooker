@@ -144,9 +144,9 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!195 &6137604990950288296
 NavMeshAgent:
@@ -182,10 +182,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c595c931346ec82409eefe98781f4248, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _zombieState: 2
-  _walkRadius: 9
+  _zombieState: 1
+  _walkRadius: 10
   _target: {fileID: 0}
-  _waypoints: []
+  _waypoints:
+  - {fileID: 0}
+  - {fileID: 0}
   _radius: 10
   _angle: 100
   _playerRef: {fileID: 0}
