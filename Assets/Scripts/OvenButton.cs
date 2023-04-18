@@ -68,12 +68,7 @@ public class OvenButton : MonoBehaviour
 
         else
         {
-            for (var i = 0; i < _oven.FoodOven.Count; i++)
-            {
-                Rigidbody rb = _oven.FoodOven[i].GetComponent<Rigidbody>();
-                rb.AddForce(300 * transform.up);
-
-            }
+            _oven.EjectIngredient();
             
 
 

@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Data.Common;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -65,7 +64,7 @@ public class mainCharacter : LivingObject
 
 
     [SerializeField] private LayerMask _IgnoreLayer;
-    
+
     private void Start()
     {
         //lock le cursor pour la caméra
@@ -95,7 +94,7 @@ public class mainCharacter : LivingObject
     {
         Move();
         ShowItemSelected();
-       
+
     }
 
     //Crash après l'utilisation de la touche maj si  _runSpeedMultiplication == 0
@@ -124,7 +123,7 @@ public class mainCharacter : LivingObject
             {
                 _currentHunger = 100;
             }
-           
+
 
         }
     }
@@ -235,18 +234,18 @@ public class mainCharacter : LivingObject
 
     public void ChooseItem(int choixindex)
     {
-            if (GetItemSelected() != null)
-            {
-                EnleverItemEquipe(GetItemSelected().GetGameObject());
+        if (GetItemSelected() != null)
+        {
+            EnleverItemEquipe(GetItemSelected().GetGameObject());
 
-            }
-            ChoixIndex = choixindex;
+        }
+        ChoixIndex = choixindex;
 
-            if (GetItemSelected() != null)
-            {
-                AfficherItemEquipe(GetItemSelected().GetGameObject());
+        if (GetItemSelected() != null)
+        {
+            AfficherItemEquipe(GetItemSelected().GetGameObject());
 
-            }
+        }
     }
 
 
@@ -265,27 +264,27 @@ public class mainCharacter : LivingObject
         }
 
     }
-            
-        
 
-    
+
+
+
     public void Attack(InputAction.CallbackContext ctx)
     {
         if (GetItemSelected() is Pistol)
         {
             Pistol pistol = GetItemSelected().GetComponent<Pistol>();
             if (pistol.CurrentAmmo <= 0) return;
-            Ray ray = Camera.main.ScreenPointToRay(new Vector3 (Screen.width/2, Screen.height/2, 0));
+            Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
 
             Debug.DrawRay(ray.origin, Camera.main.transform.forward * 50, Color.red);
 
             RaycastHit hit;
             pistol.CurrentAmmo--;
             ZombieEvents.onAmmoChanged(pistol.CurrentAmmo, pistol.MaxAmmo);
-
+            gameManager.AddFX(pistol.MuzzleFx, pistol.MuzzlePoint.position, pistol.MuzzlePoint.localRotation);
             if (Physics.Raycast(ray, out hit, 150, ~_IgnoreLayer))
             {
-                Debug.Log(hit.collider.gameObject.name);
+
                 if (hit.collider.CompareTag("Zombie"))
                 {
                     hit.collider.GetComponent<Zombie>().SetTarget(this.transform);
@@ -311,7 +310,7 @@ public class mainCharacter : LivingObject
                     GetItemSelected().gameObject.GetComponent<Knife>().Attack(this, collider.GetComponent<IDamageable>());
                     if (collider.GetComponent<LivingObject>().CurrentLife <= 0)
                     {
-                        collider.GetComponent <IDamageable>().Die(collider.GetComponent<IDamageable>());
+                        collider.GetComponent<IDamageable>().Die(collider.GetComponent<IDamageable>());
                     }
                 }
             }
