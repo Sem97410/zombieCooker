@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &4836910513636583756
+--- !u!1 &815093607
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,46 +8,45 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4836910513636583759}
-  - component: {fileID: 4836910513636583792}
-  - component: {fileID: 4836910513636583793}
-  - component: {fileID: 8868058800673823006}
+  - component: {fileID: 815093610}
+  - component: {fileID: 815093609}
+  - component: {fileID: 815093608}
   m_Layer: 0
-  m_Name: Mesh
-  m_TagString: FoodMesh
+  m_Name: LaitueMesh
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4836910513636583759
+--- !u!4 &815093610
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4836910513636583756}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_GameObject: {fileID: 815093607}
+  m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: 0.0073776, y: -0.072744, z: -0.0070736}
+  m_LocalScale: {x: 125.838005, y: 125.838066, z: 125.838066}
   m_Children: []
-  m_Father: {fileID: 4836910514434645259}
+  m_Father: {fileID: 4836910513636583759}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &4836910513636583792
+--- !u!33 &815093609
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4836910513636583756}
-  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &4836910513636583793
+  m_GameObject: {fileID: 815093607}
+  m_Mesh: {fileID: 3918036503550500404, guid: 4fe6e35c4fc747e4c86deb941479f471, type: 3}
+--- !u!23 &815093608
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4836910513636583756}
+  m_GameObject: {fileID: 815093607}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -60,8 +59,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100002, guid: 4a8060f5ff8cf6d449db1a220601398e, type: 3}
-  - {fileID: 2100002, guid: 4a8060f5ff8cf6d449db1a220601398e, type: 3}
+  - {fileID: 2100000, guid: 8a2420403b6b06a44acf93cd039d91e3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -83,6 +81,38 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &4836910513636583756
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4836910513636583759}
+  - component: {fileID: 8868058800673823006}
+  m_Layer: 0
+  m_Name: Mesh
+  m_TagString: FoodMesh
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4836910513636583759
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4836910513636583756}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_Children:
+  - {fileID: 815093610}
+  m_Father: {fileID: 4836910514434645259}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &8868058800673823006
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -155,11 +185,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d9c28b5e063290499449b7f2c3b17eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-
-  _sprite: {fileID: 21300000, guid: eae383227dc3a5e4dad508102c0d8950, type: 3}
+  _sprite: {fileID: 21300000, guid: 07d4e7e7aab2d744189b8e147254ea99, type: 3}
   uiManager: {fileID: 0}
-  _satiety: 0
-
+  _satiety: 5
   _id: 7
 --- !u!54 &6654856121241585837
 Rigidbody:

@@ -129,6 +129,7 @@ public class mainCharacter : LivingObject
             Destroy(GetItemSelected().gameObject, 0.1f);
             EnleverItemEquipe(GetItemSelected().gameObject);
             PickUps.Remove(GetItemSelected());
+            uiManager.UpdateSpriteOfInventory(this);
             if (_currentHunger >= 100)
             {
                 _currentHunger = 100;
@@ -217,6 +218,10 @@ public class mainCharacter : LivingObject
         if (Input.GetButton("Item5"))
         {
             ChooseItem(4);
+        }
+        if (Input.GetButton("Item6"))
+        {
+            ChooseItem(5);
         }
     }
 
