@@ -88,8 +88,6 @@ public class mainCharacter : LivingObject
         _interactAction.Enable();
         _interactAction.performed += Interact;
 
-        UiManager = GameObject.FindGameObjectWithTag("UiManager").GetComponent<UiManager>();
-
         _buttonAction.Enable();
 
     }
@@ -257,7 +255,7 @@ public class mainCharacter : LivingObject
             GetItemSelected().GetComponent<SphereCollider>().enabled = true;
             GetItemSelected().GetComponentInChildren<BoxCollider>().enabled = true;
             PickUps.Remove(GetItemSelected());
-            UiManager.UpdateSpriteOfInventory(this);
+            ZombieEvents.onItemChanged(this);
 
         }
 
