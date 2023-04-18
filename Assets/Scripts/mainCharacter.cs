@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Data.Common;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -105,7 +104,7 @@ public class mainCharacter : LivingObject
     {
         Move();
         ShowItemSelected();
-       
+
     }
 
     //Crash après l'utilisation de la touche maj si  _runSpeedMultiplication == 0
@@ -134,7 +133,7 @@ public class mainCharacter : LivingObject
             {
                 _currentHunger = 100;
             }
-           
+
 
         }
     }
@@ -245,18 +244,18 @@ public class mainCharacter : LivingObject
 
     public void ChooseItem(int choixindex)
     {
-            if (GetItemSelected() != null)
-            {
-                EnleverItemEquipe(GetItemSelected().GetGameObject());
+        if (GetItemSelected() != null)
+        {
+            EnleverItemEquipe(GetItemSelected().GetGameObject());
 
-            }
-            ChoixIndex = choixindex;
+        }
+        ChoixIndex = choixindex;
 
-            if (GetItemSelected() != null)
-            {
-                AfficherItemEquipe(GetItemSelected().GetGameObject());
+        if (GetItemSelected() != null)
+        {
+            AfficherItemEquipe(GetItemSelected().GetGameObject());
 
-            }
+        }
     }
 
 
@@ -297,9 +296,10 @@ public class mainCharacter : LivingObject
             _playerAudioSource.clip = _shootClip;
             _playerAudioSource.Play();
 
+            gameManager.AddFX(pistol.MuzzleFx, pistol.MuzzlePoint.position, pistol.MuzzlePoint.localRotation);
             if (Physics.Raycast(ray, out hit, 150, ~_IgnoreLayer))
             {
-                Debug.Log(hit.collider.gameObject.name);
+
                 if (hit.collider.CompareTag("Zombie"))
                 {
                     hit.collider.GetComponent<Zombie>().SetTarget(this.transform);

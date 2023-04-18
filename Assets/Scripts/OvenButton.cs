@@ -59,15 +59,16 @@ public class OvenButton : MonoBehaviour
             _gameManager.WinCondition();
 
         }
+        if (_oven.recipeIp == 2431)
+        {
+            _oven.MakeThePlate(_oven.Poisson, _oven.SpawnPoissonPosition);
+            _gameManager.WinCondition();
+
+        }
 
         else
         {
-            for (var i = 0; i < _oven.FoodOven.Count; i++)
-            {
-                Rigidbody rb = _oven.FoodOven[i].GetComponent<Rigidbody>();
-                rb.AddForce(300 * transform.up);
-
-            }
+            _oven.EjectIngredient();
             
 
 
