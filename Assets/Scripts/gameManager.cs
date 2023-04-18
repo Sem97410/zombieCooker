@@ -7,7 +7,7 @@ public class gameManager : MonoBehaviour
 {
 
     private Transform _FXs;
-    private Transform _Foods;
+    [SerializeField] private Transform _Foods;
     [SerializeField]
     private static gameManager _gameManager;
     private int _numberOfPlate;
@@ -84,7 +84,7 @@ public class gameManager : MonoBehaviour
         if (model)
         {
             Zombie zombie = Instantiate(model, position, rotation);
-            zombie.transform.SetParent(Instance()._Foods);
+            //zombie.transform.SetParent(Instance()._Foods);
         }
 
         return null;

@@ -29,8 +29,8 @@ public class ZombieSpawner : MonoBehaviour
             _zombie.WalkRadius = randomWalkRadius;
 
             float randomTime = Random.Range(0.5f, 2.0f);
-            Vector3 randomPos = new Vector3(Random.Range(-5, 5), 1, Random.Range(-5, 5));
-            gameManager.SpawnZombieInSpawner(_zombie, randomPos, Quaternion.identity);
+            Vector3 randomPos = new Vector3(Random.Range(-5, 5),0, Random.Range(-5, 5));
+            gameManager.SpawnZombieInSpawner(_zombie, transform.position + randomPos, Quaternion.identity);
             gameManager.Instance().ZombieCount++;
 
             //Instantiate(_spawnParticle.gameObject, transform.position + Vector3.up, _spawnParticle.transform.rotation);
