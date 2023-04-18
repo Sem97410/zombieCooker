@@ -65,8 +65,6 @@ public class mainCharacter : LivingObject
 
 
     [SerializeField] private LayerMask _IgnoreLayer;
-
-    //[SerializeField] private Animator _playerAnimator;
     
     private void Start()
     {
@@ -92,8 +90,6 @@ public class mainCharacter : LivingObject
 
         _buttonAction.Enable();
 
-        //_playerAnimator = this.GetComponentInChildren<Animator>();
-
     }
     private void Update()
     {
@@ -109,12 +105,6 @@ public class mainCharacter : LivingObject
         float horizontalInput = Input.GetAxis("Horizontal") * _movementSpeed * Time.deltaTime; ;
         float verticalInput = Input.GetAxis("Vertical") * _movementSpeed * Time.deltaTime; ;
         transform.Translate(horizontalInput, 0, verticalInput);
-        //if (horizontalInput == 0 && verticalInput == 0)
-        //{
-        //    //_playerAnimator.SetBool("isWalking", false);
-        //}
-        //else
-        //    //_playerAnimator.SetBool("isWalking", true);
     }
 
 
@@ -130,6 +120,11 @@ public class mainCharacter : LivingObject
             Destroy(GetItemSelected().gameObject, 0.1f);
             EnleverItemEquipe(GetItemSelected().gameObject);
             PickUps.Remove(GetItemSelected());
+            if (_currentHunger >= 100)
+            {
+                _currentHunger = 100;
+            }
+           
 
         }
     }
@@ -143,8 +138,6 @@ public class mainCharacter : LivingObject
                 _movementSpeed = _movementSpeed * _runSpeedMultiplication;
                 _hungerDecrease = _hungerDecrease / _hungerDecreaseRun;          //augmente la perte de faim quand on court
                 _isRunning = true;
-                //_playerAnimator.SetBool("isSprinting", true);
-                //_playerAnimator.SetBool("isWalking", false);
                 //gameManager.AddFX(_walkFx, this.transform.position, transform.rotation);
 
             }
@@ -154,8 +147,6 @@ public class mainCharacter : LivingObject
             if (_isRunning == true)
             {
                 _isRunning = false;
-
-                //_playerAnimator.SetBool("isSprinting", false) ;
 
                 _movementSpeed = _movementSpeed / _runSpeedMultiplication;
                 _hungerDecrease = _hungerDecrease * _hungerDecreaseRun;
@@ -234,7 +225,7 @@ public class mainCharacter : LivingObject
         go.SetActive(true);
         go.transform.parent = this.ItemPos;
         go.transform.localPosition = Vector3.zero;
-        //go.transform.rotation = ItemPos.rotation * Quaternion.Euler(0, 90, 0);
+        go.transform.rotation = ItemPos.rotation * Quaternion.Euler(0, -90, 0);
     }
     public void EnleverItemEquipe(GameObject go)
     {
