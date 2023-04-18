@@ -23,9 +23,14 @@ public class LivingObject : MonoBehaviour, IDamageable
         throw new System.NotImplementedException();
     }
 
-    public void TakeDamage(int damage, IDamageable Attaquant)
+    public virtual void TakeDamage(int damage, IDamageable Attaquant)
     {
         _currentLife -= damage;
         Debug.Log(this.gameObject.name + _currentLife);
+
+        if (_currentLife <= 0)
+        {
+            Die(this);
+        }
     }
 }

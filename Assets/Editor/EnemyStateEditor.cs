@@ -79,19 +79,19 @@ public class EnemyStateEditor : Editor
     {
         Zombie _zombieFOV = (Zombie)target;
         Handles.color = Color.black;
-        Handles.DrawWireArc(_zombieFOV.transform.position, Vector3.up, Vector3.forward, 360, _zombieFOV._radius);
+        Handles.DrawWireArc(_zombieFOV.transform.position, Vector3.up, Vector3.forward, 360, _zombieFOV.Radius);
 
-        Vector3 viewAngle01 = DirectionFromAngle(_zombieFOV.transform.eulerAngles.y, -_zombieFOV._angle / 2);
-        Vector3 viewAngle02 = DirectionFromAngle(_zombieFOV.transform.eulerAngles.y, _zombieFOV._angle / 2);
+        Vector3 viewAngle01 = DirectionFromAngle(_zombieFOV.transform.eulerAngles.y, -_zombieFOV.Angle / 2);
+        Vector3 viewAngle02 = DirectionFromAngle(_zombieFOV.transform.eulerAngles.y, _zombieFOV.Angle / 2);
 
         Handles.color = Color.yellow;
-        Handles.DrawLine(_zombieFOV.transform.position, _zombieFOV.transform.position + viewAngle01 * _zombieFOV._radius);
-        Handles.DrawLine(_zombieFOV.transform.position, _zombieFOV.transform.position + viewAngle02 * _zombieFOV._radius);
+        Handles.DrawLine(_zombieFOV.transform.position, _zombieFOV.transform.position + viewAngle01 * _zombieFOV.Radius);
+        Handles.DrawLine(_zombieFOV.transform.position, _zombieFOV.transform.position + viewAngle02 * _zombieFOV.Radius);
 
-        if (_zombieFOV._canSeePlayer)
+        if (_zombieFOV.CanSeePlayer)
         {
             Handles.color = Color.green;
-            Handles.DrawLine(_zombieFOV.transform.position, _zombieFOV._playerRef.transform.position);
+            Handles.DrawLine(_zombieFOV.transform.position, _zombieFOV.PlayerRef.transform.position);
         }
     }
 
