@@ -182,8 +182,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c595c931346ec82409eefe98781f4248, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _zombieState: 1
-  _walkRadius: 0
+  _zombieState: 2
+  _walkRadius: 9
   _target: {fileID: 0}
   _waypoints: []
   _radius: 10

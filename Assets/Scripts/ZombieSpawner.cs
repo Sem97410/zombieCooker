@@ -4,46 +4,43 @@ using UnityEngine;
 
 public class ZombieSpawner : MonoBehaviour
 {
+    [SerializeField] private Zombie _zombie;
 
-    private bool _canSpawn;
-    [SerializeField] private GameObject _enemy;
+    private void Start()
+    {
+        _zombie._zombieState = Zombie.ZombieState.Random;
+    }
 
     public void StartSpawn()
     {
-        StartCoroutine("SpawnEnemy");
+        StartCoroutine("SpawnZombie");
     }
 
     public void StopSpawn()
     {
-        StopCoroutine("SpawnEnemy");
+        StopCoroutine("SpawnZombie");
     }
 
-    public void StartBossWaveSpawner()
+    IEnumerator SpawnZombie()
     {
-        Instantiate(_enemy, transform.position, Quaternion.identity);
-        //Instantiate(_spawnParticle.gameObject, transform.position + Vector3.up, _spawnParticle.transform.rotation);
-        //GameManager.OnEnemySpawned?.Invoke();
-    }
-
-    IEnumerator SpawnEnemy()
-    {
-        //Control KS pour entourer le code.
-        while (_canSpawn)
+        while (true)
         {
-            float randomTime = Random.Range(2.0f, 5.0f);
+            float randomWalkRadius = Random.Range(5, 15);
+            _zombie.WalkRadius = randomWalkRadius;
 
-            Instantiate(_enemy, transform.position, Quaternion.identity);
-
-            //quaternion.identity pour garder la rotation de l'objet en lui même
+            float randomTime = Random.Range(0.5f, 2.0f);
+            Vector3 randomPos = new Vector3(Random.Range(-5, 5), 1, Random.Range(-5, 5));
+            gameManager.SpawnZombieInSpawner(_zombie, randomPos, Quaternion.identity);
+            gameManager.Instance().ZombieCount++;
 
             //Instantiate(_spawnParticle.gameObject, transform.position + Vector3.up, _spawnParticle.transform.rotation);
 
-            //int randomClip = Random.Range(0, _screamClip.Length);
-            
-            //_screamAudio.clip = _screamClip[randomClip];
-            //_screamAudio.Play();
-
             //GameManager.OnEnemySpawned?.Invoke();
+
+            if (gameManager.Instance().ZombieCount >= gameManager.Instance().MaxZombieSpawn)
+            {
+                StopSpawn();
+            }
 
             yield return new WaitForSeconds(randomTime);
         }

@@ -79,6 +79,7 @@ public class mainCharacter : LivingObject
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
         PickUps = new List<PickUp>();
+        MaxLife = 100;
         CurrentLife = MaxLife;
 
         ChoixIndex = 0;
@@ -274,17 +275,17 @@ public class mainCharacter : LivingObject
         }
 
     }
-            
-        
 
-    
+
+
+
     public void Attack(InputAction.CallbackContext ctx)
     {
         if (GetItemSelected() is Pistol)
         {
             Pistol pistol = GetItemSelected().GetComponent<Pistol>();
             if (pistol.CurrentAmmo <= 0) return;
-            Ray ray = Camera.main.ScreenPointToRay(new Vector3 (Screen.width/2, Screen.height/2, 0));
+            Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
 
             Debug.DrawRay(ray.origin, Camera.main.transform.forward * 50, Color.red);
 
@@ -321,12 +322,15 @@ public class mainCharacter : LivingObject
                 if (collider.CompareTag("Zombie"))
                 {
                     GetItemSelected().gameObject.GetComponent<Knife>().Attack(this, collider.GetComponent<IDamageable>());
-                    if (collider.GetComponent<LivingObject>().CurrentLife <= 0)
-                    {
-                        collider.GetComponent <IDamageable>().Die(collider.GetComponent<IDamageable>());
-                    }
                 }
             }
         }
+    }
+
+    public override void TakeDamage(int damage, IDamageable Attaquant)
+    {
+        base.TakeDamage(damage, Attaquant);
+
+        ZombieEvents.onLifeChanged(_currentLife);
     }
 }
