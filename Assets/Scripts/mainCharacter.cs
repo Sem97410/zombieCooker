@@ -31,29 +31,19 @@ public class mainCharacter : LivingObject
     [SerializeField]
     private float _hungerDecrease;   //la vitesse a laquelle on perd de la faim
 
-    [SerializeField] private InputAction _dropItemAction;
+    [SerializeField]
+    private float _hungerDecreaseRun; // la perte de faim quand on court
 
     [SerializeField] private UiManager uiManager;
 
-    public bool CanInteract { get => _canInteract; set => _canInteract = value; }
-    public PickUp ItemInteractable { get => _itemInteractable; set => _itemInteractable = value; }
-    public bool HavePistol { get => _havePistol; set => _havePistol = value; }
-    public List<PickUp> PickUps { get => _pickUp; set => _pickUp = value; }
-    public int ChoixIndex { get => _choixIndex; set => _choixIndex = value; }
-    public Transform ItemPos { get => _itemPos; set => _itemPos = value; }
-    public float MovementSpeed { get => _movementSpeed; set => _movementSpeed = value; }
-    public bool HaveKnife { get => _haveKnife; set => _haveKnife = value; }
-    public UiManager UiManager { get => uiManager; set => uiManager = value; }
-    public InputAction ButtonAction { get => _buttonAction; set => _buttonAction = value; }
-
-    [SerializeField]
-    private float _hungerDecreaseRun; // la perte de faim quand on court
+    [SerializeField] private InputAction _dropItemAction;
 
     private bool _isRunning;
 
     [SerializeField]
     private Fx _walkFx;
 
+    [Header("Inputs")]
     [SerializeField] private InputAction _shootAction;
 
     [SerializeField] private InputAction _interactAction;
@@ -65,12 +55,30 @@ public class mainCharacter : LivingObject
 
     [SerializeField] private LayerMask _IgnoreLayer;
 
+
+    [Header("Audio Player")]
+    [SerializeField] private AudioSource _playerAudioSource;
+    [SerializeField] private AudioClip _shootClip;
+
+    public bool CanInteract { get => _canInteract; set => _canInteract = value; }
+    public PickUp ItemInteractable { get => _itemInteractable; set => _itemInteractable = value; }
+    public bool HavePistol { get => _havePistol; set => _havePistol = value; }
+    public List<PickUp> PickUps { get => _pickUp; set => _pickUp = value; }
+    public int ChoixIndex { get => _choixIndex; set => _choixIndex = value; }
+    public Transform ItemPos { get => _itemPos; set => _itemPos = value; }
+    public float MovementSpeed { get => _movementSpeed; set => _movementSpeed = value; }
+    public bool HaveKnife { get => _haveKnife; set => _haveKnife = value; }
+    public UiManager UiManager { get => uiManager; set => uiManager = value; }
+    public InputAction ButtonAction { get => _buttonAction; set => _buttonAction = value; }
+    public AudioSource PlayerAudioSource { get => _playerAudioSource; set => _playerAudioSource = value; }
+
     private void Start()
     {
         //lock le cursor pour la caméra
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
         PickUps = new List<PickUp>();
+        MaxLife = 100;
         CurrentLife = MaxLife;
 
         ChoixIndex = 0;
@@ -88,6 +96,8 @@ public class mainCharacter : LivingObject
         _interactAction.performed += Interact;
 
         _buttonAction.Enable();
+
+        _playerAudioSource = this.GetComponent<AudioSource>();
 
     }
     private void Update()
@@ -255,10 +265,11 @@ public class mainCharacter : LivingObject
         {
             GetItemSelected().transform.parent = null;
             GetItemSelected().GetComponent<Rigidbody>().isKinematic = false;
-            GetItemSelected().GetComponent<Rigidbody>().AddForce(gameObject.transform.forward * 10, ForceMode.Impulse);
+            GetItemSelected().GetComponent<Rigidbody>().AddForce(gameObject.transform.forward * 15, ForceMode.Impulse);
             GetItemSelected().GetComponent<SphereCollider>().enabled = true;
             GetItemSelected().GetComponentInChildren<BoxCollider>().enabled = true;
             PickUps.Remove(GetItemSelected());
+            ChooseItem(0);
             ZombieEvents.onItemChanged(this);
 
         }
@@ -281,6 +292,10 @@ public class mainCharacter : LivingObject
             RaycastHit hit;
             pistol.CurrentAmmo--;
             ZombieEvents.onAmmoChanged(pistol.CurrentAmmo, pistol.MaxAmmo);
+
+            _playerAudioSource.clip = _shootClip;
+            _playerAudioSource.Play();
+
             gameManager.AddFX(pistol.MuzzleFx, pistol.MuzzlePoint.position, pistol.MuzzlePoint.localRotation);
             if (Physics.Raycast(ray, out hit, 150, ~_IgnoreLayer))
             {
@@ -308,12 +323,15 @@ public class mainCharacter : LivingObject
                 if (collider.CompareTag("Zombie"))
                 {
                     GetItemSelected().gameObject.GetComponent<Knife>().Attack(this, collider.GetComponent<IDamageable>());
-                    if (collider.GetComponent<LivingObject>().CurrentLife <= 0)
-                    {
-                        collider.GetComponent<IDamageable>().Die(collider.GetComponent<IDamageable>());
-                    }
                 }
             }
         }
+    }
+
+    public override void TakeDamage(int damage, IDamageable Attaquant)
+    {
+        base.TakeDamage(damage, Attaquant);
+
+        ZombieEvents.onLifeChanged(_currentLife);
     }
 }

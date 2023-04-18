@@ -59,9 +59,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d9c28b5e063290499449b7f2c3b17eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sprite: {fileID: 0}
+
+  _sprite: {fileID: 21300000, guid: 6a0a4afdee2ecfa44b8dffbeca1c4aaa, type: 3}
   uiManager: {fileID: 0}
-  _satiety: 8
+  _satiety: 0
+
   _id: 13
 --- !u!54 &-1604905490233300457
 Rigidbody:
