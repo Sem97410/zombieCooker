@@ -58,7 +58,7 @@ public class UiManager : MonoBehaviour
         { 
             Images[0].sprite = DefaultSprite;
         }
-        for (int i = 0; i < Images.Count-1; i++)
+        for (int i = 0; i < Images.Count -1; i++)
         {
             if (i > player.PickUps.Count-1)
             {
