@@ -15,7 +15,7 @@ public class Zombie : LivingObject
     }
 
     [Header("Enemy")]
-     public ZombieState _zombieState;
+    public ZombieState _zombieState;
 
     private float _speedWalk = 3;
     private float _speedRun = 5;
@@ -26,31 +26,39 @@ public class Zombie : LivingObject
     private bool _isPatrol;
     private bool _isAttacked = false;
 
-    public float _walkRadius;
+    [SerializeField] private float _walkRadius;
 
     private Vector3 _guardPosition;
 
     private Quaternion _guardRotation;
 
     //[SerializeField] private Transform _target;
-    public Transform _target;
+    [SerializeField] private Transform _target;
     //[SerializeField] private Transform[] _waypoints;
-    public Transform[] _waypoints;
+    [SerializeField] private Transform[] _waypoints;
 
     private NavMeshAgent _agent;
 
-    public Transform Target { get => _target; set => _target = value; }
-    public bool IsAttacked { get => _isAttacked; set => _isAttacked = value; }
-
     [Header("Field Of View")]
-    public float _radius;
-    [Range(0,360)] public float _angle;
-    public GameObject _playerRef;
+    [SerializeField] private float _radius;
+    [Range(0, 360)][SerializeField] private float _angle;
+    [SerializeField] private GameObject _playerRef;
 
     [SerializeField] private LayerMask _targetMask;
     [SerializeField] private LayerMask _ObstructionMask;
 
-    public bool _canSeePlayer;
+    [SerializeField] private bool _canSeePlayer;
+
+    public Transform Target { get => _target; set => _target = value; }
+    public bool IsAttacked { get => _isAttacked; set => _isAttacked = value; }
+    public float WalkRadius { get => _walkRadius; set => _walkRadius = value; }
+    public float Radius { get => _radius; set => _radius = value; }
+    public float Angle { get => _angle; set => _angle = value; }
+    public GameObject PlayerRef { get => _playerRef; set => _playerRef = value; }
+    public bool CanSeePlayer { get => _canSeePlayer; set => _canSeePlayer = value; }
+    public Transform[] Waypoints { get => _waypoints; set => _waypoints = value; }
+    public LayerMask TargetMask { get => _targetMask; set => _targetMask = value; }
+    public LayerMask ObstructionMask { get => _ObstructionMask; set => _ObstructionMask = value; }
 
     private void Start()
     {
@@ -63,6 +71,8 @@ public class Zombie : LivingObject
 
         MaxLife = 100;
         CurrentLife = MaxLife;
+
+        _damage = 10;
 
         _guardPosition = this.transform.position;
         _guardRotation = this.transform.rotation;
@@ -199,4 +209,13 @@ public class Zombie : LivingObject
             _canSeePlayer = false;
         }
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (Target == PlayerRef.transform && collision.gameObject.CompareTag("Player"))
+        {
+            collision.gameObject.GetComponent<LivingObject>().TakeDamage(_damage, this);
+        }
+    }
+
 }
