@@ -84,6 +84,7 @@ public class UiManager : MonoBehaviour
             else
             {
                 Images[i].sprite = player.PickUps[i].Sprite;
+                Images[i].preserveAspect = true;
             }
         }
     }

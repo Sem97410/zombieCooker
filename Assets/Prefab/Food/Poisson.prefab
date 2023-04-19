@@ -185,7 +185,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d9c28b5e063290499449b7f2c3b17eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sprite: {fileID: 0}
+  _sprite: {fileID: 21300000, guid: 571ad30119571c44da237d4ceb63988a, type: 3}
   uiManager: {fileID: 0}
   _satiety: 10
   _id: 17
