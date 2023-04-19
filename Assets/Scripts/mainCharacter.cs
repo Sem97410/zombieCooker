@@ -152,7 +152,6 @@ public class mainCharacter : LivingObject
     {
         while (_currentHunger > 0)
         {
-
             yield return new WaitForSeconds(_hungerDecrease);
             _currentHunger -= 1;
             ZombieEvents.onHungerChanged(_currentHunger);
