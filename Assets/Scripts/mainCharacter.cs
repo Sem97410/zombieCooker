@@ -72,7 +72,7 @@ public class mainCharacter : LivingObject
     }
     private void Start()
     {
-        CursorMode(true);
+        CursorMode(false);
         PickUps = new List<PickUp>();
         MaxLife = 100;
         CurrentLife = MaxLife;
