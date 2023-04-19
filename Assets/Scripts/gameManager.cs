@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class gameManager : MonoBehaviour
 {
+    [SerializeField] private int _numberOfPlateNeed;
 
     [SerializeField] private Transform _FXs = null;
     [SerializeField] private Transform _Foods;
@@ -26,6 +27,7 @@ public class gameManager : MonoBehaviour
     [SerializeField] private Spawner[] _spawners;
 
     public int NumberOfPlate { get => _numberOfPlate; set => _numberOfPlate = value; }
+    public int NumberOfPlateNeed { get => _numberOfPlateNeed; set => _numberOfPlateNeed = value; }
     public Spawner[] Spawners { get => _spawners; set => _spawners = value; }
 
     //public int MaxFoodSpawn { get => _maxFoodSpawn; set => _maxFoodSpawn = value; }
@@ -111,7 +113,7 @@ public class gameManager : MonoBehaviour
     public void WinCondition()
     {
         _numberOfPlate++;
-        if (_numberOfPlate == 4)
+        if (_numberOfPlate == NumberOfPlateNeed)
         {
             Debug.Log("Victoire");
         }

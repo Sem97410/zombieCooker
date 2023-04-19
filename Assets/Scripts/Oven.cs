@@ -83,11 +83,6 @@ public class Oven : MonoBehaviour
                 gameManager.AddFX(_ingredientFx, _spawnIngredientParticulePosition.position, Quaternion.identity);
             }
 
-            
-            
-
-
-
         }
     }
 

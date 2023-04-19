@@ -26,7 +26,13 @@ public class ZombieEvents
     public delegate void OnZombieSpawnedDied();
     public static OnZombieSpawnedDied onZombieSpawnedDied;
 
-    public delegate void OnRecipeDone(int recipeDone);
+    public delegate void OnRecipeDone(int recipeDone, int recipeNeed);
     public static OnRecipeDone onRecipeDone;
+
+    public delegate void OnFoodEaten(AudioSource audioSource);
+    public static OnFoodEaten onFoodEaten;
+
+    public delegate void OnShoot(AudioSource audioSource);
+    public static OnShoot onShoot;
 
 }

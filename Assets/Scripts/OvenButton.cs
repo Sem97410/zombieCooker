@@ -87,7 +87,7 @@ public class OvenButton : MonoBehaviour
     {
         _oven.MakeThePlate(recipe, recipePosition);
         _gameManager.WinCondition();
-        ZombieEvents.onRecipeDone(_gameManager.NumberOfPlate);
+        ZombieEvents.onRecipeDone(_gameManager.NumberOfPlate, _gameManager.NumberOfPlateNeed);
     }
 
     //private void OnCollisionEnter(Collision collision)

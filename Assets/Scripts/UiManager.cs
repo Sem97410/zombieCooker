@@ -86,6 +86,7 @@ public class UiManager : MonoBehaviour
             else
             {
                 Images[i].sprite = player.PickUps[i].Sprite;
+                Images[i].preserveAspect = true;
             }
         }
     }
@@ -126,8 +127,8 @@ public class UiManager : MonoBehaviour
         IconGrabItem.SetActive(false);
     }
 
-    private void UpdateNumberOfPlateUi(int recipeDone)
+    private void UpdateNumberOfPlateUi(int recipeDone, int recipeNeed)
     {
-        AmmoText.text = String.Format("Plats cuisiné : {0}/{4}", recipeDone);
+        AmmoText.text = String.Format("Plats cuisiné : {0}/{1}", recipeDone, recipeNeed);
     }
 }

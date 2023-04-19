@@ -6,60 +6,44 @@ using UnityEngine.InputSystem;
 
 public class mainCharacter : LivingObject
 {
-    [SerializeField]
-    private float _movementSpeed;
-
-    private List<PickUp> _pickUp;
-
-    [SerializeField]
-    private float _runSpeedMultiplication;      //cette variable est multiplié avec la vitesse pour calculer la vitesse de course
-
-    private PickUp _itemInteractable;
-
-    private int _choixIndex;
-    [SerializeField] private Transform _itemPos;
-
-
-    private float _maxHunger;
-
-    [SerializeField]
-    private float _currentHunger;
-
-
-    [SerializeField] private bool _canInteract;
-    private bool _havePistol;
-    private bool _haveKnife;
-    [SerializeField]
-    private float _hungerDecrease;   //la vitesse a laquelle on perd de la faim
-
-    [SerializeField]
-    private float _hungerDecreaseRun; // la perte de faim quand on court
-
-    [SerializeField] private UiManager uiManager;
-
-    [SerializeField] private InputAction _dropItemAction;
-
+    [Header("Movement")]
+    [SerializeField] private float _movementSpeed;
+    [SerializeField] private float _runSpeedMultiplication;
     private bool _isRunning;
 
-    [SerializeField]
-    private Fx _walkFx;
+    [Header("PickUpOptions")]
+    [SerializeField] private Transform _itemPos;
+    [SerializeField] private int _maxSpaceInInventory = 6;
+    private PickUp _itemInteractable;
+    private List<PickUp> _pickUp;
+    private bool _canInteract;
+    private bool _havePistol;
+    private bool _haveKnife;
+    private int _choixIndex;
+
+
+    [Header("HungerOptions")]
+    [SerializeField] private float _currentHunger;
+    [SerializeField] private float _hungerDecrease;
+    [SerializeField] private float _hungerDecreaseRun;
+    private float _maxHunger;
 
     [Header("Inputs")]
     [SerializeField] private InputAction _shootAction;
-
     [SerializeField] private InputAction _interactAction;
-
     [SerializeField] private InputAction _buttonAction;
-
     [SerializeField] private InputAction _eatAction;
-
-
-    [SerializeField] private LayerMask _IgnoreLayer;
+    [SerializeField] private InputAction _dropItemAction;
 
 
     [Header("Audio Player")]
     [SerializeField] private AudioSource _playerAudioSource;
     [SerializeField] private AudioClip _shootClip;
+
+    [SerializeField] private UiManager uiManager;
+    [SerializeField] private Fx _walkFx;
+    [SerializeField] private LayerMask _IgnoreLayer;
+
 
     public bool CanInteract { get => _canInteract; set => _canInteract = value; }
     public PickUp ItemInteractable { get => _itemInteractable; set => _itemInteractable = value; }
@@ -72,7 +56,17 @@ public class mainCharacter : LivingObject
     public UiManager UiManager { get => uiManager; set => uiManager = value; }
     public InputAction ButtonAction { get => _buttonAction; set => _buttonAction = value; }
     public AudioSource PlayerAudioSource { get => _playerAudioSource; set => _playerAudioSource = value; }
+    public int MaxSpaceInInventory { get => _maxSpaceInInventory; set => _maxSpaceInInventory = value; }
 
+    private void OnEnable()
+    {
+        ZombieEvents.onFoodEaten += EatFood;
+    }
+
+    private void OnDisable()
+    {
+        ZombieEvents.onFoodEaten -= EatFood;
+    }
     private void Start()
     {
         //lock le cursor pour la caméra
@@ -123,20 +117,8 @@ public class mainCharacter : LivingObject
         if (GetItemSelected() == null) return;
         if (GetItemSelected() is Food)
         {
-            Debug.Log("food dans mains");
-            Food _food = GetItemSelected().gameObject.GetComponent<Food>();
-            Debug.Log(_food.Satiety);
-            _currentHunger += _food.Satiety;
-            Destroy(GetItemSelected().gameObject, 0.1f);
-            EnleverItemEquipe(GetItemSelected().gameObject);
-            PickUps.Remove(GetItemSelected());
+            ZombieEvents.onFoodEaten(PlayerAudioSource);
             uiManager.UpdateSpriteOfInventory(this);
-            if (_currentHunger >= 100)
-            {
-                _currentHunger = 100;
-            }
-
-
         }
     }
 
@@ -296,13 +278,11 @@ public class mainCharacter : LivingObject
             Debug.DrawRay(ray.origin, Camera.main.transform.forward * 50, Color.red);
 
             RaycastHit hit;
-            pistol.CurrentAmmo--;
+            DecreasedAmmo(1, pistol);
             ZombieEvents.onAmmoChanged(pistol.CurrentAmmo, pistol.MaxAmmo);
+            ZombieEvents.onShoot(PlayerAudioSource);
+            PlayShootFx(pistol);
 
-            _playerAudioSource.clip = _shootClip;
-            _playerAudioSource.Play();
-
-            gameManager.AddFX(pistol.MuzzleFx, pistol.MuzzlePoint.position, pistol.MuzzlePoint.localRotation);
             if (Physics.Raycast(ray, out hit, 150, ~_IgnoreLayer))
             {
 
@@ -341,5 +321,28 @@ public class mainCharacter : LivingObject
         base.TakeDamage(damage, Attaquant);
 
         ZombieEvents.onLifeChanged(_currentLife);
+    }
+
+    public void EatFood(AudioSource audioSource)
+    {
+        Food _food = GetItemSelected().gameObject.GetComponent<Food>();
+        _currentHunger += _food.Satiety;
+        Destroy(GetItemSelected().gameObject, 0.1f);
+        EnleverItemEquipe(GetItemSelected().gameObject);
+        PickUps.Remove(GetItemSelected());
+        if (_currentHunger >= 100)
+        {
+            _currentHunger = 100;
+        }
+    }
+
+    public void PlayShootFx(Pistol pistol)
+    {
+        gameManager.AddFX(pistol.MuzzleFx, pistol.MuzzlePoint.position, pistol.MuzzlePoint.localRotation);
+    }
+
+    public void DecreasedAmmo(int value, Pistol pistol)
+    {
+        pistol.CurrentAmmo -= value;
     }
 }
