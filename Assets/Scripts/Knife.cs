@@ -17,7 +17,7 @@ public class Knife : Weapon, IShooting
     public override void PickUpItem()
     {
         base.PickUpItem();
-        if (MainCharacter.PickUps.Count >= 6)
+        if (MainCharacter.PickUps.Count >= MainCharacter.MaxSpaceInInventory)
         {
             Debug.Log("Inventaire plein");
             return;
@@ -26,7 +26,6 @@ public class Knife : Weapon, IShooting
         {
             ZombieEvents.onTriggerItemExit();
             MainCharacter.HaveKnife = true;
-            Debug.Log("A pris le couteau");
         }
         
     }

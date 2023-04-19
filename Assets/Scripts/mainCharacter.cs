@@ -7,52 +7,34 @@ public class mainCharacter : LivingObject
 {
     [SerializeField]
     private float _movementSpeed;
-
     private List<PickUp> _pickUp;
-
     [SerializeField]
     private float _runSpeedMultiplication;      //cette variable est multiplié avec la vitesse pour calculer la vitesse de course
-
     private PickUp _itemInteractable;
-
     private int _choixIndex;
     [SerializeField] private Transform _itemPos;
-
-
     private float _maxHunger;
-
     [SerializeField]
     private float _currentHunger;
-
-
     [SerializeField] private bool _canInteract;
     private bool _havePistol;
     private bool _haveKnife;
     [SerializeField]
     private float _hungerDecrease;   //la vitesse a laquelle on perd de la faim
-
     [SerializeField]
     private float _hungerDecreaseRun; // la perte de faim quand on court
-
     [SerializeField] private UiManager uiManager;
-
     [SerializeField] private InputAction _dropItemAction;
-
     private bool _isRunning;
-
     [SerializeField]
     private Fx _walkFx;
+    [SerializeField] private int _maxSpaceInInventory = 6;
 
     [Header("Inputs")]
     [SerializeField] private InputAction _shootAction;
-
     [SerializeField] private InputAction _interactAction;
-
     [SerializeField] private InputAction _buttonAction;
-
     [SerializeField] private InputAction _eatAction;
-
-
     [SerializeField] private LayerMask _IgnoreLayer;
 
 
@@ -71,6 +53,7 @@ public class mainCharacter : LivingObject
     public UiManager UiManager { get => uiManager; set => uiManager = value; }
     public InputAction ButtonAction { get => _buttonAction; set => _buttonAction = value; }
     public AudioSource PlayerAudioSource { get => _playerAudioSource; set => _playerAudioSource = value; }
+    public int MaxSpaceInInventory { get => _maxSpaceInInventory; set => _maxSpaceInInventory = value; }
 
     private void Start()
     {

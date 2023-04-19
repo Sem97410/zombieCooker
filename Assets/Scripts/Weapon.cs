@@ -36,7 +36,7 @@ public class Weapon : PickUp
 
     public override void PickUpItem()
     {
-        if (MainCharacter.PickUps.Count >= 6)
+        if (MainCharacter.PickUps.Count >= MainCharacter.MaxSpaceInInventory)
         {
             Debug.Log("Inventaire plein");
             return;
