@@ -4,7 +4,17 @@ using UnityEngine;
 
 public class FoodSpawner : MonoBehaviour
 {
+    private int _foodCount;
+
+    [SerializeField] private int _foodToSpawn;
+
+    [SerializeField] private float _radius;
+
     [SerializeField] private Food[] _food;
+
+    public int FoodCount { get => _foodCount; set => _foodCount = value; }
+    public int FoodToSpawn { get => _foodToSpawn; set => _foodToSpawn = value; }
+    public float Radius { get => _radius; set => _radius = value; }
 
     public void StartSpawn()
     {
@@ -21,15 +31,15 @@ public class FoodSpawner : MonoBehaviour
         while (true)
         {
             int randomFood = Random.Range(0, _food.Length);
-            Vector3 randomPos = new Vector3(Random.Range(-5, 5), 0, Random.Range(-5, 5));
+            Vector3 randomPos = new Vector3(Random.Range(-Radius, Radius), 0, Random.Range(-Radius, Radius));
             gameManager.SpawnFoodInSpawner(_food[randomFood], transform.position + randomPos, Quaternion.identity);
-            gameManager.Instance().FoodCount++;
+            FoodCount++;
 
             //Instantiate(_spawnParticle.gameObject, transform.position + Vector3.up, _spawnParticle.transform.rotation);
 
             //GameManager.OnEnemySpawned?.Invoke();
 
-            if (gameManager.Instance().FoodCount >= gameManager.Instance().MaxFoodSpawn)
+            if (FoodCount >= FoodToSpawn)
             {
                 StopSpawn();
             }

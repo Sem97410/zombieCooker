@@ -281,10 +281,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a23b057400c26d4799de382072a443b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _foodCount: 0
-  _maxFoodSpawn: 15
-  _zombieCount: 0
-  _maxZombieSpawn: 15
+  _FXs: {fileID: 0}
+  _Foods: {fileID: 0}
+  _Enemies: {fileID: 0}
   _zombieSpawners:
   - {fileID: 205076564}
   _foodSpawners:
@@ -1434,6 +1433,14 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 989681875505700207, guid: 5db6667561139a54ebfb789f98b85eae, type: 3}
+      propertyPath: _radius
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 989681875505700207, guid: 5db6667561139a54ebfb789f98b85eae, type: 3}
+      propertyPath: _foodToSpawn
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 989681875505700207, guid: 5db6667561139a54ebfb789f98b85eae, type: 3}
       propertyPath: _food.Array.size
       value: 6
       objectReference: {fileID: 0}
@@ -1599,6 +1606,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6090397179611315502, guid: 1f9bd9d938283924c9d045d4cbe1450d, type: 3}
+      propertyPath: _radius
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 6090397179611315502, guid: 1f9bd9d938283924c9d045d4cbe1450d, type: 3}
+      propertyPath: _zombieToSpawn
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1f9bd9d938283924c9d045d4cbe1450d, type: 3}
 --- !u!1001 &6137604991643619459
@@ -1657,14 +1672,6 @@ PrefabInstance:
       value: Zombie
       objectReference: {fileID: 0}
     - target: {fileID: 6137604990950288302, guid: a1b4b3decd4fec2448fdd713347b68dc, type: 3}
-      propertyPath: _zombieState
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6137604990950288302, guid: a1b4b3decd4fec2448fdd713347b68dc, type: 3}
-      propertyPath: _waypoints.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6137604990950288302, guid: a1b4b3decd4fec2448fdd713347b68dc, type: 3}
       propertyPath: _waypoints.Array.data[0]
       value: 
       objectReference: {fileID: 1502703630}
@@ -1672,17 +1679,5 @@ PrefabInstance:
       propertyPath: _waypoints.Array.data[1]
       value: 
       objectReference: {fileID: 453943407}
-    - target: {fileID: 6137604990950288302, guid: a1b4b3decd4fec2448fdd713347b68dc, type: 3}
-      propertyPath: _waypoints.Array.data[2]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 6137604990950288303, guid: a1b4b3decd4fec2448fdd713347b68dc, type: 3}
-      propertyPath: m_UseGravity
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6137604990950288303, guid: a1b4b3decd4fec2448fdd713347b68dc, type: 3}
-      propertyPath: m_IsKinematic
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a1b4b3decd4fec2448fdd713347b68dc, type: 3}

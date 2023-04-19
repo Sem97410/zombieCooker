@@ -129,6 +129,7 @@ public class mainCharacter : LivingObject
             Destroy(GetItemSelected().gameObject, 0.1f);
             EnleverItemEquipe(GetItemSelected().gameObject);
             PickUps.Remove(GetItemSelected());
+            uiManager.UpdateSpriteOfInventory(this);
             if (_currentHunger >= 100)
             {
                 _currentHunger = 100;
@@ -306,11 +307,11 @@ public class mainCharacter : LivingObject
 
                 if (hit.collider.CompareTag("Zombie"))
                 {
-                    hit.collider.GetComponent<Zombie>().SetTarget(this.transform);
+                    //hit.collider.GetComponent<Zombie>().SetTarget(this.transform);
                     pistol.Attack(this, hit.collider.GetComponent<IDamageable>());
                     if (hit.collider.GetComponent<LivingObject>().CurrentLife <= 0)
                     {
-                        hit.collider.GetComponent<IDamageable>().Die(hit.collider.GetComponent<IDamageable>());
+                        hit.collider.GetComponent<LivingObject>().Die(hit.collider.GetComponent<IDamageable>());
                     }
                 }
             }

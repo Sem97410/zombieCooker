@@ -6,27 +6,28 @@ using UnityEngine;
 public class gameManager : MonoBehaviour
 {
 
-    private Transform _FXs;
-    private Transform _Foods;
+    [SerializeField] private Transform _FXs;
+    [SerializeField] private Transform _Foods;
+    [SerializeField] private Transform _Enemies;
     [SerializeField]
     private static gameManager _gameManager;
     private int _numberOfPlate;
 
     //public static List<Food> ingredients = new List<Food>();
 
-    [SerializeField] private int _foodCount;
-    [SerializeField] private int _maxFoodSpawn;
+    //[SerializeField] private int _foodCount;
+    //[SerializeField] private int _maxFoodSpawn;
 
-    [SerializeField] private int _zombieCount;
-    [SerializeField] private int _maxZombieSpawn;
+    //[SerializeField] private int _zombieCount;
+    //[SerializeField] private int _maxZombieSpawn;
 
     [SerializeField] private ZombieSpawner[] _zombieSpawners;
     [SerializeField] private FoodSpawner[] _foodSpawners;
 
-    public int MaxFoodSpawn { get => _maxFoodSpawn; set => _maxFoodSpawn = value; }
-    public int FoodCount { get => _foodCount; set => _foodCount = value; }
-    public int MaxZombieSpawn { get => _maxZombieSpawn; set => _maxZombieSpawn = value; }
-    public int ZombieCount { get => _zombieCount; set => _zombieCount = value; }
+    //public int MaxFoodSpawn { get => _maxFoodSpawn; set => _maxFoodSpawn = value; }
+    //public int FoodCount { get => _foodCount; set => _foodCount = value; }
+    //public int MaxZombieSpawn { get => _maxZombieSpawn; set => _maxZombieSpawn = value; }
+    //public int ZombieCount { get => _zombieCount; set => _zombieCount = value; }
 
     private void Awake()
     {
@@ -84,7 +85,7 @@ public class gameManager : MonoBehaviour
         if (model)
         {
             Zombie zombie = Instantiate(model, position, rotation);
-            zombie.transform.SetParent(Instance()._Foods);
+            zombie.transform.SetParent(Instance()._Enemies);
         }
 
         return null;
