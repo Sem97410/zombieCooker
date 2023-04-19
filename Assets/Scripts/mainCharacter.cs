@@ -57,6 +57,15 @@ public class mainCharacter : LivingObject
     public AudioSource PlayerAudioSource { get => _playerAudioSource; set => _playerAudioSource = value; }
     public int MaxSpaceInInventory { get => _maxSpaceInInventory; set => _maxSpaceInInventory = value; }
 
+    private void OnEnable()
+    {
+        ZombieEvents.onFoodEaten += EatFood;
+    }
+
+    private void OnDisable()
+    {
+        ZombieEvents.onFoodEaten -= EatFood;
+    }
     private void Start()
     {
         //lock le cursor pour la caméra
@@ -107,20 +116,8 @@ public class mainCharacter : LivingObject
         if (GetItemSelected() == null) return;
         if (GetItemSelected() is Food)
         {
-            Debug.Log("food dans mains");
-            Food _food = GetItemSelected().gameObject.GetComponent<Food>();
-            Debug.Log(_food.Satiety);
-            _currentHunger += _food.Satiety;
-            Destroy(GetItemSelected().gameObject, 0.1f);
-            EnleverItemEquipe(GetItemSelected().gameObject);
-            PickUps.Remove(GetItemSelected());
+            ZombieEvents.onFoodEaten(PlayerAudioSource);
             uiManager.UpdateSpriteOfInventory(this);
-            if (_currentHunger >= 100)
-            {
-                _currentHunger = 100;
-            }
-
-
         }
     }
 
@@ -323,5 +320,18 @@ public class mainCharacter : LivingObject
         base.TakeDamage(damage, Attaquant);
 
         ZombieEvents.onLifeChanged(_currentLife);
+    }
+
+    public void EatFood(AudioSource audioSource)
+    {
+        Food _food = GetItemSelected().gameObject.GetComponent<Food>();
+        _currentHunger += _food.Satiety;
+        Destroy(GetItemSelected().gameObject, 0.1f);
+        EnleverItemEquipe(GetItemSelected().gameObject);
+        PickUps.Remove(GetItemSelected());
+        if (_currentHunger >= 100)
+        {
+            _currentHunger = 100;
+        }
     }
 }
