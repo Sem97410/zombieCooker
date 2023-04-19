@@ -12,8 +12,8 @@ public class gameManager : MonoBehaviour
     [SerializeField] private Transform _Foods;
     [SerializeField] private Transform _Enemies;
     [SerializeField] private Transform _Spawners;
-    [SerializeField]
-    private static gameManager _gameManager;
+    [SerializeField] private static gameManager _gameManager;
+    [SerializeField] private Camera _deathCamera;
     private int _numberOfPlate;
 
     //public static List<Food> ingredients = new List<Food>();
@@ -29,6 +29,7 @@ public class gameManager : MonoBehaviour
     public int NumberOfPlate { get => _numberOfPlate; set => _numberOfPlate = value; }
     public int NumberOfPlateNeed { get => _numberOfPlateNeed; set => _numberOfPlateNeed = value; }
     public Spawner[] Spawners { get => _spawners; set => _spawners = value; }
+    public Camera DeathCamera { get => _deathCamera; set => _deathCamera = value; }
 
     //public int MaxFoodSpawn { get => _maxFoodSpawn; set => _maxFoodSpawn = value; }
     //public int FoodCount { get => _foodCount; set => _foodCount = value; }
@@ -38,6 +39,15 @@ public class gameManager : MonoBehaviour
     private void Awake()
     {
         _gameManager = this;
+    }
+
+    private void OnEnable()
+    {
+        ZombieEvents.onPlayerDeath += SetMainCameraOnDeath;
+    }
+    private void OnDisable()
+    {
+        ZombieEvents.onPlayerDeath -= SetMainCameraOnDeath;
     }
 
     private void Start()
@@ -117,6 +127,12 @@ public class gameManager : MonoBehaviour
         {
             Debug.Log("Victoire");
         }
+    }
+
+    public void SetMainCameraOnDeath(bool value)
+    {
+        DeathCamera.gameObject.SetActive(true);
+        DeathCamera = Camera.main;
     }
 
     

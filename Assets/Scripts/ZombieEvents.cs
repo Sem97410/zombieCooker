@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ZombieEvents 
+public class ZombieEvents
 {
     public delegate void OnHungerChanged(float value);
     public static OnHungerChanged onHungerChanged;
@@ -34,5 +34,8 @@ public class ZombieEvents
 
     public delegate void OnShoot(AudioSource audioSource);
     public static OnShoot onShoot;
+
+    public delegate void OnPlayerDeath(bool value);
+    public static OnPlayerDeath onPlayerDeath;
 
 }
