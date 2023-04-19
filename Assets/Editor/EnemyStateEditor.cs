@@ -72,7 +72,7 @@ public class EnemyStateEditor : Editor
                     EditorGUILayout.PropertyField(m_zombiePlayerRef, new GUIContent("PlayerRef"));
                     EditorGUILayout.PropertyField(m_zombieTargetMask, new GUIContent("Target Mask"));
                     EditorGUILayout.PropertyField(m_zombieObstructionMask, new GUIContent("Obstruction Mask"));
-                    EditorGUILayout.PropertyField(m_zombieSpawner, new GUIContent("Spawner"));   
+                    EditorGUILayout.PropertyField(m_zombieSpawner, new GUIContent("Spawner"));
                     serializedObject.ApplyModifiedProperties();
                     break;
                 }

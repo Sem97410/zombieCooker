@@ -10,19 +10,21 @@ public class UiManager : MonoBehaviour
     [SerializeField] private List<Image> images;
     [SerializeField] private Sprite _defaultSprite;
     [SerializeField] private Image _foodBar;
-    [SerializeField] private Image _lifeBar;
     [SerializeField] private Text _ammoText;
     [SerializeField] private GameObject _iconGrabItem;
     [SerializeField] private Text _recipeDoneText;
 
+    [SerializeField] private Image _lifeBar;
 
     public List<Image> Images { get => images; set => images = value; }
     public Sprite DefaultSprite { get => _defaultSprite; set => _defaultSprite = value; }
     public Image FoodBar { get => _foodBar; set => _foodBar = value; }
-    public Image LifeBar { get => _lifeBar; set => _lifeBar = value; }
+    
     public Text AmmoText { get => _ammoText; set => _ammoText = value; }
     public GameObject IconGrabItem { get => _iconGrabItem; set => _iconGrabItem = value; }
     public Text RecipeDoneText { get => _recipeDoneText; set => _recipeDoneText = value; }
+    public Image LifeBar { get => _lifeBar; set => _lifeBar = value; }
+
 
     public void OnEnable()
     {
@@ -129,7 +131,4 @@ public class UiManager : MonoBehaviour
     {
         AmmoText.text = String.Format("Plats cuisiné : {0}/{1}", recipeDone, recipeNeed);
     }
-
-
-
 }
