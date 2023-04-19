@@ -40,7 +40,7 @@ public class FoodSpawner : Spawner
     }
     private void OnDrawGizmos()
     {
-        Gizmos.color = Color.green;
+        Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(transform.position, Radius);
     }
 }
