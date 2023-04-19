@@ -60,7 +60,6 @@ public class mainCharacter : LivingObject
     private void OnEnable()
     {
         ZombieEvents.onFoodEaten += EatFood;
-        ZombieEvents.onShoot += PlayShootFx;
     }
 
     private void OnDisable()
