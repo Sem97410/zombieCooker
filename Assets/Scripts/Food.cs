@@ -6,8 +6,6 @@ public class Food : PickUp
 {
     [SerializeField] private float _satiety;
 
-    
-
     public float Satiety { get => _satiety; set => _satiety = value; }
     public int Id { get => _id; set => _id = value; }
 
@@ -25,13 +23,14 @@ public class Food : PickUp
     }
     public override void PickUpItem()
     {
-        if (MainCharacter.PickUps.Count >= 6)
+        if (MainCharacter.PickUps.Count >= MainCharacter.MaxSpaceInInventory)
         {
             Debug.Log("Inventaire plein");
             return;
         }
         else
         {
+            ZombieEvents.onTriggerItemExit();
             SetGameObject(this.gameObject);
             MainCharacter.PickUps.Add((PickUp)this);
             MainCharacter.ChooseItem(MainCharacter.PickUps.Count - 1);
@@ -42,8 +41,6 @@ public class Food : PickUp
             BoxCollider _box = GetComponentInChildren<BoxCollider>();
             CapsuleCollider _capsule = MainCharacter.GetComponent<CapsuleCollider>();
             Physics.IgnoreCollision(_box, _capsule);
-            //this.GetComponentInChildren<BoxCollider>().enabled = false;
-
 
         }
 

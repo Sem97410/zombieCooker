@@ -2,7 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.SymbolStore;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.AI;
+using TMPro;
 
 [RequireComponent(typeof(NavMeshAgent))]
 public class Zombie : LivingObject
@@ -49,7 +51,9 @@ public class Zombie : LivingObject
 
     [SerializeField] private bool _canSeePlayer;
 
-    //private ZombieSpawner _spawner;
+    [SerializeField] private ZombieSpawner _spawner;
+
+    private Slider _sliderLifeBar;
 
     public Transform Target { get => _target; set => _target = value; }
     public bool IsAttacked { get => _isAttacked; set => _isAttacked = value; }
@@ -61,7 +65,8 @@ public class Zombie : LivingObject
     public Transform[] Waypoints { get => _waypoints; set => _waypoints = value; }
     public LayerMask TargetMask { get => _targetMask; set => _targetMask = value; }
     public LayerMask ObstructionMask { get => _ObstructionMask; set => _ObstructionMask = value; }
-    //public ZombieSpawner Spawner { get => _spawner; set => _spawner = value; }
+    public ZombieSpawner Spawner { get => _spawner; set => _spawner = value; }
+    public Slider SliderLifeBar { get => _sliderLifeBar; set => _sliderLifeBar = value; }
 
     private void Start()
     {
@@ -70,7 +75,9 @@ public class Zombie : LivingObject
         _agent.autoBraking = false;
         _isPatrol = true;
 
-        _playerRef = GameObject.FindGameObjectWithTag("Player");
+        PlayerRef = GameObject.FindGameObjectWithTag("Player");
+        SliderLifeBar = gameObject.GetComponentInChildren<Slider>();
+        SliderLifeBar.gameObject.SetActive(false);
 
         MaxLife = 100;
         CurrentLife = MaxLife;
@@ -222,14 +229,32 @@ public class Zombie : LivingObject
         }
     }
 
+    public void UpdateZombieLifeBar(float curentValue, float maxLife)
+    {
+        SliderLifeBar.value = curentValue / maxLife;
+    }
 
-    //public override void Die(IDamageable Cible)
-    //{
-    //    if (Spawner != null)
-    //    {
-    //        Spawner.ZombieCount--;
-    //    }
+    public IEnumerator ShowZombieLife()
+    {
+        SliderLifeBar.gameObject.SetActive(true);
+        UpdateZombieLifeBar(CurrentLife, MaxLife);
 
-    //}
+        yield return new WaitForSeconds(1.0f);
+
+        SliderLifeBar.gameObject.SetActive(false);
+
+    }
+
+
+    public override void Die(IDamageable Cible)
+    {
+        if (Spawner != null)
+        {
+            ZombieEvents.onZombieSpawnedDied?.Invoke();
+        }
+
+        Destroy(this.gameObject);
+
+    }
 
 }

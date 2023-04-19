@@ -31,12 +31,12 @@ public class Weapon : PickUp
     {
         base.Start();
         CurrentAmmo = MaxAmmo;
-        
+
     }
 
     public override void PickUpItem()
     {
-        if (MainCharacter.PickUps.Count >= 6)
+        if (MainCharacter.PickUps.Count >= MainCharacter.MaxSpaceInInventory)
         {
             Debug.Log("Inventaire plein");
             return;

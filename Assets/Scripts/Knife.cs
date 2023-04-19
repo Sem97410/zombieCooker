@@ -17,17 +17,17 @@ public class Knife : Weapon, IShooting
     public override void PickUpItem()
     {
         base.PickUpItem();
-        if (MainCharacter.PickUps.Count >= 6)
+        if (MainCharacter.PickUps.Count >= MainCharacter.MaxSpaceInInventory)
         {
             Debug.Log("Inventaire plein");
             return;
         }
         else
         {
+            ZombieEvents.onTriggerItemExit();
             MainCharacter.HaveKnife = true;
-            Debug.Log("A pris le couteau");
         }
-        
+
     }
 
     public void Attack(IDamageable attaquant, IDamageable cible)
