@@ -131,6 +131,7 @@ public class gameManager : MonoBehaviour
 
     public void SetMainCameraOnDeath(bool value)
     {
+        DeathCamera.gameObject.SetActive(true);
         DeathCamera = Camera.main;
     }
 
