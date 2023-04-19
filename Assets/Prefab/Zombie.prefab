@@ -112,7 +112,7 @@ Transform:
   m_GameObject: {fileID: 6137604990950288299}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 2.26, y: 0, z: -0.36}
-  m_LocalScale: {x: 1, y: 1.8, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6137604990839121565}
   m_Father: {fileID: 0}
@@ -183,7 +183,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _zombieState: 2
-  _walkRadius: 11
+  _walkRadius: 6
   _target: {fileID: 0}
   _waypoints: []
   _radius: 30

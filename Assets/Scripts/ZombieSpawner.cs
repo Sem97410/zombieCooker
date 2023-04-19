@@ -29,7 +29,7 @@ public class ZombieSpawner : MonoBehaviour
             _zombie.WalkRadius = randomWalkRadius;
 
             float randomTime = Random.Range(0.5f, 2.0f);
-            Vector3 randomPos = new Vector3(Random.Range(-5, 5),0, Random.Range(-5, 5));
+            Vector3 randomPos = new Vector3(Random.Range(-30, 30),0, Random.Range(-30, 30));
             gameManager.SpawnZombieInSpawner(_zombie, transform.position + randomPos, Quaternion.identity);
             gameManager.Instance().ZombieCount++;
 
