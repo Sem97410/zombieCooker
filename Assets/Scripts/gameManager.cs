@@ -2,6 +2,7 @@ using JetBrains.Annotations;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class gameManager : MonoBehaviour
 {
@@ -99,5 +100,7 @@ public class gameManager : MonoBehaviour
             Debug.Log("Victoire");
         }
     }
+
+    
 
 }
