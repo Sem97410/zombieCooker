@@ -21,6 +21,8 @@ public class Ammo : PickUp
         {
             if (MainCharacter.GetItemSelected() is Pistol)
             {
+                Debug.Log("Reload");
+                MainCharacter.WeaponAnimator.SetTrigger("Reload");
                 Pistol pistol = MainCharacter.GetItemSelected().GetComponent<Pistol>();
                 pistol.CurrentAmmo += 10;
                 pistol.CurrentAmmo = Mathf.Clamp(pistol.CurrentAmmo, 0, pistol.MaxAmmo);

@@ -60,6 +60,14 @@ public class mainCharacter : LivingObject
     [SerializeField] private AudioSource _playerAudioSource;
     [SerializeField] private AudioClip _shootClip;
 
+    [Header("Animation")]
+    [SerializeField] private Animator _weaponAnimator;
+
+
+
+    private LineRenderer _swingLineRenderer;
+    private bool _canAttack = true;
+
     public bool CanInteract { get => _canInteract; set => _canInteract = value; }
     public PickUp ItemInteractable { get => _itemInteractable; set => _itemInteractable = value; }
     public bool HavePistol { get => _havePistol; set => _havePistol = value; }
@@ -71,6 +79,7 @@ public class mainCharacter : LivingObject
     public UiManager UiManager { get => uiManager; set => uiManager = value; }
     public InputAction ButtonAction { get => _buttonAction; set => _buttonAction = value; }
     public AudioSource PlayerAudioSource { get => _playerAudioSource; set => _playerAudioSource = value; }
+    public Animator WeaponAnimator { get => _weaponAnimator; set => _weaponAnimator = value; }
 
     private void Start()
     {
@@ -98,6 +107,7 @@ public class mainCharacter : LivingObject
         _buttonAction.Enable();
 
         _playerAudioSource = this.GetComponent<AudioSource>();
+
 
     }
     private void Update()
@@ -190,6 +200,9 @@ public class mainCharacter : LivingObject
             ItemInteractable.PickUpItem();
             CanInteract = false;
             ItemInteractable = null;
+            ChooseWeaponAnimator(true);
+
+
         }
         else return;
     }
@@ -273,6 +286,7 @@ public class mainCharacter : LivingObject
             GetItemSelected().GetComponent<Rigidbody>().AddForce(gameObject.transform.forward * 15, ForceMode.Impulse);
             GetItemSelected().GetComponent<SphereCollider>().enabled = true;
             GetItemSelected().GetComponentInChildren<BoxCollider>().enabled = true;
+            ChooseWeaponAnimator(false);
             PickUps.Remove(GetItemSelected());
             ChooseItem(0);
             ZombieEvents.onItemChanged(this);
@@ -282,55 +296,122 @@ public class mainCharacter : LivingObject
     }
 
 
+    private void ChooseWeaponAnimator(bool activate)
+    {
+        if (GetItemSelected() is Knife || GetItemSelected() is Pistol)
+        {
+            if (activate == true)
+            {
+                if (GetItemSelected() is Pistol)
+                {
+                    _weaponAnimator = GetItemSelected().GetComponentInChildren<Animator>();
+                }
+                else
+                {
+                    _weaponAnimator = GetItemSelected().GetComponent<Animator>();
 
+                }
+                _weaponAnimator.enabled = activate;
+
+            }
+            else
+            {
+                _weaponAnimator.enabled = activate;
+
+            }
+        }
+    }
 
     public void Attack(InputAction.CallbackContext ctx)
     {
-        if (GetItemSelected() is Pistol)
+        if (_canAttack == true)
         {
-            Pistol pistol = GetItemSelected().GetComponent<Pistol>();
-            if (pistol.CurrentAmmo <= 0) return;
-            Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
 
-            Debug.DrawRay(ray.origin, Camera.main.transform.forward * 50, Color.red);
-
-            RaycastHit hit;
-            pistol.CurrentAmmo--;
-            ZombieEvents.onAmmoChanged(pistol.CurrentAmmo, pistol.MaxAmmo);
-
-            _playerAudioSource.clip = _shootClip;
-            _playerAudioSource.Play();
-
-            gameManager.AddFX(pistol.MuzzleFx, pistol.MuzzlePoint.position, pistol.MuzzlePoint.localRotation);
-            if (Physics.Raycast(ray, out hit, 150, ~_IgnoreLayer))
+            if (GetItemSelected() is Pistol)
             {
+                Pistol pistol = GetItemSelected().GetComponent<Pistol>();
+                if (pistol.CurrentAmmo <= 0) return;
+                Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
 
-                if (hit.collider.CompareTag("Zombie"))
+                Debug.DrawRay(ray.origin, Camera.main.transform.forward * 50, Color.red);
+
+                RaycastHit hit;
+                pistol.CurrentAmmo--;
+                ZombieEvents.onAmmoChanged(pistol.CurrentAmmo, pistol.MaxAmmo);
+
+                _playerAudioSource.clip = _shootClip;
+                _playerAudioSource.Play();
+                StartCoroutine(Attack(GetItemSelected()));
+
+                gameManager.AddFX(pistol.MuzzleFx, pistol.MuzzlePoint.position, pistol.MuzzlePoint.localRotation);
+                if (Physics.Raycast(ray, out hit, 150, ~_IgnoreLayer))
                 {
-                    //hit.collider.GetComponent<Zombie>().SetTarget(this.transform);
-                    pistol.Attack(this, hit.collider.GetComponent<IDamageable>());
-                    if (hit.collider.GetComponent<LivingObject>().CurrentLife <= 0)
+
+                    if (hit.collider.CompareTag("Zombie"))
                     {
-                        hit.collider.GetComponent<LivingObject>().Die(hit.collider.GetComponent<IDamageable>());
+                        //hit.collider.GetComponent<Zombie>().SetTarget(this.transform);
+                        pistol.Attack(this, hit.collider.GetComponent<IDamageable>());
+                        if (hit.collider.GetComponent<LivingObject>().CurrentLife <= 0)
+                        {
+                            hit.collider.GetComponent<LivingObject>().Die(hit.collider.GetComponent<IDamageable>());
+                        }
                     }
                 }
             }
-        }
 
-        else if (GetItemSelected() is Knife)
-        {
-            //Mettre l'animation d'attaque et le takeDamage au moment ou le couteau touche un enemy
-
-            Collider[] hitColliders = Physics.OverlapSphere(transform.position, 2);
-
-            foreach (Collider collider in hitColliders)
+            if (GetItemSelected() is Knife)
             {
-                if (collider.CompareTag("Zombie"))
-                {
-                    GetItemSelected().gameObject.GetComponent<Knife>().Attack(this, collider.GetComponent<IDamageable>());
-                }
+                //Mettre l'animation d'attaque et le takeDamage au moment ou le couteau touche un enemy
+
+                
+
+                _swingLineRenderer = GetItemSelected().GetComponentInChildren<LineRenderer>();
+                StartCoroutine(Attack(GetItemSelected()));
+
+                
+
+
+
             }
         }
+    }
+
+
+    IEnumerator Attack(PickUp TypeOfWeapon)
+    {
+        _canAttack = false;
+
+        if (TypeOfWeapon is Knife)
+        {
+            int randomAttack = UnityEngine.Random.Range(1, 3);
+
+            _swingLineRenderer.enabled = true;
+            _weaponAnimator.SetInteger("CanAttack", randomAttack);
+
+            yield return new WaitForSeconds(0.50f);
+            _swingLineRenderer.enabled = false;
+
+            yield return new WaitForSeconds(0.60f);
+
+            _weaponAnimator.SetInteger("CanAttack", 3);
+            _canAttack = true;
+
+
+        }
+        if (TypeOfWeapon is Pistol)
+        {
+            _weaponAnimator.SetBool("CanShoot", true);
+            yield return new WaitForSeconds(0.45f);
+            _weaponAnimator.SetBool("CanShoot", false);
+            //yield return new WaitForSeconds(0.35f);
+
+            _canAttack = true;
+
+
+
+        }
+
+
     }
 
     public override void TakeDamage(int damage, IDamageable Attaquant)
