@@ -15,4 +15,10 @@ public class ZombieEvents
 
     public delegate void OnItemChanged(mainCharacter player);
     public static OnItemChanged onItemChanged;
+
+    public delegate void OnTriggerItemEnter();
+    public static OnTriggerItemEnter onTriggerItemEnter;
+
+    public delegate void OnTriggerItemExit();
+    public static OnTriggerItemExit onTriggerItemExit;
 }

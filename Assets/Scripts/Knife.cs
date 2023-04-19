@@ -24,6 +24,7 @@ public class Knife : Weapon, IShooting
         }
         else
         {
+            ZombieEvents.onTriggerItemExit();
             MainCharacter.HaveKnife = true;
             Debug.Log("A pris le couteau");
         }

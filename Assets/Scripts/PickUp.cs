@@ -30,6 +30,7 @@ public class PickUp : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             IsPickable = true;
+            ZombieEvents.onTriggerItemEnter();
             other.gameObject.GetComponent<mainCharacter>().CanInteract = true;
             other.gameObject.GetComponent<mainCharacter>().ItemInteractable = this;
             Debug.Log("Peut prendre");
@@ -41,6 +42,7 @@ public class PickUp : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             IsPickable = false;
+            ZombieEvents.onTriggerItemExit();
             other.gameObject.GetComponent<mainCharacter>().CanInteract = false;
             other.gameObject.GetComponent<mainCharacter>().ItemInteractable = null;
 
@@ -50,7 +52,6 @@ public class PickUp : MonoBehaviour
 
     public virtual void PickUpItem()
     {
-        
     }
 
     public void SetGameObject(GameObject go)

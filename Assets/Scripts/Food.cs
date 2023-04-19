@@ -32,6 +32,7 @@ public class Food : PickUp
         }
         else
         {
+            ZombieEvents.onTriggerItemExit();
             SetGameObject(this.gameObject);
             MainCharacter.PickUps.Add((PickUp)this);
             MainCharacter.ChooseItem(MainCharacter.PickUps.Count - 1);
