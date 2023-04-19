@@ -44,3 +44,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _eatFood: {fileID: 8300000, guid: 12b0bd33c32e38045b490ab8b1cfa964, type: 3}
+  _shoot: {fileID: 8300000, guid: b6acb31810db42b42942adab071f6072, type: 3}

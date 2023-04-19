@@ -72,7 +72,7 @@ public class mainCharacter : LivingObject
     }
     private void Start()
     {
-        CursorMode(true);
+        CursorMode(false);
         PickUps = new List<PickUp>();
         MaxLife = 100;
         CurrentLife = MaxLife;
@@ -83,6 +83,7 @@ public class mainCharacter : LivingObject
         _dropItemAction.performed += DropItem;
         _shootAction.Enable();
         _shootAction.performed += Attack;
+
         _eatAction.Enable();
         _eatAction.performed += Eat;
 
@@ -93,7 +94,7 @@ public class mainCharacter : LivingObject
 
         _buttonAction.Enable();
 
-        _playerAudioSource = this.GetComponent<AudioSource>();
+        _playerAudioSource = gameObject.GetComponent<AudioSource>();
 
     }
     private void Update()
