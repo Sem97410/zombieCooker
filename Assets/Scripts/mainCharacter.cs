@@ -61,17 +61,18 @@ public class mainCharacter : LivingObject
     private void OnEnable()
     {
         ZombieEvents.onFoodEaten += EatFood;
+        ZombieEvents.onPlayerDeath += CursorMode;
     }
 
     private void OnDisable()
     {
         ZombieEvents.onFoodEaten -= EatFood;
+        ZombieEvents.onPlayerDeath -= CursorMode;
+
     }
     private void Start()
     {
-        //lock le cursor pour la caméra
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
+        CursorMode(true);
         PickUps = new List<PickUp>();
         MaxLife = 100;
         CurrentLife = MaxLife;
@@ -234,14 +235,12 @@ public class mainCharacter : LivingObject
         if (GetItemSelected() != null)
         {
             EnleverItemEquipe(GetItemSelected().GetGameObject());
-
         }
         ChoixIndex = choixindex;
 
         if (GetItemSelected() != null)
         {
             AfficherItemEquipe(GetItemSelected().GetGameObject());
-
         }
     }
 
@@ -318,8 +317,11 @@ public class mainCharacter : LivingObject
     public override void TakeDamage(int damage, IDamageable Attaquant)
     {
         base.TakeDamage(damage, Attaquant);
-
         ZombieEvents.onLifeChanged(_currentLife);
+        if (IsDead)
+        {
+            ZombieEvents.onPlayerDeath(true);
+        }
     }
 
     public void EatFood(AudioSource audioSource)
@@ -343,5 +345,18 @@ public class mainCharacter : LivingObject
     public void DecreasedAmmo(int value, Pistol pistol)
     {
         pistol.CurrentAmmo -= value;
+    }
+
+    public void CursorMode(bool value)
+    {
+        Cursor.visible = value;
+        if (value)
+        {
+            Cursor.lockState = CursorLockMode.None;
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+        }
     }
 }

@@ -58,7 +58,7 @@ public class Oven : MonoBehaviour
     private void Start()
     {
         RecipeIp = 1;
-        
+
     }
 
 
@@ -66,7 +66,7 @@ public class Oven : MonoBehaviour
     {
         if (other.CompareTag("FoodMesh"))
         {
-            
+
             _food = other.GetComponentInParent<Food>();
             if (_foodOven.Count >= 0 && !_foodOven.Contains(_food.gameObject))
             {
@@ -102,7 +102,7 @@ public class Oven : MonoBehaviour
                 RecipeIp = 1;
             }
         }
-   }
+    }
 
 
     public void MakeThePlate(GameObject plate, Transform spawnPosition)
@@ -116,7 +116,7 @@ public class Oven : MonoBehaviour
         _foodOven.Clear();
         _foodIdOven.Clear();
         Instantiate(plate, spawnPosition.position, transform.rotation);
-        gameManager.AddFX(_recipeFx, _spawnRecipeParticulePosition.position, Quaternion.identity);  
+        gameManager.AddFX(_recipeFx, _spawnRecipeParticulePosition.position, Quaternion.identity);
         RecipeIp = 1;
     }
 

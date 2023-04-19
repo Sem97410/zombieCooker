@@ -27,7 +27,7 @@ public class Knife : Weapon, IShooting
             ZombieEvents.onTriggerItemExit();
             MainCharacter.HaveKnife = true;
         }
-        
+
     }
 
     public void Attack(IDamageable attaquant, IDamageable cible)
