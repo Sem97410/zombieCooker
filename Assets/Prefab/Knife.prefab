@@ -297,7 +297,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _sprite: {fileID: 0}
   uiManager: {fileID: 0}
-  _damage: 0
+  _damage: 10
   _fireRate: 0
   _maxAmmo: 0
   _currentAmmo: 0
