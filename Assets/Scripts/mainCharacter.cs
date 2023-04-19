@@ -60,6 +60,7 @@ public class mainCharacter : LivingObject
     private void OnEnable()
     {
         ZombieEvents.onFoodEaten += EatFood;
+        ZombieEvents.onShoot += PlayShootFx;
     }
 
     private void OnDisable()
@@ -277,13 +278,11 @@ public class mainCharacter : LivingObject
             Debug.DrawRay(ray.origin, Camera.main.transform.forward * 50, Color.red);
 
             RaycastHit hit;
-            pistol.CurrentAmmo--;
+            DecreasedAmmo(1, pistol);
             ZombieEvents.onAmmoChanged(pistol.CurrentAmmo, pistol.MaxAmmo);
+            ZombieEvents.onShoot(PlayerAudioSource);
+            PlayShootFx(pistol);
 
-            _playerAudioSource.clip = _shootClip;
-            _playerAudioSource.Play();
-
-            gameManager.AddFX(pistol.MuzzleFx, pistol.MuzzlePoint.position, pistol.MuzzlePoint.localRotation);
             if (Physics.Raycast(ray, out hit, 150, ~_IgnoreLayer))
             {
 
@@ -333,5 +332,15 @@ public class mainCharacter : LivingObject
         {
             _currentHunger = 100;
         }
+    }
+
+    public void PlayShootFx(Pistol pistol)
+    {
+        gameManager.AddFX(pistol.MuzzleFx, pistol.MuzzlePoint.position, pistol.MuzzlePoint.localRotation);
+    }
+
+    public void DecreasedAmmo(int value, Pistol pistol)
+    {
+        pistol.CurrentAmmo -= value;
     }
 }

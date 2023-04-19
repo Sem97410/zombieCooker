@@ -31,4 +31,7 @@ public class ZombieEvents
     public delegate void OnFoodEaten(AudioSource audioSource);
     public static OnFoodEaten onFoodEaten;
 
+    public delegate void OnShoot(AudioSource audioSource);
+    public static OnShoot onShoot;
+
 }
