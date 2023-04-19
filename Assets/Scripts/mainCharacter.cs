@@ -5,42 +5,44 @@ using UnityEngine.InputSystem;
 
 public class mainCharacter : LivingObject
 {
-    [SerializeField]
-    private float _movementSpeed;
-    private List<PickUp> _pickUp;
-    [SerializeField]
-    private float _runSpeedMultiplication;      //cette variable est multiplié avec la vitesse pour calculer la vitesse de course
-    private PickUp _itemInteractable;
-    private int _choixIndex;
+    [Header("Movement")]
+    [SerializeField] private float _movementSpeed;
+    [SerializeField] private float _runSpeedMultiplication;
+    private bool _isRunning;
+
+    [Header("PickUpOptions")]
     [SerializeField] private Transform _itemPos;
-    private float _maxHunger;
-    [SerializeField]
-    private float _currentHunger;
-    [SerializeField] private bool _canInteract;
+    [SerializeField] private int _maxSpaceInInventory = 6;
+    private PickUp _itemInteractable;
+    private List<PickUp> _pickUp;
+    private bool _canInteract;
     private bool _havePistol;
     private bool _haveKnife;
-    [SerializeField]
-    private float _hungerDecrease;   //la vitesse a laquelle on perd de la faim
-    [SerializeField]
-    private float _hungerDecreaseRun; // la perte de faim quand on court
-    [SerializeField] private UiManager uiManager;
-    [SerializeField] private InputAction _dropItemAction;
-    private bool _isRunning;
-    [SerializeField]
-    private Fx _walkFx;
-    [SerializeField] private int _maxSpaceInInventory = 6;
+    private int _choixIndex;
+
+
+    [Header("HungerOptions")]
+    [SerializeField] private float _currentHunger;
+    [SerializeField] private float _hungerDecrease;
+    [SerializeField] private float _hungerDecreaseRun;
+    private float _maxHunger;
 
     [Header("Inputs")]
     [SerializeField] private InputAction _shootAction;
     [SerializeField] private InputAction _interactAction;
     [SerializeField] private InputAction _buttonAction;
     [SerializeField] private InputAction _eatAction;
-    [SerializeField] private LayerMask _IgnoreLayer;
+    [SerializeField] private InputAction _dropItemAction;
 
 
     [Header("Audio Player")]
     [SerializeField] private AudioSource _playerAudioSource;
     [SerializeField] private AudioClip _shootClip;
+
+    [SerializeField] private UiManager uiManager;
+    [SerializeField] private Fx _walkFx;
+    [SerializeField] private LayerMask _IgnoreLayer;
+
 
     public bool CanInteract { get => _canInteract; set => _canInteract = value; }
     public PickUp ItemInteractable { get => _itemInteractable; set => _itemInteractable = value; }
