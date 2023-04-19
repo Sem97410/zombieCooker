@@ -25,6 +25,8 @@ public class gameManager : MonoBehaviour
     [SerializeField] private ZombieSpawner[] _zombieSpawners;
     [SerializeField] private FoodSpawner[] _foodSpawners;
 
+    public int NumberOfPlate { get => _numberOfPlate; set => _numberOfPlate = value; }
+
     //public int MaxFoodSpawn { get => _maxFoodSpawn; set => _maxFoodSpawn = value; }
     //public int FoodCount { get => _foodCount; set => _foodCount = value; }
     //public int MaxZombieSpawn { get => _maxZombieSpawn; set => _maxZombieSpawn = value; }

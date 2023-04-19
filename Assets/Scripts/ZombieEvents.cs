@@ -24,4 +24,8 @@ public class ZombieEvents
 
     public delegate void OnZombieSpawnedDied();
     public static OnZombieSpawnedDied onZombieSpawnedDied;
+
+    public delegate void OnRecipeDone(int recipeDone);
+    public static OnRecipeDone onRecipeDone;
+
 }
