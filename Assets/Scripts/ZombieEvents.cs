@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ZombieEvents 
 {
@@ -15,4 +16,23 @@ public class ZombieEvents
 
     public delegate void OnItemChanged(mainCharacter player);
     public static OnItemChanged onItemChanged;
+
+    public delegate void OnTriggerItemEnter();
+    public static OnTriggerItemEnter onTriggerItemEnter;
+
+    public delegate void OnTriggerItemExit();
+    public static OnTriggerItemExit onTriggerItemExit;
+
+    public delegate void OnZombieSpawnedDied();
+    public static OnZombieSpawnedDied onZombieSpawnedDied;
+
+    public delegate void OnRecipeDone(int recipeDone, int recipeNeed);
+    public static OnRecipeDone onRecipeDone;
+
+    public delegate void OnFoodEaten(AudioSource audioSource);
+    public static OnFoodEaten onFoodEaten;
+
+    public delegate void OnShoot(AudioSource audioSource);
+    public static OnShoot onShoot;
+
 }

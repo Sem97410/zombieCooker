@@ -15,6 +15,7 @@ public class EnemyStateEditor : Editor
     SerializedProperty m_zombieWalkRadius;
     SerializedProperty m_zombieTargetMask;
     SerializedProperty m_zombieObstructionMask;
+    SerializedProperty m_zombieSpawner;
     
     private void OnEnable()
     {
@@ -27,6 +28,8 @@ public class EnemyStateEditor : Editor
         m_zombieWalkRadius = serializedObject.FindProperty("_walkRadius");
         m_zombieTargetMask = serializedObject.FindProperty("_targetMask");
         m_zombieObstructionMask = serializedObject.FindProperty("_ObstructionMask");
+        m_zombieSpawner = serializedObject.FindProperty("_spawner");
+
     }
 
     public override void OnInspectorGUI()
@@ -69,6 +72,7 @@ public class EnemyStateEditor : Editor
                     EditorGUILayout.PropertyField(m_zombiePlayerRef, new GUIContent("PlayerRef"));
                     EditorGUILayout.PropertyField(m_zombieTargetMask, new GUIContent("Target Mask"));
                     EditorGUILayout.PropertyField(m_zombieObstructionMask, new GUIContent("Obstruction Mask"));
+                    EditorGUILayout.PropertyField(m_zombieSpawner, new GUIContent("Spawner"));
                     serializedObject.ApplyModifiedProperties();
                     break;
                 }

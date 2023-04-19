@@ -12,7 +12,7 @@ public class LivingObject : MonoBehaviour, IDamageable
     public int CurrentLife { get => _currentLife; set => _currentLife = value; }
     public bool IsDead { get => _isDead; set => _isDead = value; }
 
-    public void Die(IDamageable Cible)
+    public virtual void Die(IDamageable Cible)
     {
         Destroy(this.gameObject);
         

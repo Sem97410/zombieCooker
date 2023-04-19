@@ -2,31 +2,38 @@ using JetBrains.Annotations;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class gameManager : MonoBehaviour
 {
+    [SerializeField] private int _numberOfPlateNeed;
 
-    private Transform _FXs;
+    [SerializeField] private Transform _FXs = null;
     [SerializeField] private Transform _Foods;
+    [SerializeField] private Transform _Enemies;
+    [SerializeField] private Transform _Spawners;
     [SerializeField]
     private static gameManager _gameManager;
     private int _numberOfPlate;
 
     //public static List<Food> ingredients = new List<Food>();
 
-    [SerializeField] private int _foodCount;
-    [SerializeField] private int _maxFoodSpawn;
+    //[SerializeField] private int _foodCount;
+    //[SerializeField] private int _maxFoodSpawn;
 
-    [SerializeField] private int _zombieCount;
-    [SerializeField] private int _maxZombieSpawn;
+    //[SerializeField] private int _zombieCount;
+    //[SerializeField] private int _maxZombieSpawn;
 
-    [SerializeField] private ZombieSpawner[] _zombieSpawners;
-    [SerializeField] private FoodSpawner[] _foodSpawners;
+    [SerializeField] private Spawner[] _spawners;
 
-    public int MaxFoodSpawn { get => _maxFoodSpawn; set => _maxFoodSpawn = value; }
-    public int FoodCount { get => _foodCount; set => _foodCount = value; }
-    public int MaxZombieSpawn { get => _maxZombieSpawn; set => _maxZombieSpawn = value; }
-    public int ZombieCount { get => _zombieCount; set => _zombieCount = value; }
+    public int NumberOfPlate { get => _numberOfPlate; set => _numberOfPlate = value; }
+    public int NumberOfPlateNeed { get => _numberOfPlateNeed; set => _numberOfPlateNeed = value; }
+    public Spawner[] Spawners { get => _spawners; set => _spawners = value; }
+
+    //public int MaxFoodSpawn { get => _maxFoodSpawn; set => _maxFoodSpawn = value; }
+    //public int FoodCount { get => _foodCount; set => _foodCount = value; }
+    //public int MaxZombieSpawn { get => _maxZombieSpawn; set => _maxZombieSpawn = value; }
+    //public int ZombieCount { get => _zombieCount; set => _zombieCount = value; }
 
     private void Awake()
     {
@@ -35,15 +42,15 @@ public class gameManager : MonoBehaviour
 
     private void Start()
     {
-        foreach (FoodSpawner foodSpawner in _foodSpawners)
+        foreach (Spawner foodSpawner in Spawners)
         {
             foodSpawner.StartSpawn();
         }
 
-        foreach (ZombieSpawner zombieSpawner in _zombieSpawners)
-        {
-            zombieSpawner.StartSpawn();
-        }
+        //foreach (ZombieSpawner zombieSpawner in Spawners)
+        //{
+        //    zombieSpawner.StartSpawn();
+        //}
     }
     public static gameManager Instance()
     {
@@ -68,36 +75,51 @@ public class gameManager : MonoBehaviour
         return null;
     }
 
-    public static Food SpawnFoodInSpawner(Food model, Vector3 position, Quaternion rotation)
+    public static T SpawnGoInSpawner<T>(T model, Vector3 position, Quaternion rotation) where T: MonoBehaviour
     {
         if (model)
         {
-            Food food = Instantiate(model, position, rotation);
-            food.transform.SetParent(Instance()._Foods);
+            T go = Instantiate(model, position, rotation);
+            go.transform.SetParent(GetParent<T>());
         }
 
         return null;
     }
 
-    public static Zombie SpawnZombieInSpawner(Zombie model, Vector3 position, Quaternion rotation)
+    public static Transform GetParent<T>() where T : MonoBehaviour
     {
-        if (model)
+        Transform parent = null;
+        gameManager gM = Instance();
+        if (typeof(T) == typeof(Fx))
         {
-            Zombie zombie = Instantiate(model, position, rotation);
-            //zombie.transform.SetParent(Instance()._Foods);
+            parent = gM._FXs;
         }
 
-        return null;
+        if (typeof(T) == typeof(Spawner))
+        {
+            parent = gM._Spawners;
+        }
+
+#if UNITY_EDITOR
+        else
+        {
+            Debug.LogWarning("Can't find parent of type '" + typeof(T) + "', temporary use level as Parent");
+            parent = gM.transform;
+        }
+#endif //UNITY_EDITOR
+        return parent;
     }
 
     public void WinCondition()
     {
         _numberOfPlate++;
-        if (_numberOfPlate == 4)
+        if (_numberOfPlate == NumberOfPlateNeed)
         {
             Debug.Log("Victoire");
             Time.timeScale = 0;
         }
     }
+
+    
 
 }

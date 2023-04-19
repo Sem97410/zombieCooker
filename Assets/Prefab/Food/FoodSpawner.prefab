@@ -43,11 +43,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7db3c26cf55fd94c9a078b7ddd24b06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxFoodSpawn: 15
-  _food:
-  - {fileID: 4836910514434645254, guid: c2897dcf4067dfb41b33d2dbc0f32a5d, type: 3}
-  - {fileID: 8868058800949055262, guid: 033a4da1b4bea6b438b8c11b08b898fa, type: 3}
-  - {fileID: 348139802372710978, guid: 6db90ea124acf9e438591911b477791b, type: 3}
-  - {fileID: 373044058113783122, guid: ce971c071f2972a45a216e44f593a909, type: 3}
-  - {fileID: 8481568989515360765, guid: e552d98266d2fa849b4ae6f0972f37ee, type: 3}
-  - {fileID: 6238004473684223902, guid: 5e9efe174a3131c43aebaa6127bed789, type: 3}
+  _numberToSpawn: 15
+  _radius: 15
+  foods:
+  - {fileID: 4836910514434645257, guid: c2897dcf4067dfb41b33d2dbc0f32a5d, type: 3}
+  - {fileID: 8868058800949055249, guid: 033a4da1b4bea6b438b8c11b08b898fa, type: 3}
+  - {fileID: 348139802372710989, guid: 6db90ea124acf9e438591911b477791b, type: 3}
+  - {fileID: 8946082384043315308, guid: 4f4e967ee8c5a9f43833fcefdd04be24, type: 3}
+  - {fileID: 373044058113783133, guid: ce971c071f2972a45a216e44f593a909, type: 3}
+  - {fileID: 8946082384043315308, guid: 5e9efe174a3131c43aebaa6127bed789, type: 3}
