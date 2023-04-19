@@ -12,6 +12,8 @@ public class UiManager : MonoBehaviour
     [SerializeField] private Image _foodBar;
     [SerializeField] private Image _lifeBar;
     [SerializeField] private Text _ammoText;
+    [SerializeField] private GameObject _iconGrabItem;
+    [SerializeField] private Text _recipeDoneText;
 
 
     public List<Image> Images { get => images; set => images = value; }
@@ -19,6 +21,8 @@ public class UiManager : MonoBehaviour
     public Image FoodBar { get => _foodBar; set => _foodBar = value; }
     public Image LifeBar { get => _lifeBar; set => _lifeBar = value; }
     public Text AmmoText { get => _ammoText; set => _ammoText = value; }
+    public GameObject IconGrabItem { get => _iconGrabItem; set => _iconGrabItem = value; }
+    public Text RecipeDoneText { get => _recipeDoneText; set => _recipeDoneText = value; }
 
     public void OnEnable()
     {
@@ -29,6 +33,12 @@ public class UiManager : MonoBehaviour
         ZombieEvents.onAmmoChanged += UpdateAmmoText;
 
         ZombieEvents.onItemChanged += UpdateSpriteOfInventory;
+
+        ZombieEvents.onTriggerItemEnter += ShowIconGrabItem;
+
+        ZombieEvents.onTriggerItemExit += HideIconGrabItem;
+
+        ZombieEvents.onRecipeDone += UpdateNumberOfPlateUi;
 
     }
 
@@ -41,6 +51,13 @@ public class UiManager : MonoBehaviour
         ZombieEvents.onAmmoChanged -= UpdateAmmoText;
 
         ZombieEvents.onItemChanged -= UpdateSpriteOfInventory;
+
+        ZombieEvents.onTriggerItemEnter -= ShowIconGrabItem;
+
+        ZombieEvents.onTriggerItemExit -= HideIconGrabItem;
+
+        ZombieEvents.onRecipeDone -= UpdateNumberOfPlateUi;
+
 
 
 
@@ -95,6 +112,21 @@ public class UiManager : MonoBehaviour
     public void UpdateAmmoText(int currentAmmo, int maxAmmo)
     {
         AmmoText.text = String.Format("{0}/{1}", currentAmmo, maxAmmo);
+    }
+
+    public void ShowIconGrabItem()
+    {
+        IconGrabItem.SetActive(true);
+    }
+
+    public void HideIconGrabItem()
+    {
+        IconGrabItem.SetActive(false);
+    }
+
+    private void UpdateNumberOfPlateUi(int recipeDone)
+    {
+        AmmoText.text = String.Format("Plats cuisiné : {0}/{4}", recipeDone);
     }
 
 
