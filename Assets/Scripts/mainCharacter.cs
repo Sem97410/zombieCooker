@@ -94,6 +94,7 @@ public class mainCharacter : LivingObject
         _dropItemAction.performed += DropItem;
         _shootAction.Enable();
         _shootAction.performed += Attack;
+
         _eatAction.Enable();
         _eatAction.performed += Eat;
 
@@ -104,7 +105,7 @@ public class mainCharacter : LivingObject
 
         _buttonAction.Enable();
 
-        _playerAudioSource = this.GetComponent<AudioSource>();
+        _playerAudioSource = gameObject.GetComponent<AudioSource>();
 
 
     }

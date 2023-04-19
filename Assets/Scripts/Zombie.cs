@@ -19,7 +19,7 @@ public class Zombie : LivingObject
     [Header("Enemy")]
     public ZombieState _zombieState;
 
-    private float _speedWalk = 3;
+    private float _speedWalk = 1.5f;
     private float _speedRun = 5;
 
     private int _damage;
@@ -55,6 +55,8 @@ public class Zombie : LivingObject
 
     private Slider _sliderLifeBar;
 
+    [SerializeField] private Animator _zombieAnimator;
+
     public Transform Target { get => _target; set => _target = value; }
     public bool IsAttacked { get => _isAttacked; set => _isAttacked = value; }
     public float WalkRadius { get => _walkRadius; set => _walkRadius = value; }
@@ -77,6 +79,7 @@ public class Zombie : LivingObject
 
         PlayerRef = GameObject.FindGameObjectWithTag("Player");
         SliderLifeBar = gameObject.GetComponentInChildren<Slider>();
+
         SliderLifeBar.gameObject.SetActive(false);
 
         MaxLife = 100;
@@ -113,11 +116,13 @@ public class Zombie : LivingObject
     private void Movement()
     {
         if (_isPatrol)
-        { 
+        {
+            
             // Choisi un autre point de destination lorque le zombie arrive proche de sa destination
             if (!_agent.pathPending && _agent.remainingDistance < 0.5f && !_agent.isStopped)
             {
                 _agent.isStopped = true;
+                _zombieAnimator.SetBool("Walk", false);
                 StopCoroutine("WaitOnDestination");
                 StartCoroutine(WaitOnDestination());
             }
@@ -164,6 +169,7 @@ public class Zombie : LivingObject
 
         _agent.isStopped = false;
         GotoNextPoint();
+        _zombieAnimator.SetBool("Walk", true);
     }
 
     IEnumerator FOVRoutine()
