@@ -21,4 +21,7 @@ public class ZombieEvents
 
     public delegate void OnTriggerItemExit();
     public static OnTriggerItemExit onTriggerItemExit;
+
+    public delegate void OnZombieSpawnedDied();
+    public static OnZombieSpawnedDied onZombieSpawnedDied;
 }

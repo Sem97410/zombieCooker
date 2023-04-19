@@ -309,10 +309,10 @@ public class mainCharacter : LivingObject
                 {
                     //hit.collider.GetComponent<Zombie>().SetTarget(this.transform);
                     pistol.Attack(this, hit.collider.GetComponent<IDamageable>());
-                    if (hit.collider.GetComponent<LivingObject>().CurrentLife <= 0)
-                    {
-                        hit.collider.GetComponent<LivingObject>().Die(hit.collider.GetComponent<IDamageable>());
-                    }
+                    //if (hit.collider.GetComponent<LivingObject>().CurrentLife <= 0)
+                    //{
+                    //    hit.collider.GetComponent<Zombie>().Die(hit.collider.GetComponent<IDamageable>());
+                    //}
                 }
             }
         }
