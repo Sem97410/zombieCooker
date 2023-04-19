@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.InputSystem;
 
 public class mainCharacter : LivingObject
@@ -307,8 +308,10 @@ public class mainCharacter : LivingObject
 
                 if (hit.collider.CompareTag("Zombie"))
                 {
+                    Zombie zombie = hit.collider.GetComponent<Zombie>();
                     //hit.collider.GetComponent<Zombie>().SetTarget(this.transform);
                     pistol.Attack(this, hit.collider.GetComponent<IDamageable>());
+                    zombie.StartCoroutine(zombie.ShowZombieLife());
                     //if (hit.collider.GetComponent<LivingObject>().CurrentLife <= 0)
                     //{
                     //    hit.collider.GetComponent<Zombie>().Die(hit.collider.GetComponent<IDamageable>());

@@ -1,54 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem.HID;
 using UnityEngine.PlayerLoop;
 
-public class ZombieSpawner : MonoBehaviour
+public class ZombieSpawner : Spawner
 {
-    [SerializeField] private int _zombieCount;
-    [SerializeField] private int _zombieToSpawn;
+    [SerializeField] Zombie[] zombie;
 
-    [SerializeField] private float _radius;
-
-    [SerializeField] private Zombie _zombie;
-
-    public float Radius { get => _radius; set => _radius = value; }
-    public int ZombieCount { get => _zombieCount; set => _zombieCount = value; }
-
-    private void Start()
-    {
-        _zombie._zombieState = Zombie.ZombieState.Random;
-        ZombieEvents.onZombieSpawnedDied += RespawnZombieDied;
-
-    }
-
-    public void StartSpawn()
-    {
-        StartCoroutine("SpawnZombie");
-    }
-
-    public void StopSpawn()
-    {
-        StopCoroutine("SpawnZombie");
-    }
-
-    void RespawnZombieDied()
-    {
-        ZombieCount--;
-        StartSpawn();
-    }
-
-    IEnumerator SpawnZombie()
+    protected override IEnumerator Spawn()
     {
         while (true)
         {
             float randomTime = Random.Range(2.0f, 5.0f);
+            int randomGo = Random.Range(0, zombie.Length);
 
             yield return new WaitForSeconds(randomTime);
-            
-            float randomWalkRadius = Random.Range(10, 20);
-            _zombie.WalkRadius = randomWalkRadius;
-            _zombie.Spawner = this;
 
             Vector3 pos = transform.position + new Vector3(0, 50, 0) + new Vector3(Random.Range(-Radius, Radius), 0, Random.Range(-Radius, Radius));
 
@@ -58,20 +25,27 @@ public class ZombieSpawner : MonoBehaviour
 
             if (Physics.Raycast(ray, out hit, 150))
             {
-                gameManager.SpawnZombieInSpawner(_zombie, hit.point, Quaternion.identity);
-                _zombieCount++;
+                gameManager.SpawnGoInSpawner(zombie[randomGo], hit.point, Quaternion.identity);
+                Count++;
             }
 
             //Instantiate(_spawnParticle.gameObject, transform.position + Vector3.up, _spawnParticle.transform.rotation);
 
             //GameManager.OnEnemySpawned?.Invoke();
 
-            if (_zombieCount >= _zombieToSpawn)
+            if (Count >= NumberToSpawn)
             {
                 StopSpawn();
             }
-
+            
         }
+
     }
 
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, Radius);
+    }
 }
