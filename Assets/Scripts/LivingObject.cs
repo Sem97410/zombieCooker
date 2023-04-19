@@ -5,7 +5,7 @@ using UnityEngine;
 public class LivingObject : MonoBehaviour, IDamageable
 {
     private int _maxLife;
-    protected int _currentLife;
+    [SerializeField] protected int _currentLife;
     private bool _isDead;
 
     public int MaxLife { get => _maxLife; set => _maxLife = value; }
@@ -15,7 +15,7 @@ public class LivingObject : MonoBehaviour, IDamageable
     public virtual void Die(IDamageable Cible)
     {
         Destroy(this.gameObject);
-        
+        _isDead = true;
     }
 
     public void Heal()
@@ -27,8 +27,12 @@ public class LivingObject : MonoBehaviour, IDamageable
     {
         _currentLife -= damage;
         Debug.Log(this.gameObject.name + _currentLife);
+        CheckIfDead();
+    }
 
-        if (_currentLife <= 0)
+    public void CheckIfDead()
+    {
+        if (_currentLife < 0)
         {
             Die(this);
         }

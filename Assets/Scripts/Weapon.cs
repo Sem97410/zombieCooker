@@ -31,7 +31,7 @@ public class Weapon : PickUp
     {
         base.Start();
         CurrentAmmo = MaxAmmo;
-        
+
     }
 
     public override void PickUpItem()
