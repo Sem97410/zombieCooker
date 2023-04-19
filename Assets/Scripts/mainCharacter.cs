@@ -42,13 +42,16 @@ public class mainCharacter : LivingObject
     [Header("Animation")]
     [SerializeField] private Animator _weaponAnimator;
 
+    [Header("Particules")]
+    [SerializeField] private Fx _walkFx;
+    [SerializeField] private Fx _hitFx;
+
 
 
     private LineRenderer _swingLineRenderer;
     private bool _canAttack = true;
 
     [SerializeField] private UiManager uiManager;
-    [SerializeField] private Fx _walkFx;
     [SerializeField] private LayerMask _IgnoreLayer;
 
 
@@ -330,13 +333,19 @@ public class mainCharacter : LivingObject
                     gameManager.AddFX(pistol.MuzzleFx, pistol.MuzzlePoint.position, pistol.MuzzlePoint.localRotation);
                     if (Physics.Raycast(ray, out hit, 150, ~_IgnoreLayer))
                     {
-
+                        
                         if (hit.collider.CompareTag("Zombie"))
                         {
+                            
                             Zombie zombie = hit.collider.GetComponent<Zombie>();
                             pistol.Attack(this, hit.collider.GetComponent<IDamageable>());
                             zombie.StartCoroutine(zombie.ShowZombieLife());
                     
+                        }
+                        else
+                        {
+                            Fx fx = gameManager.AddFX(_hitFx, hit.point, Quaternion.identity);
+                            fx.transform.LookAt(this.transform);
                         }
                     }
                 }
