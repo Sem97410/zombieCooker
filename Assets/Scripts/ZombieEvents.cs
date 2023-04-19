@@ -15,4 +15,7 @@ public class ZombieEvents
 
     public delegate void OnItemChanged(mainCharacter player);
     public static OnItemChanged onItemChanged;
+
+    public delegate void OnZombieSpawnedDied();
+    public static OnZombieSpawnedDied onZombieSpawnedDied;
 }
