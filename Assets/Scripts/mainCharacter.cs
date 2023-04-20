@@ -350,15 +350,6 @@ public class mainCharacter : LivingObject
                         }
                     }
                 }
-                if (hit.collider.CompareTag("Zombie"))
-                {
-                    //hit.collider.GetComponent<Zombie>().SetTarget(this.transform);
-                    pistol.Attack(this, hit.collider.GetComponent<IDamageable>());
-                    if (hit.collider.GetComponent<LivingObject>().CurrentLife <= 0)
-                    {
-                        hit.collider.GetComponent<LivingObject>().Die(hit.collider.GetComponent<IDamageable>());
-                    }
-                }
             }
         }
 

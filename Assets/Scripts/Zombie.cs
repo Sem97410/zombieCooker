@@ -69,6 +69,7 @@ public class Zombie : LivingObject
     public LayerMask ObstructionMask { get => _ObstructionMask; set => _ObstructionMask = value; }
     public ZombieSpawner Spawner { get => _spawner; set => _spawner = value; }
     public Slider SliderLifeBar { get => _sliderLifeBar; set => _sliderLifeBar = value; }
+    public int Damage { get => _damage; set => _damage = value; }
 
     private void Start()
     {
@@ -206,6 +207,8 @@ public class Zombie : LivingObject
                     _agent.speed = _speedRun;
                     _agent.destination = Target.position;
                     _isPatrol = false;
+                    _zombieAnimator.SetBool("Walk", false);
+                    _zombieAnimator.SetBool("Run", true);
                 }
                 else
                 {
@@ -218,6 +221,8 @@ public class Zombie : LivingObject
                 _canSeePlayer = false;
                 Target = null;
                 _isPatrol = true;
+                _zombieAnimator.SetBool("Walk", true);
+                _zombieAnimator.SetBool("Run", false);
             }
         }
 
@@ -231,7 +236,10 @@ public class Zombie : LivingObject
     {
         if (Target == PlayerRef.transform && collision.gameObject.CompareTag("Player"))
         {
-            collision.gameObject.GetComponent<LivingObject>().TakeDamage(_damage, this);
+            _agent.isStopped = true ;
+            _zombieAnimator.SetBool("Run", false);
+            _zombieAnimator.SetBool("Walk", false);
+            _zombieAnimator.SetTrigger("Attack");
         }
     }
 
@@ -258,9 +266,11 @@ public class Zombie : LivingObject
         {
             ZombieEvents.onZombieSpawnedDied?.Invoke();
         }
+        _agent.isStopped = true;
 
-        Destroy(this.gameObject);
+        _zombieAnimator.SetTrigger("Dead");
+
+        Destroy(this.gameObject, 2.0f);
 
     }
-
 }
