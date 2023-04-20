@@ -72,14 +72,11 @@ public class mainCharacter : LivingObject
     private void OnEnable()
     {
         ZombieEvents.onFoodEaten += EatFood;
-        ZombieEvents.onPlayerDeath += CursorMode;
     }
 
     private void OnDisable()
     {
         ZombieEvents.onFoodEaten -= EatFood;
-        ZombieEvents.onPlayerDeath -= CursorMode;
-
     }
     private void Start()
     {
@@ -179,6 +176,7 @@ public class mainCharacter : LivingObject
             CheckIfDead();
             if (IsDead)
             {
+                CursorMode(true);
                 ZombieEvents.onPlayerDeath(true);
             }
         }
@@ -421,6 +419,7 @@ public class mainCharacter : LivingObject
         ZombieEvents.onLifeChanged(_currentLife);
         if (IsDead)
         {
+            CursorMode(true);
             ZombieEvents.onPlayerDeath(true);
         }
     }
@@ -453,7 +452,7 @@ public class mainCharacter : LivingObject
         Cursor.visible = value;
         if (value)
         {
-            Cursor.lockState = CursorLockMode.None;
+            Cursor.lockState = CursorLockMode.Confined;
         }
         else
         {
