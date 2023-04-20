@@ -130,6 +130,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1170473698, guid: a1b4b3decd4fec2448fdd713347b68dc, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1170473698, guid: a1b4b3decd4fec2448fdd713347b68dc, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1170473698, guid: a1b4b3decd4fec2448fdd713347b68dc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1267579826, guid: a1b4b3decd4fec2448fdd713347b68dc, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -190,6 +202,14 @@ PrefabInstance:
       propertyPath: _spawner
       value: 
       objectReference: {fileID: 205076564}
+    - target: {fileID: 6137604990950288302, guid: a1b4b3decd4fec2448fdd713347b68dc, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6137604990950288302, guid: a1b4b3decd4fec2448fdd713347b68dc, type: 3}
+      propertyPath: _zombieState
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a1b4b3decd4fec2448fdd713347b68dc, type: 3}
 --- !u!1 &104559645 stripped

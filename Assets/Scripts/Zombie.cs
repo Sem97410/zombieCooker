@@ -190,7 +190,7 @@ public class Zombie : LivingObject
     {
         Collider[] rangeChecks = Physics.OverlapSphere(transform.position, _radius, _targetMask);
 
-        if (rangeChecks.Length != 0 && !IsAttacked)
+        if (rangeChecks.Length != 0 && !IsAttacked && IsDead)
         {
             Transform target = rangeChecks[0].transform;
             Vector3 directionToTarget = (target.position - transform.position).normalized;
@@ -251,7 +251,7 @@ public class Zombie : LivingObject
     public IEnumerator ShowZombieLife()
     {
         SliderLifeBar.gameObject.SetActive(true);
-        SliderLifeBar.transform.LookAt(Target);
+        SliderLifeBar.transform.LookAt(PlayerRef.transform);
         UpdateZombieLifeBar(CurrentLife, MaxLife);
 
         yield return new WaitForSeconds(1.0f);
@@ -268,9 +268,10 @@ public class Zombie : LivingObject
             ZombieEvents.onZombieSpawnedDied?.Invoke();
         }
         _agent.isStopped = true;
-
+        Target = null;
+        IsDead = true;
         _zombieAnimator.SetTrigger("Dead");
-
+        this.enabled = false;
         Destroy(this.gameObject, 2.0f);
 
     }
