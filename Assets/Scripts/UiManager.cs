@@ -90,7 +90,7 @@ public class UiManager : MonoBehaviour
         { 
             Images[0].sprite = DefaultSprite;
         }
-        for (int i = 0; i < Images.Count -1; i++)
+        for (int i = 0; i < Images.Count; i++)
         {
             if (i > player.PickUps.Count-1)
             {
@@ -163,7 +163,7 @@ public class UiManager : MonoBehaviour
     IEnumerator ObjectifCoroutine()
     {
         Objectif.CrossFadeAlpha(1, 2, true);
-        yield return new WaitForSeconds(8f);
+        yield return new WaitForSeconds(5f);
         Objectif.CrossFadeAlpha(0, 1, true);
     }
 }

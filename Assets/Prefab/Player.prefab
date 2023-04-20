@@ -356,32 +356,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3022e53520821140b4579920dba19c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _currentLife: 0
   _movementSpeed: 5
   _runSpeedMultiplication: 2
   _itemPos: {fileID: 849881854}
+  _maxSpaceInInventory: 5
   _currentHunger: 100
-  _canInteract: 0
   _hungerDecrease: 1
   _hungerDecreaseRun: 2
-  uiManager: {fileID: 0}
-  _dropItemAction:
-    m_Name: Drop Item
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: 7b05d87a-f903-40c0-a775-0c6cf2a76b77
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings:
-    - m_Name: 
-      m_Id: 64b3bd00-3f7d-4067-a988-0cd519928080
-      m_Path: <Keyboard>/f
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Drop Item
-      m_Flags: 0
-  _walkFx: {fileID: -4932167650510407165, guid: b3ea1da61d563f547b07229b4ce11d3d, type: 3}
-  _maxSpaceInInventory: 6
   _shootAction:
     m_Name: Shoot
     m_Type: 0
@@ -430,12 +412,31 @@ MonoBehaviour:
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []
+  _dropItemAction:
+    m_Name: Drop Item
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 7b05d87a-f903-40c0-a775-0c6cf2a76b77
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 64b3bd00-3f7d-4067-a988-0cd519928080
+      m_Path: <Keyboard>/f
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Drop Item
+      m_Flags: 0
+  _playerAudioSource: {fileID: 0}
+  _shootClip: {fileID: 0}
+  _weaponAnimator: {fileID: 0}
+  _walkFx: {fileID: -4932167650510407165, guid: b3ea1da61d563f547b07229b4ce11d3d, type: 3}
+  _hitFx: {fileID: 0}
+  uiManager: {fileID: 0}
   _IgnoreLayer:
     serializedVersion: 2
     m_Bits: 64
-  _playerAudioSource: {fileID: 0}
-
-  _shootClip: {fileID: 0}
 --- !u!54 &6091596465544781633
 Rigidbody:
   m_ObjectHideFlags: 0
