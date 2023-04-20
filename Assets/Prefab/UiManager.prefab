@@ -58,3 +58,4 @@ MonoBehaviour:
   _lifeBar: {fileID: 0}
   _gameOverCanvas: {fileID: 0}
   _hudCanvas: {fileID: 0}
+  _objectif: {fileID: 0}
