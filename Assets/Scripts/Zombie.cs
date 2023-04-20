@@ -190,7 +190,7 @@ public class Zombie : LivingObject
     {
         Collider[] rangeChecks = Physics.OverlapSphere(transform.position, _radius, _targetMask);
 
-        if (rangeChecks.Length != 0 && !IsAttacked)
+        if (rangeChecks.Length != 0 && !IsAttacked && !IsDead)
         {
             Transform target = rangeChecks[0].transform;
             Vector3 directionToTarget = (target.position - transform.position).normalized;
@@ -250,13 +250,16 @@ public class Zombie : LivingObject
 
     public IEnumerator ShowZombieLife()
     {
-        SliderLifeBar.gameObject.SetActive(true);
-        SliderLifeBar.transform.LookAt(PlayerRef.transform);
-        UpdateZombieLifeBar(CurrentLife, MaxLife);
+        if (!IsDead)
+        {
+            SliderLifeBar.gameObject.SetActive(true);
+            SliderLifeBar.transform.LookAt(PlayerRef.transform);
+            UpdateZombieLifeBar(CurrentLife, MaxLife);
 
-        yield return new WaitForSeconds(1.0f);
+            yield return new WaitForSeconds(1.0f);
 
-        SliderLifeBar.gameObject.SetActive(false);
+            SliderLifeBar.gameObject.SetActive(false); 
+        }
 
     }
 
@@ -264,6 +267,7 @@ public class Zombie : LivingObject
     public override void TakeDamage(int damage, IDamageable Attaquant)
     {
         base.TakeDamage(damage, Attaquant);
+        if (IsDead) return;
         _zombieAnimator.SetTrigger("Hit");
     }
 
@@ -274,8 +278,9 @@ public class Zombie : LivingObject
             ZombieEvents.onZombieSpawnedDied?.Invoke();
         }
         IsDead = true;
+        _agent.isStopped = true;
+        enabled = false;
         _zombieAnimator.SetTrigger("Dead");
-        this.enabled = false;
         Destroy(this.gameObject, 2.0f);
 
     }
