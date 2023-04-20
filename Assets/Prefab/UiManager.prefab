@@ -56,5 +56,5 @@ MonoBehaviour:
   _iconGrabItem: {fileID: 0}
   _recipeDoneText: {fileID: 0}
   _lifeBar: {fileID: 0}
-  _gameOverCanvas: {fileID: 1552917219370370647, guid: fae56796580b8ed43913bc1a9b1eef28, type: 3}
+  _gameOverCanvas: {fileID: 0}
   _hudCanvas: {fileID: 0}

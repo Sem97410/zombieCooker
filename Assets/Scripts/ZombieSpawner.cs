@@ -25,6 +25,8 @@ public class ZombieSpawner : Spawner
 
             if (Physics.Raycast(ray, out hit, 150))
             {
+                zombie[randomGo]._zombieState = Zombie.ZombieState.Random;
+                zombie[randomGo].Spawner = this;
                 gameManager.SpawnGoInSpawner(zombie[randomGo], hit.point, Quaternion.identity);
                 Count++;
             }
