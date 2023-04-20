@@ -251,6 +251,7 @@ public class Zombie : LivingObject
     public IEnumerator ShowZombieLife()
     {
         SliderLifeBar.gameObject.SetActive(true);
+        SliderLifeBar.transform.LookAt(Target);
         UpdateZombieLifeBar(CurrentLife, MaxLife);
 
         yield return new WaitForSeconds(1.0f);

@@ -72,14 +72,11 @@ public class mainCharacter : LivingObject
     private void OnEnable()
     {
         ZombieEvents.onFoodEaten += EatFood;
-        ZombieEvents.onPlayerDeath += CursorMode;
     }
 
     private void OnDisable()
     {
         ZombieEvents.onFoodEaten -= EatFood;
-        ZombieEvents.onPlayerDeath -= CursorMode;
-
     }
     private void Start()
     {
@@ -176,6 +173,12 @@ public class mainCharacter : LivingObject
             yield return new WaitForSeconds(1f);
             _currentLife -= 1;
             ZombieEvents.onLifeChanged(_currentLife);
+            CheckIfDead();
+            if (IsDead)
+            {
+                CursorMode(true);
+                ZombieEvents.onPlayerDeath(true);
+            }
         }
     }
 
@@ -356,15 +359,8 @@ public class mainCharacter : LivingObject
         if (GetItemSelected() is Knife)
         {
             //Mettre l'animation d'attaque et le takeDamage au moment ou le couteau touche un enemy
-
-
-
             _swingLineRenderer = GetItemSelected().GetComponentInChildren<LineRenderer>();
             StartCoroutine(Attack(GetItemSelected()));
-
-
-
-
 
         }
     }
@@ -414,6 +410,7 @@ public class mainCharacter : LivingObject
         ZombieEvents.onLifeChanged(_currentLife);
         if (IsDead)
         {
+            CursorMode(true);
             ZombieEvents.onPlayerDeath(true);
         }
     }
@@ -446,7 +443,7 @@ public class mainCharacter : LivingObject
         Cursor.visible = value;
         if (value)
         {
-            Cursor.lockState = CursorLockMode.None;
+            Cursor.lockState = CursorLockMode.Confined;
         }
         else
         {
