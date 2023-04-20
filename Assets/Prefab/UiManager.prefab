@@ -52,4 +52,9 @@ MonoBehaviour:
   - {fileID: 0}
   _defaultSprite: {fileID: 10917, guid: 0000000000000000f000000000000000, type: 0}
   _foodBar: {fileID: 0}
-  _HealthBar: {fileID: 0}
+  _ammoText: {fileID: 0}
+  _iconGrabItem: {fileID: 0}
+  _recipeDoneText: {fileID: 0}
+  _lifeBar: {fileID: 0}
+  _gameOverCanvas: {fileID: 1552917219370370647, guid: fae56796580b8ed43913bc1a9b1eef28, type: 3}
+  _hudCanvas: {fileID: 0}

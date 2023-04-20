@@ -34,4 +34,15 @@ public class Knife : Weapon, IShooting
     {
         cible.TakeDamage(Damage, attaquant);
     }
+    public void OnAttack()
+    {
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, 2);
+        foreach (Collider collider in hitColliders)
+        {
+            if (collider.CompareTag("Zombie"))
+            {
+               GetComponent<Knife>().Attack(MainCharacter, collider.GetComponent<IDamageable>());
+            }
+        }
+    }
 }
