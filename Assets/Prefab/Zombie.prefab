@@ -609,6 +609,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c595c931346ec82409eefe98781f4248, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _currentLife: 0
   _zombieState: 0
   _walkRadius: 10
   _target: {fileID: 0}
@@ -625,6 +626,7 @@ MonoBehaviour:
   _canSeePlayer: 0
   _spawner: {fileID: 0}
   _zombieAnimator: {fileID: 1816174714}
+  _deathFx: {fileID: -3314558031130281731, guid: d5f26854a8904624c8073139cd2eb346, type: 3}
 --- !u!1 &6137604990951441569
 GameObject:
   m_ObjectHideFlags: 0

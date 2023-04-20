@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.HID;
 
 public class mainCharacter : LivingObject
 {
@@ -45,10 +46,14 @@ public class mainCharacter : LivingObject
     [Header("Particules")]
     [SerializeField] private Fx _walkFx;
     [SerializeField] private Fx _hitFx;
+    [SerializeField] private Fx _bloodFx;
+    [SerializeField] private Fx _deathZombieFx;
 
 
 
-    private LineRenderer _swingLineRenderer;
+
+
+    private TrailRenderer _trailRenderer;
     private bool _canAttack = true;
 
     [SerializeField] private UiManager uiManager;
@@ -68,6 +73,8 @@ public class mainCharacter : LivingObject
     public AudioSource PlayerAudioSource { get => _playerAudioSource; set => _playerAudioSource = value; }
     public int MaxSpaceInInventory { get => _maxSpaceInInventory; set => _maxSpaceInInventory = value; }
     public Animator WeaponAnimator { get => _weaponAnimator; set => _weaponAnimator = value; }
+    public Fx BloodFx { get => _bloodFx; set => _bloodFx = value; }
+    public Fx DeathZombieFx { get => _deathZombieFx; set => _deathZombieFx = value; }
 
     private void OnEnable()
     {
@@ -289,10 +296,13 @@ public class mainCharacter : LivingObject
                 if (GetItemSelected() is Pistol)
                 {
                     _weaponAnimator = GetItemSelected().GetComponentInChildren<Animator>();
+
                 }
                 else
                 {
                     _weaponAnimator = GetItemSelected().GetComponent<Animator>();
+                    _trailRenderer = GetItemSelected().GetComponentInChildren<TrailRenderer>();
+
 
                 }
                 _weaponAnimator.enabled = activate;
@@ -326,56 +336,55 @@ public class mainCharacter : LivingObject
                 PlayShootFx(pistol);
 
 
-               
+
                 StartCoroutine(Attack(GetItemSelected()));
 
                 if (Physics.Raycast(ray, out hit, 150, ~_IgnoreLayer))
                 {
+
+
                     gameManager.AddFX(pistol.MuzzleFx, pistol.MuzzlePoint.position, pistol.MuzzlePoint.localRotation);
                     if (Physics.Raycast(ray, out hit, 150, ~_IgnoreLayer))
                     {
-                        
+
                         if (hit.collider.CompareTag("Zombie"))
                         {
-                            
+
                             Zombie zombie = hit.collider.GetComponent<Zombie>();
                             pistol.Attack(this, hit.collider.GetComponent<IDamageable>());
                             zombie.StartCoroutine(zombie.ShowZombieLife());
-                    
+                            FxImpact(_bloodFx, hit.point);
+
+                            
+                            FxImpact(_deathZombieFx, hit.point);
+
+
+
                         }
                         else
                         {
-                            Fx fx = gameManager.AddFX(_hitFx, hit.point, Quaternion.identity);
-                            fx.transform.LookAt(this.transform);
+                            FxImpact(_hitFx, hit.point);
+
                         }
                     }
                 }
-                if (hit.collider.CompareTag("Zombie"))
-                {
-                    //hit.collider.GetComponent<Zombie>().SetTarget(this.transform);
-                    pistol.Attack(this, hit.collider.GetComponent<IDamageable>());
-                    if (hit.collider.GetComponent<LivingObject>().CurrentLife <= 0)
-                    {
-                        hit.collider.GetComponent<LivingObject>().Die(hit.collider.GetComponent<IDamageable>());
-                    }
-                }
+                
+            }
+            if (GetItemSelected() is Knife)
+            {
+                //Mettre l'animation d'attaque et le takeDamage au moment ou le couteau touche un enemy
+
+
+
+                StartCoroutine(Attack(GetItemSelected()));
+
+
+
+
+
             }
         }
 
-        if (GetItemSelected() is Knife)
-        {
-            //Mettre l'animation d'attaque et le takeDamage au moment ou le couteau touche un enemy
-
-
-
-            _swingLineRenderer = GetItemSelected().GetComponentInChildren<LineRenderer>();
-            StartCoroutine(Attack(GetItemSelected()));
-
-
-
-
-
-        }
     }
 
 
@@ -388,11 +397,11 @@ public class mainCharacter : LivingObject
         {
             int randomAttack = UnityEngine.Random.Range(1, 3);
 
-            _swingLineRenderer.enabled = true;
+            _trailRenderer.enabled = true;
             _weaponAnimator.SetInteger("CanAttack", randomAttack);
 
             yield return new WaitForSeconds(0.50f);
-            _swingLineRenderer.enabled = false;
+            _trailRenderer.enabled = false;
 
             yield return new WaitForSeconds(0.60f);
 
@@ -416,6 +425,8 @@ public class mainCharacter : LivingObject
 
 
     }
+
+
 
     public override void TakeDamage(int damage, IDamageable Attaquant)
     {
@@ -462,4 +473,11 @@ public class mainCharacter : LivingObject
             Cursor.lockState = CursorLockMode.Locked;
         }
     }
+
+    public void FxImpact(Fx fx, Vector3 impactPoint)
+    {
+        fx = gameManager.AddFX(fx, impactPoint, Quaternion.identity);
+        fx.transform.LookAt(this.transform);
+    }
+
 }
