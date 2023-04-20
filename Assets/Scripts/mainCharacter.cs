@@ -1,9 +1,7 @@
-using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.HID;
 
 public class mainCharacter : LivingObject
 {
@@ -14,7 +12,7 @@ public class mainCharacter : LivingObject
 
     [Header("PickUpOptions")]
     [SerializeField] private Transform _itemPos;
-    [SerializeField] private int _maxSpaceInInventory = 6;
+    [SerializeField] private int _maxSpaceInInventory = 5;
     private PickUp _itemInteractable;
     private List<PickUp> _pickUp;
     private bool _canInteract;
@@ -48,10 +46,9 @@ public class mainCharacter : LivingObject
     [SerializeField] private Fx _walkFx;
     [SerializeField] private Fx _hitFx;
     [SerializeField] private Fx _bloodFx;
-    [SerializeField] private Fx _deathZombieFx;
 
 
-   
+
 
 
 
@@ -76,19 +73,15 @@ public class mainCharacter : LivingObject
     public int MaxSpaceInInventory { get => _maxSpaceInInventory; set => _maxSpaceInInventory = value; }
     public Animator WeaponAnimator { get => _weaponAnimator; set => _weaponAnimator = value; }
     public Fx BloodFx { get => _bloodFx; set => _bloodFx = value; }
-    public Fx DeathZombieFx { get => _deathZombieFx; set => _deathZombieFx = value; }
 
     private void OnEnable()
     {
         ZombieEvents.onFoodEaten += EatFood;
-        ZombieEvents.onPlayerDeath += CursorMode;
     }
 
     private void OnDisable()
     {
         ZombieEvents.onFoodEaten -= EatFood;
-        ZombieEvents.onPlayerDeath -= CursorMode;
-
     }
     private void Start()
     {
@@ -185,6 +178,12 @@ public class mainCharacter : LivingObject
             yield return new WaitForSeconds(1f);
             _currentLife -= 1;
             ZombieEvents.onLifeChanged(_currentLife);
+            CheckIfDead();
+            if (IsDead)
+            {
+                CursorMode(true);
+                ZombieEvents.onPlayerDeath(true);
+            }
         }
     }
 
@@ -315,13 +314,13 @@ public class mainCharacter : LivingObject
                 _weaponAnimator.enabled = activate;
                 if (GetItemSelected() is Pistol)
                 {
-                    Component[] Transform; 
+                    Component[] Transform;
                     Transform = GetItemSelected().GetComponentsInChildren<Transform>();
-                   
-                    Transform[1].gameObject.transform.localPosition = new Vector3(0, 0, 0);
-                    
 
-                   
+                    Transform[1].gameObject.transform.localPosition = new Vector3(0, 0, 0);
+
+
+
                 }
 
             }
@@ -366,8 +365,7 @@ public class mainCharacter : LivingObject
                             zombie.StartCoroutine(zombie.ShowZombieLife());
                             FxImpact(_bloodFx, hit.point);
 
-                            
-                            FxImpact(_deathZombieFx, hit.point);
+
 
 
 
@@ -379,19 +377,11 @@ public class mainCharacter : LivingObject
                         }
                     }
                 }
-                
             }
             if (GetItemSelected() is Knife)
             {
                 //Mettre l'animation d'attaque et le takeDamage au moment ou le couteau touche un enemy
-
-
-
                 StartCoroutine(Attack(GetItemSelected()));
-
-
-
-
 
             }
         }
@@ -445,6 +435,7 @@ public class mainCharacter : LivingObject
         ZombieEvents.onLifeChanged(_currentLife);
         if (IsDead)
         {
+            CursorMode(true);
             ZombieEvents.onPlayerDeath(true);
         }
     }
@@ -477,7 +468,7 @@ public class mainCharacter : LivingObject
         Cursor.visible = value;
         if (value)
         {
-            Cursor.lockState = CursorLockMode.None;
+            Cursor.lockState = CursorLockMode.Confined;
         }
         else
         {
