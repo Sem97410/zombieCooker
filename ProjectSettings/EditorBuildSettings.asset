@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: 5267c4d401b7f9145a596674438867d7
+  - enabled: 1
     path: Assets/Scenes/Damien.unity
     guid: f4d627d7358e584408ab8158b8422cd5
   m_configObjects: {}

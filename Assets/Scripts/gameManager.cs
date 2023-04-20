@@ -52,9 +52,9 @@ public class gameManager : MonoBehaviour
 
     private void Start()
     {
-        foreach (Spawner foodSpawner in Spawners)
+        foreach (Spawner Spawner in Spawners)
         {
-            foodSpawner.StartSpawn();
+            Spawner.StartSpawn();
         }
 
         //foreach (ZombieSpawner zombieSpawner in Spawners)
