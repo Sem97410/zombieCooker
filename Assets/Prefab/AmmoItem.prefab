@@ -62,7 +62,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _sprite: {fileID: 0}
   uiManager: {fileID: 0}
-<<<<<<< HEAD
 --- !u!108 &6852696256935995443
 Light:
   m_ObjectHideFlags: 0
@@ -125,8 +124,6 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
-=======
->>>>>>> 14e80cdae8df5e5a6f04488666a6caf67dd4a2b2
 --- !u!1 &1066530237678709322
 GameObject:
   m_ObjectHideFlags: 0
