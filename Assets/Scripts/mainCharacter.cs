@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -50,6 +51,7 @@ public class mainCharacter : LivingObject
     [SerializeField] private Fx _deathZombieFx;
 
 
+   
 
 
 
@@ -311,6 +313,16 @@ public class mainCharacter : LivingObject
             else
             {
                 _weaponAnimator.enabled = activate;
+                if (GetItemSelected() is Pistol)
+                {
+                    Component[] Transform; 
+                    Transform = GetItemSelected().GetComponentsInChildren<Transform>();
+                   
+                    Transform[1].gameObject.transform.localPosition = new Vector3(0, 0, 0);
+                    
+
+                   
+                }
 
             }
         }
@@ -338,7 +350,6 @@ public class mainCharacter : LivingObject
 
 
                 StartCoroutine(Attack(GetItemSelected()));
-
                 if (Physics.Raycast(ray, out hit, 150, ~_IgnoreLayer))
                 {
 
