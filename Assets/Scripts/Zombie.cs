@@ -202,9 +202,9 @@ public class Zombie : LivingObject
                 {
                     _canSeePlayer = true;
                     Target = target;
+                    _agent.isStopped = false;
                     _agent.speed = _speedRun;
                     _agent.destination = Target.position;
-                    _agent.isStopped = false;
                     _isPatrol = false;
                 }
                 else
