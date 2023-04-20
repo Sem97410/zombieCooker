@@ -17,6 +17,7 @@ public class UiManager : MonoBehaviour
     [SerializeField] private Image _lifeBar;
     [SerializeField] private Canvas _gameOverCanvas;
     [SerializeField] private Canvas _hudCanvas;
+    [SerializeField] private Text _objectif;
 
     public List<Image> Images { get => images; set => images = value; }
     public Sprite DefaultSprite { get => _defaultSprite; set => _defaultSprite = value; }
@@ -28,6 +29,7 @@ public class UiManager : MonoBehaviour
     public Image LifeBar { get => _lifeBar; set => _lifeBar = value; }
     public Canvas GameOverCanvas { get => _gameOverCanvas; set => _gameOverCanvas = value; }
     public Canvas HudCanvas { get => _hudCanvas; set => _hudCanvas = value; }
+    public Text Objectif { get => _objectif; set => _objectif = value; }
 
     public void OnEnable()
     {
@@ -79,6 +81,8 @@ public class UiManager : MonoBehaviour
         {
             image.sprite = DefaultSprite;
         }
+
+        ShowObjectif();
     }
     public void UpdateSpriteOfInventory(mainCharacter player)
     {
@@ -86,7 +90,7 @@ public class UiManager : MonoBehaviour
         { 
             Images[0].sprite = DefaultSprite;
         }
-        for (int i = 0; i < Images.Count -1; i++)
+        for (int i = 0; i < Images.Count; i++)
         {
             if (i > player.PickUps.Count-1)
             {
@@ -149,5 +153,17 @@ public class UiManager : MonoBehaviour
     public void HideHud(bool value)
     {
         HudCanvas.gameObject.SetActive(false);  
+    }
+
+    public void ShowObjectif()
+    {
+        StartCoroutine("ObjectifCoroutine");
+    }
+
+    IEnumerator ObjectifCoroutine()
+    {
+        Objectif.CrossFadeAlpha(1, 2, true);
+        yield return new WaitForSeconds(5f);
+        Objectif.CrossFadeAlpha(0, 1, true);
     }
 }

@@ -12,7 +12,7 @@ public class mainCharacter : LivingObject
 
     [Header("PickUpOptions")]
     [SerializeField] private Transform _itemPos;
-    [SerializeField] private int _maxSpaceInInventory = 6;
+    [SerializeField] private int _maxSpaceInInventory = 5;
     private PickUp _itemInteractable;
     private List<PickUp> _pickUp;
     private bool _canInteract;

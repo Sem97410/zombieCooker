@@ -355,32 +355,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3022e53520821140b4579920dba19c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _currentLife: 0
   _movementSpeed: 5
   _runSpeedMultiplication: 2
   _itemPos: {fileID: 849881854}
+  _maxSpaceInInventory: 5
   _currentHunger: 100
-  _canInteract: 0
   _hungerDecrease: 1
   _hungerDecreaseRun: 2
-  uiManager: {fileID: 0}
-  _dropItemAction:
-    m_Name: Drop Item
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: 7b05d87a-f903-40c0-a775-0c6cf2a76b77
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings:
-    - m_Name: 
-      m_Id: 64b3bd00-3f7d-4067-a988-0cd519928080
-      m_Path: <Keyboard>/f
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Drop Item
-      m_Flags: 0
-  _walkFx: {fileID: -4932167650510407165, guid: b3ea1da61d563f547b07229b4ce11d3d, type: 3}
-  _maxSpaceInInventory: 6
   _shootAction:
     m_Name: Shoot
     m_Type: 0
@@ -437,11 +419,36 @@ MonoBehaviour:
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []
+  _dropItemAction:
+    m_Name: Drop Item
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 7b05d87a-f903-40c0-a775-0c6cf2a76b77
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 64b3bd00-3f7d-4067-a988-0cd519928080
+      m_Path: <Keyboard>/f
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Drop Item
+      m_Flags: 0
+  _playerAudioSource: {fileID: 0}
+  _shootClip: {fileID: 0}
+  _weaponAnimator: {fileID: 0}
+  _walkFx: {fileID: -4932167650510407165, guid: b3ea1da61d563f547b07229b4ce11d3d, type: 3}
+  _hitFx: {fileID: 0}
+  uiManager: {fileID: 0}
   _IgnoreLayer:
     serializedVersion: 2
     m_Bits: 64
+<<<<<<< HEAD
   _playerAudioSource: {fileID: 0}
   _shootClip: {fileID: 0}
+=======
+>>>>>>> 14e80cdae8df5e5a6f04488666a6caf67dd4a2b2
 --- !u!54 &6091596465544781633
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -843,6 +850,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 849881854}
+  - {fileID: 3076337356476332623}
   m_Father: {fileID: 1863726144075638388}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -943,3 +951,96 @@ MonoBehaviour:
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
   m_Version: 2
+--- !u!1 &7349551285902539594
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3076337356476332623}
+  - component: {fileID: 6713577331377061319}
+  m_Layer: 0
+  m_Name: Spot Light
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3076337356476332623
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7349551285902539594}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.582, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6091596465581650488}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!108 &6713577331377061319
+Light:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7349551285902539594}
+  m_Enabled: 1
+  serializedVersion: 10
+  m_Type: 0
+  m_Shape: 0
+  m_Color: {r: 0.990566, g: 0.9301158, b: 0.6681648, a: 1}
+  m_Intensity: 24.8
+  m_Range: 63.82
+  m_SpotAngle: 68.781845
+  m_InnerSpotAngle: 60.58397
+  m_CookieSize: 10
+  m_Shadows:
+    m_Type: 0
+    m_Resolution: -1
+    m_CustomResolution: -1
+    m_Strength: 1
+    m_Bias: 0.05
+    m_NormalBias: 0.4
+    m_NearPlane: 0.2
+    m_CullingMatrixOverride:
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 0
+      e10: 0
+      e11: 1
+      e12: 0
+      e13: 0
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+    m_UseCullingMatrixOverride: 0
+  m_Cookie: {fileID: 0}
+  m_DrawHalo: 0
+  m_Flare: {fileID: 0}
+  m_RenderMode: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RenderingLayerMask: 1
+  m_Lightmapping: 2
+  m_LightShadowCasterMode: 0
+  m_AreaSize: {x: 1, y: 1}
+  m_BounceIntensity: 1
+  m_ColorTemperature: 6570
+  m_UseColorTemperature: 0
+  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_UseBoundingSphereOverride: 0
+  m_UseViewFrustumForShadowCasterCull: 1
+  m_ShadowRadius: 0
+  m_ShadowAngle: 0
