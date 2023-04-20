@@ -190,7 +190,7 @@ public class Zombie : LivingObject
     {
         Collider[] rangeChecks = Physics.OverlapSphere(transform.position, _radius, _targetMask);
 
-        if (rangeChecks.Length != 0 && !IsAttacked && IsDead)
+        if (rangeChecks.Length != 0 && !IsAttacked)
         {
             Transform target = rangeChecks[0].transform;
             Vector3 directionToTarget = (target.position - transform.position).normalized;
@@ -261,14 +261,18 @@ public class Zombie : LivingObject
     }
 
 
+    public override void TakeDamage(int damage, IDamageable Attaquant)
+    {
+        base.TakeDamage(damage, Attaquant);
+        _zombieAnimator.SetTrigger("Hit");
+    }
+
     public override void Die(IDamageable Cible)
     {
         if (Spawner != null)
         {
             ZombieEvents.onZombieSpawnedDied?.Invoke();
         }
-        _agent.isStopped = true;
-        Target = null;
         IsDead = true;
         _zombieAnimator.SetTrigger("Dead");
         this.enabled = false;
