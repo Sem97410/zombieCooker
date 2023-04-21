@@ -383,7 +383,9 @@ public class mainCharacter : LivingObject
                         }
                     }
                 }
+                
             }
+
             if (GetItemSelected() is Knife)
             {
                 StartCoroutine(AttackAnimation(GetItemSelected()));
@@ -391,7 +393,9 @@ public class mainCharacter : LivingObject
             }
         }
 
+        
     }
+
 
 
 

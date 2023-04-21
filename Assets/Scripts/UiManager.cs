@@ -53,6 +53,7 @@ public class UiManager : MonoBehaviour
         ZombieEvents.onPlayerDeath += ShowGameOver;
         ZombieEvents.onPlayerDeath += HideHud;
 
+        ZombieEvents.onTriggerButtonEnter += ShowIconGrabItem;
     }
 
     public void OnDisable()
@@ -73,6 +74,9 @@ public class UiManager : MonoBehaviour
 
         ZombieEvents.onPlayerDeath -= ShowGameOver;
         ZombieEvents.onPlayerDeath -= HideHud;
+
+        ZombieEvents.onTriggerButtonEnter -= ShowIconGrabItem;
+
 
 
     }
@@ -143,7 +147,7 @@ public class UiManager : MonoBehaviour
 
     private void UpdateNumberOfPlateUi(int recipeDone, int recipeNeed)
     {
-        AmmoText.text = String.Format("Plats cuisiné : {0}/{1}", recipeDone, recipeNeed);
+        Objectif.text = String.Format("Plats cuisiné : {0}/{1}", recipeDone, recipeNeed);
     }
 
     public void ShowGameOver(bool value)

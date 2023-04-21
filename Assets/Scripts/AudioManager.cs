@@ -46,6 +46,8 @@ public class AudioManager : MonoBehaviour
     public void ShootPlay(AudioSource audioSource)
     {
         audioSource.clip = Shoot;
+        float randomPitch = Random.Range(0.8f, 1.2f);
+        audioSource.pitch = randomPitch;
         audioSource.Play();
     }
 
