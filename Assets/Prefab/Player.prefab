@@ -419,15 +419,7 @@ MonoBehaviour:
     m_Id: 754293bc-2dc2-4751-af2c-b6877a0e61e9
     m_Processors: 
     m_Interactions: 
-    m_SingletonActionBindings:
-    - m_Name: 
-      m_Id: 2d3d1efa-76d4-45bf-9a25-d4822637f929
-      m_Path: <Mouse>/leftButton
-      m_Interactions: Hold(duration=2)
-      m_Processors: 
-      m_Groups: 
-      m_Action: Eat
-      m_Flags: 0
+    m_SingletonActionBindings: []
   _dropItemAction:
     m_Name: Drop Item
     m_Type: 0

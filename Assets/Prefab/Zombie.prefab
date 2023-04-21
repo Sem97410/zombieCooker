@@ -622,12 +622,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _currentLife: 0
-  _zombieState: 2
+  _zombieState: 0
   _walkRadius: 10
   _target: {fileID: 0}
   _waypoints: []
-  _radius: 10
-  _angle: 100
+  _radius: 15
+  _angle: 240
   _playerRef: {fileID: 0}
   _targetMask:
     serializedVersion: 2

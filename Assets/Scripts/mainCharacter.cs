@@ -100,7 +100,7 @@ public class mainCharacter : LivingObject
         _eatAction.Enable();
         _eatAction.performed += Eat;
 
-        StartCoroutine("DecreaseHunger");
+        //StartCoroutine("DecreaseHunger");
 
         _interactAction.Enable();
         _interactAction.performed += Interact;
