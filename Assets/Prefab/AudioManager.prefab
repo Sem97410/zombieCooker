@@ -45,3 +45,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _eatFood: {fileID: 8300000, guid: 12b0bd33c32e38045b490ab8b1cfa964, type: 3}
   _shoot: {fileID: 8300000, guid: b6acb31810db42b42942adab071f6072, type: 3}
+  _endGameSound: {fileID: 0}
+  _reloadGunSound: {fileID: 8300000, guid: 418596cff190dfb4a87cdcbb2019e9a1, type: 3}
+  _zombieHitSound: {fileID: 8300000, guid: 39a4ae014d56c7247a91548c1e3406d8, type: 3}

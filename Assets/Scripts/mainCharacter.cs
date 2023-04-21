@@ -355,17 +355,14 @@ public class mainCharacter : LivingObject
                 ZombieEvents.onShoot(PlayerAudioSource);
                 PlayShootFx(pistol);
 
-
-
                 StartCoroutine(AttackAnimation(GetItemSelected()));
                 if (Physics.Raycast(ray, out hit, 150, ~_IgnoreLayer))
                 {
 
-
                     gameManager.AddFX(pistol.MuzzleFx, pistol.MuzzlePoint.position, pistol.MuzzlePoint.localRotation);
                     if (Physics.Raycast(ray, out hit, 150, ~_IgnoreLayer))
                     {
-
+                        
                         if (hit.collider.CompareTag("Zombie"))
                         {
 
@@ -373,10 +370,6 @@ public class mainCharacter : LivingObject
                             pistol.Attack(this, hit.collider.GetComponent<IDamageable>());
                             zombie.StartCoroutine(zombie.ShowZombieLife());
                             FxImpact(_bloodFx, hit.point);
-
-
-
-
 
                         }
                         else

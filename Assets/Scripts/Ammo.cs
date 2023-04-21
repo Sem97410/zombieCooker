@@ -21,6 +21,7 @@ public class Ammo : PickUp
             Pistol pistol = MainCharacter.GetItemSelected().GetComponent<Pistol>();
             if (pistol.CurrentAmmo == pistol.MaxAmmo) return;
             MainCharacter.WeaponAnimator.SetTrigger("Reload");
+            ZombieEvents.onReload(MainCharacter.PlayerAudioSource);
             ZombieEvents.onTriggerItemExit();
             pistol.CurrentAmmo += 10;
             pistol.CurrentAmmo = Mathf.Clamp(pistol.CurrentAmmo, 0, pistol.MaxAmmo);
