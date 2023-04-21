@@ -9,6 +9,7 @@ using TMPro;
 [RequireComponent(typeof(NavMeshAgent))]
 public class Zombie : LivingObject
 {
+
     public enum ZombieState
     {
         Guard,
@@ -56,6 +57,9 @@ public class Zombie : LivingObject
     private Slider _sliderLifeBar;
 
     [SerializeField] private Animator _zombieAnimator;
+
+    [Header("Particules")]
+    [SerializeField] private Fx _deathFx;
 
     public Transform Target { get => _target; set => _target = value; }
     public bool IsAttacked { get => _isAttacked; set => _isAttacked = value; }
@@ -277,12 +281,16 @@ public class Zombie : LivingObject
         if (Spawner != null)
         {
             ZombieEvents.onZombieSpawnedDied?.Invoke();
+           
+            
         }
         IsDead = true;
         _agent.isStopped = true;
         enabled = false;
         _zombieAnimator.SetTrigger("Dead");
+        gameManager.AddFX(_deathFx, this.transform.position , Quaternion.identity);
         Destroy(this.gameObject, 2.0f);
+
 
     }
 }

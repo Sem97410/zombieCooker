@@ -17,6 +17,7 @@ public class EnemyStateEditor : Editor
     SerializedProperty m_zombieObstructionMask;
     SerializedProperty m_zombieSpawner;
     SerializedProperty m_zombieAnimator;
+    SerializedProperty m_zombieDeathFx;
     
     private void OnEnable()
     {
@@ -31,6 +32,7 @@ public class EnemyStateEditor : Editor
         m_zombieObstructionMask = serializedObject.FindProperty("_ObstructionMask");
         m_zombieSpawner = serializedObject.FindProperty("_spawner");
         m_zombieAnimator = serializedObject.FindProperty("_zombieAnimator");
+        m_zombieDeathFx = serializedObject.FindProperty("_deathFx");
 
     }
 
@@ -51,6 +53,8 @@ public class EnemyStateEditor : Editor
                     EditorGUILayout.PropertyField(m_zombieTargetMask, new GUIContent("Target Mask"));
                     EditorGUILayout.PropertyField(m_zombieObstructionMask, new GUIContent("Obstruction Mask"));
                     EditorGUILayout.PropertyField(m_zombieAnimator, new GUIContent("Animator"));
+                    EditorGUILayout.PropertyField(m_zombieDeathFx, new GUIContent("DeathFx"));
+
                     serializedObject.ApplyModifiedProperties();
                     break;
                 }
@@ -64,6 +68,8 @@ public class EnemyStateEditor : Editor
                     EditorGUILayout.PropertyField(m_zombieTargetMask, new GUIContent("Target Mask"));
                     EditorGUILayout.PropertyField(m_zombieObstructionMask, new GUIContent("Obstruction Mask"));
                     EditorGUILayout.PropertyField(m_zombieAnimator, new GUIContent("Animator"));
+                    EditorGUILayout.PropertyField(m_zombieDeathFx, new GUIContent("DeathFx"));
+
                     serializedObject.ApplyModifiedProperties();
                     break;
                 }
@@ -78,6 +84,8 @@ public class EnemyStateEditor : Editor
                     EditorGUILayout.PropertyField(m_zombieObstructionMask, new GUIContent("Obstruction Mask"));
                     EditorGUILayout.PropertyField(m_zombieSpawner, new GUIContent("Spawner"));
                     EditorGUILayout.PropertyField(m_zombieAnimator, new GUIContent("Animator"));
+                    EditorGUILayout.PropertyField(m_zombieDeathFx, new GUIContent("DeathFx"));
+
                     serializedObject.ApplyModifiedProperties();
                     break;
                 }

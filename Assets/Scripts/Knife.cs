@@ -41,7 +41,9 @@ public class Knife : Weapon, IShooting
         {
             if (collider.CompareTag("Zombie"))
             {
-               GetComponent<Knife>().Attack(MainCharacter, collider.GetComponent<IDamageable>());
+                Knife knife = GetComponent<Knife>();
+                knife.Attack(MainCharacter, collider.GetComponent<IDamageable>());
+                MainCharacter.FxImpact(MainCharacter.BloodFx,knife.transform.position);
             }
         }
     }
