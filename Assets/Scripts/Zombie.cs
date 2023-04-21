@@ -61,6 +61,9 @@ public class Zombie : LivingObject
     [Header("Particules")]
     [SerializeField] private Fx _deathFx;
 
+    [Header("Audio")]
+    [SerializeField] private AudioSource _zombieAudioSource;
+
     public Transform Target { get => _target; set => _target = value; }
     public bool IsAttacked { get => _isAttacked; set => _isAttacked = value; }
     public float WalkRadius { get => _walkRadius; set => _walkRadius = value; }
@@ -74,6 +77,7 @@ public class Zombie : LivingObject
     public ZombieSpawner Spawner { get => _spawner; set => _spawner = value; }
     public Slider SliderLifeBar { get => _sliderLifeBar; set => _sliderLifeBar = value; }
     public int Damage { get => _damage; set => _damage = value; }
+    public AudioSource ZombieAudioSource { get => _zombieAudioSource; set => _zombieAudioSource = value; }
 
     private void Start()
     {
@@ -95,6 +99,8 @@ public class Zombie : LivingObject
 
         _guardPosition = this.transform.position;
         _guardRotation = this.transform.rotation;
+
+        ZombieAudioSource = GetComponent<AudioSource>();
 
         GotoNextPoint();
         StartCoroutine(FOVRoutine());
@@ -274,6 +280,7 @@ public class Zombie : LivingObject
         base.TakeDamage(damage, Attaquant);
         if (IsDead) return;
         _zombieAnimator.SetTrigger("Hit");
+        ZombieEvents.onZombieHit(ZombieAudioSource);
     }
 
     public override void Die(IDamageable Cible)

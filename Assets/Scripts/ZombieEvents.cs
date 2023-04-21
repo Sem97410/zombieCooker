@@ -44,4 +44,22 @@ public class ZombieEvents
     public delegate void OnTriggerHideGrabIconExit();
     public static OnTriggerHideGrabIconExit onTriggerHideGrabIconExit;
 
+    public delegate void OnPlayerWin(bool value);
+    public static OnPlayerWin onPlayerWin;
+
+
+    public delegate void OnReload(AudioSource audioSource);
+    public static OnReload onReload;
+
+    public delegate void OnPickUpAmmo(AudioSource audioSource);
+    public static OnPickUpAmmo onPickUpAmmo;
+
+    public delegate void OnZombieHit(AudioSource audioSource);
+    public static OnZombieHit onZombieHit;
+
+    public delegate void OnResumeGame();
+    public static OnResumeGame onResumeGame;
+    
+    public delegate void OnQuitGame();
+    public static OnQuitGame onQuitGame;
 }

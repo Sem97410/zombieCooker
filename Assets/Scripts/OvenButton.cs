@@ -8,7 +8,6 @@ public class OvenButton : MonoBehaviour
     private Oven _oven;
 
     [SerializeField] private mainCharacter _player;
-    [SerializeField] private gameManager _gameManager;
 
     private Animation _animation;
 
@@ -17,9 +16,7 @@ public class OvenButton : MonoBehaviour
     {
         _animation = GetComponent<Animation>();
     }
-
-
-    
+   
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
@@ -50,28 +47,24 @@ public class OvenButton : MonoBehaviour
     {
         if (_oven.recipeIp == 30)
         {
-          
-            
+
             MakeRightIpPlate(_oven.Hamburger, _oven.SpawnHamburgerPosition);
 
         }
         if (_oven.recipeIp == 5005)
         {
-            
+
             MakeRightIpPlate(_oven.Salade, _oven.SpawnSaladePosition);
 
 
         }
         if (_oven.recipeIp == 10)
         {
-          
             MakeRightIpPlate(_oven.SoupeViande, _oven.SpawnSoupeViandePosition);
-
 
         }
         if (_oven.recipeIp == 2431)
         {
-          
             MakeRightIpPlate(_oven.Poisson, _oven.SpawnPoissonPosition);
         }
 
@@ -87,8 +80,8 @@ public class OvenButton : MonoBehaviour
     public void MakeRightIpPlate(GameObject recipe, Transform recipePosition)
     {
         _oven.MakeThePlate(recipe, recipePosition);
-        _gameManager.WinCondition();
-        ZombieEvents.onRecipeDone(_gameManager.NumberOfPlate, _gameManager.NumberOfPlateNeed);
+        gameManager.Instance().WinCondition();
+        ZombieEvents.onRecipeDone(gameManager.Instance().NumberOfPlate, gameManager.Instance().NumberOfPlateNeed);
      
         _animation.Play("ButtonPush");
     }

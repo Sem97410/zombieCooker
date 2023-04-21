@@ -127,6 +127,7 @@ public class gameManager : MonoBehaviour
         {
             Debug.Log("Victoire");
             Time.timeScale = 0;
+            ZombieEvents.onPlayerWin(true);
         }
     }
 
