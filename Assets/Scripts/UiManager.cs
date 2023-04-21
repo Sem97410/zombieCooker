@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.Tracing;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class UiManager : MonoBehaviour
@@ -17,6 +18,7 @@ public class UiManager : MonoBehaviour
     [SerializeField] private Image _lifeBar;
     [SerializeField] private Canvas _gameOverCanvas;
     [SerializeField] private Canvas _hudCanvas;
+    [SerializeField] private Canvas _victoryCanvas;
     [SerializeField] private Text _objectif;
 
     [SerializeField] private Canvas _pauseMenu;
@@ -33,6 +35,7 @@ public class UiManager : MonoBehaviour
     public Canvas HudCanvas { get => _hudCanvas; set => _hudCanvas = value; }
     public Text Objectif { get => _objectif; set => _objectif = value; }
     public Canvas PauseMenu { get => _pauseMenu; set => _pauseMenu = value; }
+    public Canvas VictoryCanvas { get => _victoryCanvas; set => _victoryCanvas = value; }
 
     public void OnEnable()
     {
@@ -54,6 +57,9 @@ public class UiManager : MonoBehaviour
         ZombieEvents.onPlayerDeath += HideHud;
 
         ZombieEvents.onTriggerButtonEnter += ShowIconGrabItem;
+
+        ZombieEvents.onPlayerWin += ShowVictoryPanel;
+        ZombieEvents.onPlayerWin += HideHud;
     }
 
     public void OnDisable()
@@ -77,7 +83,8 @@ public class UiManager : MonoBehaviour
 
         ZombieEvents.onTriggerButtonEnter -= ShowIconGrabItem;
 
-
+        ZombieEvents.onPlayerWin -= ShowVictoryPanel;
+        ZombieEvents.onPlayerWin -= HideHud;
 
     }
     public void Start()
@@ -88,6 +95,7 @@ public class UiManager : MonoBehaviour
         }
 
         ShowObjectif();
+        UpdateNumberOfPlateUi(gameManager.Instance().NumberOfPlate, gameManager.Instance().NumberOfPlateNeed);
     }
     public void UpdateSpriteOfInventory(mainCharacter player)
     {
@@ -147,7 +155,7 @@ public class UiManager : MonoBehaviour
 
     private void UpdateNumberOfPlateUi(int recipeDone, int recipeNeed)
     {
-        Objectif.text = String.Format("Plats cuisiné : {0}/{1}", recipeDone, recipeNeed);
+        RecipeDoneText.text = String.Format("Plats cuisiné : {0}/{1}", recipeDone, recipeNeed);
     }
 
     public void ShowGameOver(bool value)
@@ -191,6 +199,11 @@ public class UiManager : MonoBehaviour
         Time.timeScale = 1;
     }
 
+    public void ShowVictoryPanel(bool value)
+    {
+        VictoryCanvas.gameObject.SetActive(value);
+    }
+
     public void QuitGame()
     {
 #if UNITY_EDITOR
@@ -198,5 +211,10 @@ public class UiManager : MonoBehaviour
 #else
       Application.Quit();
 #endif
+    }
+
+    public void MainMenuButton()
+    {
+        SceneManager.LoadScene("Damien");
     }
 }

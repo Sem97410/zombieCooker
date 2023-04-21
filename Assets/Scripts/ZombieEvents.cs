@@ -41,4 +41,7 @@ public class ZombieEvents
     public delegate void OnTriggerButtonEnter();
     public static OnTriggerButtonEnter onTriggerButtonEnter;
 
+    public delegate void OnPlayerWin(bool value);
+    public static OnPlayerWin onPlayerWin;
+
 }

@@ -16,28 +16,17 @@ public class Ammo : PickUp
 
     public override void PickUpItem()
     {
-        
-        if (MainCharacter.HavePistol == true)
+        if (MainCharacter.GetItemSelected() is Pistol)
         {
-            if (MainCharacter.GetItemSelected() is Pistol)
-            {
-                Debug.Log("Reload");
-                MainCharacter.WeaponAnimator.SetTrigger("Reload");
-                ZombieEvents.onTriggerItemExit();
-                Pistol pistol = MainCharacter.GetItemSelected().GetComponent<Pistol>();
-                pistol.CurrentAmmo += 10;
-                pistol.CurrentAmmo = Mathf.Clamp(pistol.CurrentAmmo, 0, pistol.MaxAmmo);
-                ZombieEvents.onAmmoChanged(pistol.CurrentAmmo, pistol.MaxAmmo);
-                Destroy(gameObject);
-            }
-            
+            Pistol pistol = MainCharacter.GetItemSelected().GetComponent<Pistol>();
+            if (pistol.CurrentAmmo == pistol.MaxAmmo) return;
+            MainCharacter.WeaponAnimator.SetTrigger("Reload");
+            ZombieEvents.onTriggerItemExit();
+            pistol.CurrentAmmo += 10;
+            pistol.CurrentAmmo = Mathf.Clamp(pistol.CurrentAmmo, 0, pistol.MaxAmmo);
+            ZombieEvents.onAmmoChanged(pistol.CurrentAmmo, pistol.MaxAmmo);
+            Destroy(gameObject);
         }
-        else
-        {
-            Debug.Log("Take the pistol");
-        }
-
-
     }
     private void AddAmmo(Pistol pistol, int value)
     {
