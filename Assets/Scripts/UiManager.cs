@@ -54,6 +54,9 @@ public class UiManager : MonoBehaviour
         ZombieEvents.onPlayerDeath += HideHud;
 
         ZombieEvents.onTriggerButtonEnter += ShowIconGrabItem;
+
+        ZombieEvents.onResumeGame += ResumeGame;
+        ZombieEvents.onQuitGame += QuitGame;
     }
 
     public void OnDisable()
@@ -77,7 +80,8 @@ public class UiManager : MonoBehaviour
 
         ZombieEvents.onTriggerButtonEnter -= ShowIconGrabItem;
 
-
+        ZombieEvents.onResumeGame -= ResumeGame;
+        ZombieEvents.onQuitGame -= QuitGame;
 
     }
     public void Start()
