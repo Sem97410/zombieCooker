@@ -21,7 +21,7 @@ public class OvenButton : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-
+            _player = other.GetComponent<mainCharacter>();
             _player.ButtonAction.performed += ValidRecipes;
             ZombieEvents.onTriggerShowGrabIconEnter();
 
