@@ -23,26 +23,8 @@ public class Food : PickUp
     }
     public override void PickUpItem()
     {
-        if (MainCharacter.PickUps.Count >= MainCharacter.MaxSpaceInInventory)
-        {
-            Debug.Log("Inventaire plein");
-            return;
-        }
-        else
-        {
-            ZombieEvents.onTriggerItemExit();
-            SetGameObject(this.gameObject);
-            MainCharacter.PickUps.Add((PickUp)this);
-            MainCharacter.ChooseItem(MainCharacter.PickUps.Count - 1);
-            MainCharacter.GetItemSelected().GetComponent<Rigidbody>().isKinematic = true;
-            MainCharacter.GetItemSelected().GetComponent<SphereCollider>().enabled = false;
-            this.GetComponentInChildren<BoxCollider>().enabled = false;
-            UiManager.UpdateSpriteOfInventory(MainCharacter);
-            BoxCollider _box = GetComponentInChildren<BoxCollider>();
-            CapsuleCollider _capsule = MainCharacter.GetComponent<CapsuleCollider>();
-            Physics.IgnoreCollision(_box, _capsule);
-
-        }
+        base.PickUpItem();
+        ZombieEvents.onTriggerItemExit();
 
     }
 }

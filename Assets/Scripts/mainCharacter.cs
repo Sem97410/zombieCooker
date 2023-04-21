@@ -17,7 +17,6 @@ public class mainCharacter : LivingObject
     private List<PickUp> _pickUp;
     private bool _canInteract;
     private bool _havePistol;
-    private bool _haveKnife;
     private int _choixIndex;
 
 
@@ -67,7 +66,6 @@ public class mainCharacter : LivingObject
     public int ChoixIndex { get => _choixIndex; set => _choixIndex = value; }
     public Transform ItemPos { get => _itemPos; set => _itemPos = value; }
     public float MovementSpeed { get => _movementSpeed; set => _movementSpeed = value; }
-    public bool HaveKnife { get => _haveKnife; set => _haveKnife = value; }
     public UiManager UiManager { get => uiManager; set => uiManager = value; }
     public InputAction ButtonAction { get => _buttonAction; set => _buttonAction = value; }
     public AudioSource PlayerAudioSource { get => _playerAudioSource; set => _playerAudioSource = value; }
@@ -78,11 +76,16 @@ public class mainCharacter : LivingObject
     private void OnEnable()
     {
         ZombieEvents.onFoodEaten += EatFood;
+
+        ZombieEvents.onPlayerWin += CursorMode;
     }
 
     private void OnDisable()
     {
         ZombieEvents.onFoodEaten -= EatFood;
+
+        ZombieEvents.onPlayerWin -= CursorMode;
+
     }
     private void Start()
     {
@@ -352,17 +355,14 @@ public class mainCharacter : LivingObject
                 ZombieEvents.onShoot(PlayerAudioSource);
                 PlayShootFx(pistol);
 
-
-
                 StartCoroutine(AttackAnimation(GetItemSelected()));
                 if (Physics.Raycast(ray, out hit, 150, ~_IgnoreLayer))
                 {
 
-
                     gameManager.AddFX(pistol.MuzzleFx, pistol.MuzzlePoint.position, pistol.MuzzlePoint.localRotation);
                     if (Physics.Raycast(ray, out hit, 150, ~_IgnoreLayer))
                     {
-
+                        
                         if (hit.collider.CompareTag("Zombie"))
                         {
 
@@ -370,10 +370,6 @@ public class mainCharacter : LivingObject
                             pistol.Attack(this, hit.collider.GetComponent<IDamageable>());
                             zombie.StartCoroutine(zombie.ShowZombieLife());
                             FxImpact(_bloodFx, hit.point);
-
-
-
-
 
                         }
                         else

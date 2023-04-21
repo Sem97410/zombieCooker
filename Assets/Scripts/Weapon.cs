@@ -36,25 +36,6 @@ public class Weapon : PickUp
 
     public override void PickUpItem()
     {
-        if (MainCharacter.PickUps.Count >= MainCharacter.MaxSpaceInInventory)
-        {
-            Debug.Log("Inventaire plein");
-            return;
-        }
-        else
-        {
-            SetGameObject(this.gameObject);
-            MainCharacter.PickUps.Add((PickUp)this);
-            MainCharacter.EnleverItemEquipe(MainCharacter.GetItemSelected().GetGameObject());
-            MainCharacter.ChoixIndex = MainCharacter.PickUps.Count - 1;
-            MainCharacter.GetItemSelected().GetComponent<Rigidbody>().isKinematic = true;
-            BoxCollider meshCollider = MainCharacter.GetItemSelected().GetComponentInChildren<BoxCollider>();
-            CapsuleCollider capsule = MainCharacter.GetComponent<CapsuleCollider>();
-            Physics.IgnoreCollision(meshCollider, capsule);
-            MainCharacter.AfficherItemEquipe(MainCharacter.GetItemSelected().GetGameObject());
-            MainCharacter.GetItemSelected().GetComponent<SphereCollider>().enabled = false;
-            UiManager.UpdateSpriteOfInventory(MainCharacter);
-
-        }
+        base.PickUpItem();
     }
 }
