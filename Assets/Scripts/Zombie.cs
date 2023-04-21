@@ -95,7 +95,7 @@ public class Zombie : LivingObject
         MaxLife = 100;
         CurrentLife = MaxLife;
 
-        _damage = 10;
+        _damage = 20;
 
         _guardPosition = this.transform.position;
         _guardRotation = this.transform.rotation;
