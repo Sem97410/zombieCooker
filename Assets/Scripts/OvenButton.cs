@@ -1,3 +1,4 @@
+using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -9,10 +10,12 @@ public class OvenButton : MonoBehaviour
     [SerializeField] private mainCharacter _player;
     [SerializeField] private gameManager _gameManager;
 
+    private Animation _animation;
+
 
     private void Start()
     {
-        //_oven = GetComponentInParent<Oven>();
+        _animation = GetComponent<Animation>();
     }
 
 
@@ -44,41 +47,36 @@ public class OvenButton : MonoBehaviour
     {
         if (_oven.recipeIp == 30)
         {
-            //_oven.MakeThePlate(_oven.Hamburger, _oven.SpawnHamburgerPosition);
-            //_gameManager.WinCondition();
-            //ZombieEvents.onRecipeDone(_gameManager.NumberOfPlate);
+          
+            
             MakeRightIpPlate(_oven.Hamburger, _oven.SpawnHamburgerPosition);
 
         }
         if (_oven.recipeIp == 5005)
         {
-            //_oven.MakeThePlate(_oven.Salade, _oven.SpawnSaladePosition);
-            //_gameManager.WinCondition();
-            //ZombieEvents.onRecipeDone(_gameManager.NumberOfPlate);
+            
             MakeRightIpPlate(_oven.Salade, _oven.SpawnSaladePosition);
 
 
         }
         if (_oven.recipeIp == 10)
         {
-            //_oven.MakeThePlate(_oven.SoupeViande, _oven.SpawnSoupeViandePosition);
-            //_gameManager.WinCondition();
-            //ZombieEvents.onRecipeDone(_gameManager.NumberOfPlate);
+          
             MakeRightIpPlate(_oven.SoupeViande, _oven.SpawnSoupeViandePosition);
 
 
         }
         if (_oven.recipeIp == 2431)
         {
-            //_oven.MakeThePlate(_oven.Poisson, _oven.SpawnPoissonPosition);
-            //_gameManager.WinCondition();
-            //ZombieEvents.onRecipeDone(_gameManager.NumberOfPlate);
+          
             MakeRightIpPlate(_oven.Poisson, _oven.SpawnPoissonPosition);
         }
 
         else
         {
             _oven.EjectIngredient();
+            _animation.Play("ButtonPush");
+
         }
 
     }
@@ -88,26 +86,10 @@ public class OvenButton : MonoBehaviour
         _oven.MakeThePlate(recipe, recipePosition);
         _gameManager.WinCondition();
         ZombieEvents.onRecipeDone(_gameManager.NumberOfPlate, _gameManager.NumberOfPlateNeed);
+     
+        _animation.Play("ButtonPush");
     }
 
-    //private void OnCollisionEnter(Collision collision)
-    //{
-    //    if (collision.gameObject.CompareTag("Player"))
-    //    {
-    //        Debug.Log(collision);
-    //        if (RecipeIp == 30)
-    //        {
-    //            MakeThePlate(_hamburger, _spawnHamburgerPosition);
-    //        }
-    //        if (RecipeIp == 5005)
-    //        {
-    //            MakeThePlate(_salade, _spawnSaladePosition);
-    //        }
-    //        if (RecipeIp == 10)
-    //        {
-    //            MakeThePlate(_soupeViande, _spawnSoupeViandePosition);
-    //        }
-    //    }
-    //}
+
 
 }
