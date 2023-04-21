@@ -225,6 +225,6 @@ public class UiManager : MonoBehaviour
 
     public void MainMenuButton()
     {
-        SceneManager.LoadScene("Damien");
+        SceneManager.LoadScene("MainMenu");
     }
 }

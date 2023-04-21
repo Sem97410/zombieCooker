@@ -136,13 +136,12 @@ public class mainCharacter : LivingObject
         float moveHorizontal = Input.GetAxisRaw("Horizontal");
         float moveVertical = Input.GetAxisRaw("Vertical");
 
-        Vector3 movement = new Vector3(moveHorizontal, 0f, moveVertical);
+        Vector3 movement = new Vector3(moveHorizontal, 0 , moveVertical);
+
         movement.Normalize();
 
        _rb.velocity = transform.TransformDirection(movement * _movementSpeed);
 
-        float rotation = Input.GetAxis("Mouse X") * _rotationSpeed;
-        transform.Rotate(0f, rotation, 0f);
 
 
 
