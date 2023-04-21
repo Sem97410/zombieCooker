@@ -11,12 +11,12 @@ GameObject:
   - component: {fileID: 4864034342094586}
   - component: {fileID: 33487610775891724}
   - component: {fileID: 23757891582141210}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: WB2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &4864034342094586
 Transform:
@@ -91,12 +91,12 @@ GameObject:
   m_Component:
   - component: {fileID: 4755633542472544}
   - component: {fileID: 2565322262874175162}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: City Bus
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &4755633542472544
 Transform:
@@ -137,12 +137,12 @@ GameObject:
   - component: {fileID: 4624756915715274}
   - component: {fileID: 33869867732346148}
   - component: {fileID: 23781418323928166}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: WB1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &4624756915715274
 Transform:
@@ -216,12 +216,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4012594891693864}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: WPF
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &4012594891693864
 Transform:
@@ -249,12 +249,12 @@ GameObject:
   - component: {fileID: 4055370351445794}
   - component: {fileID: 33454499057078672}
   - component: {fileID: 23417610459626780}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: City Bus
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &4055370351445794
 Transform:
@@ -332,12 +332,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4898113111614658}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: WDF
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &4898113111614658
 Transform:
@@ -365,12 +365,12 @@ GameObject:
   - component: {fileID: 4723629746000726}
   - component: {fileID: 33968172159457676}
   - component: {fileID: 23369712096406224}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: WB1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &4723629746000726
 Transform:
@@ -446,12 +446,12 @@ GameObject:
   - component: {fileID: 4163561750844518}
   - component: {fileID: 33144176079989380}
   - component: {fileID: 23743073108454006}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: WB2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &4163561750844518
 Transform:
@@ -525,12 +525,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4572638780723598}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: WDR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &4572638780723598
 Transform:
@@ -556,12 +556,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4819384234990996}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: WPR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &4819384234990996
 Transform:
