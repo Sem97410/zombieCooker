@@ -37,4 +37,20 @@ public class ZombieEvents
 
     public delegate void OnPlayerDeath(bool value);
     public static OnPlayerDeath onPlayerDeath;
+
+    public delegate void OnTriggerButtonEnter();
+    public static OnTriggerButtonEnter onTriggerButtonEnter;
+
+    public delegate void OnPlayerWin(bool value);
+    public static OnPlayerWin onPlayerWin;
+
+
+    public delegate void OnReload(AudioSource audioSource);
+    public static OnReload onReload;
+
+    public delegate void OnPickUpAmmo(AudioSource audioSource);
+    public static OnPickUpAmmo onPickUpAmmo;
+
+    public delegate void OnZombieHit(AudioSource audioSource);
+    public static OnZombieHit onZombieHit;
 }

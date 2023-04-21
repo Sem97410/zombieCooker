@@ -24,19 +24,10 @@ public class Pistol : Weapon, IShooting
     public override void PickUpItem()
     {
         base.PickUpItem();
-        if (MainCharacter.PickUps.Count >= 6)
-        {
-            Debug.Log("Inventaire plein");
-            return;
-        }
-        else
-        {
-            ZombieEvents.onTriggerItemExit();
-            MainCharacter.HavePistol = true;
-            ZombieEvents.onAmmoChanged(CurrentAmmo,MaxAmmo);
-            Debug.Log("A pris le pistol");
-
-        }
+        ZombieEvents.onTriggerItemExit();
+        MainCharacter.HavePistol = true;
+        ZombieEvents.onAmmoChanged(CurrentAmmo,MaxAmmo);
+       
     }
 
     public void Attack(IDamageable attaquant, IDamageable cible)

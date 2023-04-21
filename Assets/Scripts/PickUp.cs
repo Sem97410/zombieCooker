@@ -63,6 +63,23 @@ public class PickUp : MonoBehaviour
 
     public virtual void PickUpItem()
     {
+        if (MainCharacter.PickUps.Count >= MainCharacter.MaxSpaceInInventory)
+        {
+            Debug.Log("Inventaire plein");
+            return;
+        }
+        else
+        {
+            SetGameObject(this.gameObject);
+            MainCharacter.PickUps.Add(this);
+            MainCharacter.EnleverItemEquipe(MainCharacter.GetItemSelected().GetGameObject());
+            MainCharacter.ChoixIndex = MainCharacter.PickUps.Count - 1;
+            MainCharacter.GetItemSelected().GetComponent<Rigidbody>().isKinematic = true;
+            IgnoreCollisionWithPlayer();
+            MainCharacter.AfficherItemEquipe(MainCharacter.GetItemSelected().GetGameObject());
+            MainCharacter.GetItemSelected().GetComponent<SphereCollider>().enabled = false;
+            UiManager.UpdateSpriteOfInventory(MainCharacter);
+        }
     }
 
     public void SetGameObject(GameObject go)
@@ -73,6 +90,13 @@ public class PickUp : MonoBehaviour
     public GameObject GetGameObject()
     {
         return _go;
+    }
+
+    public void IgnoreCollisionWithPlayer()
+    {
+        BoxCollider meshCollider = MainCharacter.GetItemSelected().GetComponentInChildren<BoxCollider>();
+        CapsuleCollider capsule = MainCharacter.GetComponent<CapsuleCollider>();
+        Physics.IgnoreCollision(meshCollider, capsule);
     }
 
     
