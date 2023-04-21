@@ -23,7 +23,7 @@ public class OvenButton : MonoBehaviour
         {
 
             _player.ButtonAction.performed += ValidRecipes;
-
+            ZombieEvents.onTriggerButtonEnter();
 
         }
     }
