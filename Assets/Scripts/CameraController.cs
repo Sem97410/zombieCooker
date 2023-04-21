@@ -11,6 +11,11 @@ public class CameraController : MonoBehaviour
     private float _mouseSensitivity;
     private float _cameraVerticalRotation;
 
+
+    private Transform camTransform;
+
+
+
     public Transform Target { get => _target; set => _target = value; }
     public float MouseSensitivity { get => _mouseSensitivity; set => _mouseSensitivity = value; }
     public float CameraVerticalRotation { get => _cameraVerticalRotation; set => _cameraVerticalRotation = value; }
@@ -19,6 +24,7 @@ public class CameraController : MonoBehaviour
     {
         MoveCamera();   
     }
+
     private void MoveCamera()
     {
 
@@ -38,4 +44,8 @@ public class CameraController : MonoBehaviour
 
         _target.Rotate(Vector3.up * inputX);
     }
+
+
+
+
 }
