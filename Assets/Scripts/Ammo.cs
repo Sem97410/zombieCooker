@@ -23,6 +23,7 @@ public class Ammo : PickUp
             {
                 Debug.Log("Reload");
                 MainCharacter.WeaponAnimator.SetTrigger("Reload");
+                ZombieEvents.onReload?.Invoke(MainCharacter.PlayerAudioSource);
                 ZombieEvents.onTriggerItemExit();
                 Pistol pistol = MainCharacter.GetItemSelected().GetComponent<Pistol>();
                 pistol.CurrentAmmo += 10;
