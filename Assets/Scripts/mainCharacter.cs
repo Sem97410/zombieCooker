@@ -34,6 +34,7 @@ public class mainCharacter : LivingObject
     [SerializeField] private InputAction _buttonAction;
     [SerializeField] private InputAction _eatAction;
     [SerializeField] private InputAction _dropItemAction;
+    [SerializeField] private InputAction _pauseAction;
 
 
     [Header("Audio Player")]
@@ -109,6 +110,9 @@ public class mainCharacter : LivingObject
         _interactAction.performed += Interact;
 
         _buttonAction.Enable();
+
+        _pauseAction.Enable();
+        _pauseAction.performed += Pause;
 
         _playerAudioSource = gameObject.GetComponent<AudioSource>();
         _rb = GetComponent<Rigidbody>();    
@@ -263,6 +267,8 @@ public class mainCharacter : LivingObject
         go.transform.parent = this.ItemPos;
         go.transform.localPosition = Vector3.zero;
         go.transform.rotation = ItemPos.rotation * Quaternion.Euler(0, -90, 0);
+
+        ChooseWeaponAnimator(true);
     }
     public void EnleverItemEquipe(GameObject go)
     {
@@ -364,7 +370,7 @@ public class mainCharacter : LivingObject
 
 
 
-                StartCoroutine(Attack(GetItemSelected()));
+                StartCoroutine(AttackAnimation(GetItemSelected()));
                 if (Physics.Raycast(ray, out hit, 150, ~_IgnoreLayer))
                 {
 
@@ -393,20 +399,23 @@ public class mainCharacter : LivingObject
                         }
                     }
                 }
+                
             }
+
             if (GetItemSelected() is Knife)
             {
-                //Mettre l'animation d'attaque et le takeDamage au moment ou le couteau touche un enemy
-                StartCoroutine(Attack(GetItemSelected()));
+                StartCoroutine(AttackAnimation(GetItemSelected()));
 
             }
         }
 
+        
     }
 
 
 
-    IEnumerator Attack(PickUp TypeOfWeapon)
+
+    IEnumerator AttackAnimation(PickUp TypeOfWeapon)
     {
         _canAttack = false;
 
@@ -498,4 +507,9 @@ public class mainCharacter : LivingObject
         fx.transform.LookAt(this.transform);
     }
 
+    public void Pause(InputAction.CallbackContext ctx)
+    {
+        CursorMode(true);
+        UiManager.PauseGame();
+    }
 }

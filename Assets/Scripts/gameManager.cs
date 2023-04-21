@@ -126,6 +126,7 @@ public class gameManager : MonoBehaviour
         if (_numberOfPlate == NumberOfPlateNeed)
         {
             Debug.Log("Victoire");
+            Time.timeScale = 0;
         }
     }
 

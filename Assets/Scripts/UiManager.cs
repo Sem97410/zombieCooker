@@ -19,6 +19,8 @@ public class UiManager : MonoBehaviour
     [SerializeField] private Canvas _hudCanvas;
     [SerializeField] private Text _objectif;
 
+    [SerializeField] private Canvas _pauseMenu;
+
     public List<Image> Images { get => images; set => images = value; }
     public Sprite DefaultSprite { get => _defaultSprite; set => _defaultSprite = value; }
     public Image FoodBar { get => _foodBar; set => _foodBar = value; }
@@ -30,6 +32,7 @@ public class UiManager : MonoBehaviour
     public Canvas GameOverCanvas { get => _gameOverCanvas; set => _gameOverCanvas = value; }
     public Canvas HudCanvas { get => _hudCanvas; set => _hudCanvas = value; }
     public Text Objectif { get => _objectif; set => _objectif = value; }
+    public Canvas PauseMenu { get => _pauseMenu; set => _pauseMenu = value; }
 
     public void OnEnable()
     {
@@ -147,7 +150,7 @@ public class UiManager : MonoBehaviour
 
     private void UpdateNumberOfPlateUi(int recipeDone, int recipeNeed)
     {
-        AmmoText.text = String.Format("Plats cuisiné : {0}/{1}", recipeDone, recipeNeed);
+        Objectif.text = String.Format("Plats cuisiné : {0}/{1}", recipeDone, recipeNeed);
     }
 
     public void ShowGameOver(bool value)
@@ -157,7 +160,12 @@ public class UiManager : MonoBehaviour
 
     public void HideHud(bool value)
     {
-        HudCanvas.gameObject.SetActive(false);  
+        HudCanvas.gameObject.SetActive(false);
+    }
+
+    public void ShowHud()
+    {
+        HudCanvas.gameObject.SetActive(true);
     }
 
     public void ShowObjectif()
@@ -170,5 +178,28 @@ public class UiManager : MonoBehaviour
         Objectif.CrossFadeAlpha(1, 2, true);
         yield return new WaitForSeconds(5f);
         Objectif.CrossFadeAlpha(0, 1, true);
+    }
+
+    public void PauseGame()
+    {
+        PauseMenu.gameObject.SetActive(true);
+        HideHud(false);
+        Time.timeScale = 0;
+    }
+
+    public void ResumeGame()
+    {
+        PauseMenu.gameObject.SetActive(false);
+        ShowHud();
+        Time.timeScale = 1;
+    }
+
+    public void QuitGame()
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+      Application.Quit();
+#endif
     }
 }
