@@ -353,16 +353,19 @@ public class mainCharacter : LivingObject
                         }
                     }
                 }
+                
+            }
+
+            if (GetItemSelected() is Knife)
+            {
+                //Mettre l'animation d'attaque et le takeDamage au moment ou le couteau touche un enemy
+                _swingLineRenderer = GetItemSelected().GetComponentInChildren<LineRenderer>();
+                StartCoroutine(Attack(GetItemSelected()));
+
             }
         }
 
-        if (GetItemSelected() is Knife)
-        {
-            //Mettre l'animation d'attaque et le takeDamage au moment ou le couteau touche un enemy
-            _swingLineRenderer = GetItemSelected().GetComponentInChildren<LineRenderer>();
-            StartCoroutine(Attack(GetItemSelected()));
-
-        }
+        
     }
 
 
