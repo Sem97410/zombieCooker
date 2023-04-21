@@ -33,6 +33,7 @@ public class mainCharacter : LivingObject
     [SerializeField] private InputAction _buttonAction;
     [SerializeField] private InputAction _eatAction;
     [SerializeField] private InputAction _dropItemAction;
+    [SerializeField] private InputAction _pauseAction;
 
 
     [Header("Audio Player")]
@@ -106,6 +107,9 @@ public class mainCharacter : LivingObject
         _interactAction.performed += Interact;
 
         _buttonAction.Enable();
+
+        _pauseAction.Enable();
+        _pauseAction.performed += Pause;
 
         _playerAudioSource = gameObject.GetComponent<AudioSource>();
 
@@ -487,4 +491,9 @@ public class mainCharacter : LivingObject
         fx.transform.LookAt(this.transform);
     }
 
+    public void Pause(InputAction.CallbackContext ctx)
+    {
+        CursorMode(true);
+        UiManager.PauseGame();
+    }
 }
