@@ -80,6 +80,7 @@ public class Zombie : LivingObject
 
         PlayerRef = GameObject.FindGameObjectWithTag("Player");
         SliderLifeBar = gameObject.GetComponentInChildren<Slider>();
+        _zombieAnimator = GetComponentInChildren<Animator>();
 
         SliderLifeBar.gameObject.SetActive(false);
 
