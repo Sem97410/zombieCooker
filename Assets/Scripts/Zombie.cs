@@ -289,7 +289,7 @@ public class Zombie : LivingObject
         _zombieAnimator.SetTrigger("Dead");
         Fx deathFx = gameManager.AddFX(_deathFx, this.transform.position + this.transform.up   , Quaternion.identity);
         deathFx.transform.LookAt(PlayerRef.transform);
-        Destroy(this.gameObject, 2.0f);
+        Destroy(this.gameObject,3f);
 
 
     }

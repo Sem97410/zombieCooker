@@ -8,6 +8,7 @@ public class mainCharacter : LivingObject
     [Header("Movement")]
     [SerializeField] private float _movementSpeed;
     [SerializeField] private float _runSpeedMultiplication;
+    [SerializeField] private float _rotationSpeed;
     private bool _isRunning;
 
     [Header("PickUpOptions")]
@@ -54,6 +55,8 @@ public class mainCharacter : LivingObject
 
     private TrailRenderer _trailRenderer;
     private bool _canAttack = true;
+
+    private Rigidbody _rb;
 
     [SerializeField] private UiManager uiManager;
     [SerializeField] private LayerMask _IgnoreLayer;
@@ -108,6 +111,7 @@ public class mainCharacter : LivingObject
         _buttonAction.Enable();
 
         _playerAudioSource = gameObject.GetComponent<AudioSource>();
+        _rb = GetComponent<Rigidbody>();    
 
 
     }
@@ -122,9 +126,21 @@ public class mainCharacter : LivingObject
     //TODO : Rajouter un test pour eviter que ça plante
     private void Move()
     {
-        float horizontalInput = Input.GetAxis("Horizontal") * _movementSpeed * Time.deltaTime; ;
-        float verticalInput = Input.GetAxis("Vertical") * _movementSpeed * Time.deltaTime; ;
-        transform.Translate(horizontalInput, 0, verticalInput);
+        float moveHorizontal = Input.GetAxisRaw("Horizontal");
+        float moveVertical = Input.GetAxisRaw("Vertical");
+
+        Vector3 movement = new Vector3(moveHorizontal, 0f, moveVertical);
+        movement.Normalize();
+
+       _rb.velocity = transform.TransformDirection(movement * _movementSpeed);
+
+        float rotation = Input.GetAxis("Mouse X") * _rotationSpeed;
+        transform.Rotate(0f, rotation, 0f);
+
+
+
+
+
     }
 
 

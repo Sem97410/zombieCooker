@@ -50,6 +50,8 @@ public class UiManager : MonoBehaviour
         ZombieEvents.onPlayerDeath += ShowGameOver;
         ZombieEvents.onPlayerDeath += HideHud;
 
+        ZombieEvents.onTriggerShowGrabIconEnter += ShowIconGrabItem;
+        ZombieEvents.onTriggerHideGrabIconExit += HideIconGrabItem;
     }
 
     public void OnDisable()
@@ -70,6 +72,9 @@ public class UiManager : MonoBehaviour
 
         ZombieEvents.onPlayerDeath -= ShowGameOver;
         ZombieEvents.onPlayerDeath -= HideHud;
+
+        ZombieEvents.onTriggerShowGrabIconEnter -= ShowIconGrabItem;
+        ZombieEvents.onTriggerHideGrabIconExit -= HideIconGrabItem;
 
 
 

@@ -38,4 +38,10 @@ public class ZombieEvents
     public delegate void OnPlayerDeath(bool value);
     public static OnPlayerDeath onPlayerDeath;
 
+    public delegate void OnTriggerShowGrabIconEnter();
+    public static OnTriggerShowGrabIconEnter  onTriggerShowGrabIconEnter;
+
+    public delegate void OnTriggerHideGrabIconExit();
+    public static OnTriggerHideGrabIconExit onTriggerHideGrabIconExit;
+
 }
