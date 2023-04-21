@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6927688980468570942}
   - component: {fileID: 6927688980468570937}
   - component: {fileID: 6927688980468570936}
+  - component: {fileID: 2120984536}
   m_Layer: 0
   m_Name: OvenButton
   m_TagString: Untagged
@@ -111,3 +112,19 @@ MonoBehaviour:
   _oven: {fileID: 0}
   _player: {fileID: 0}
   _gameManager: {fileID: 0}
+--- !u!111 &2120984536
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6927688980468570939}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 7bf26d99b970cd543bd0590644dd2bd9, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 7bf26d99b970cd543bd0590644dd2bd9, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 0
+  m_AnimatePhysics: 0
+  m_CullingType: 0

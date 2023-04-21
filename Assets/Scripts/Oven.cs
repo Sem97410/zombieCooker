@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Oven : MonoBehaviour
 {
-    [SerializeField]
-    private RecipeManager _recipeManager;
+    
+    
     public static List<Food> ingredients = new List<Food>();
 
     private List<GameObject> _foodOven = new List<GameObject>();
@@ -115,7 +115,7 @@ public class Oven : MonoBehaviour
         }
         _foodOven.Clear();
         _foodIdOven.Clear();
-        Instantiate(plate, spawnPosition.position, transform.rotation);
+        Instantiate(plate, spawnPosition.position, Quaternion.Euler(0, 0, 0));
         gameManager.AddFX(_recipeFx, _spawnRecipeParticulePosition.position, Quaternion.identity);
         RecipeIp = 1;
     }

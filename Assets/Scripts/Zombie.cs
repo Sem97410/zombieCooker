@@ -295,8 +295,9 @@ public class Zombie : LivingObject
         _agent.isStopped = true;
         enabled = false;
         _zombieAnimator.SetTrigger("Dead");
-        gameManager.AddFX(_deathFx, this.transform.position , Quaternion.identity);
-        Destroy(this.gameObject, 2.0f);
+        Fx deathFx = gameManager.AddFX(_deathFx, this.transform.position + this.transform.up   , Quaternion.identity);
+        deathFx.transform.LookAt(PlayerRef.transform);
+        Destroy(this.gameObject,3f);
 
 
     }

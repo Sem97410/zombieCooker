@@ -1,3 +1,4 @@
+using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -8,9 +9,12 @@ public class OvenButton : MonoBehaviour
 
     [SerializeField] private mainCharacter _player;
 
+    private Animation _animation;
+
+
     private void Start()
     {
-
+        _animation = GetComponent<Animation>();
     }
    
     private void OnTriggerEnter(Collider other)
@@ -19,7 +23,8 @@ public class OvenButton : MonoBehaviour
         {
 
             _player.ButtonAction.performed += ValidRecipes;
-            ZombieEvents.onTriggerButtonEnter();
+            ZombieEvents.onTriggerShowGrabIconEnter();
+
 
         }
     }
@@ -31,6 +36,8 @@ public class OvenButton : MonoBehaviour
         {
 
             _player.ButtonAction.performed -= ValidRecipes;
+            ZombieEvents.onTriggerHideGrabIconExit();
+
 
 
         }
@@ -64,6 +71,8 @@ public class OvenButton : MonoBehaviour
         else
         {
             _oven.EjectIngredient();
+            _animation.Play("ButtonPush");
+
         }
 
     }
@@ -73,6 +82,10 @@ public class OvenButton : MonoBehaviour
         _oven.MakeThePlate(recipe, recipePosition);
         gameManager.Instance().WinCondition();
         ZombieEvents.onRecipeDone(gameManager.Instance().NumberOfPlate, gameManager.Instance().NumberOfPlateNeed);
+     
+        _animation.Play("ButtonPush");
     }
+
+
 
 }
