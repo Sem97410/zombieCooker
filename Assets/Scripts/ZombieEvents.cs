@@ -53,4 +53,10 @@ public class ZombieEvents
 
     public delegate void OnZombieHit(AudioSource audioSource);
     public static OnZombieHit onZombieHit;
+
+    public delegate void OnResumeGame();
+    public static OnResumeGame onResumeGame;
+    
+    public delegate void OnQuitGame();
+    public static OnQuitGame onQuitGame;
 }

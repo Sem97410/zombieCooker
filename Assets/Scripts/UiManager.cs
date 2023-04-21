@@ -60,6 +60,9 @@ public class UiManager : MonoBehaviour
 
         ZombieEvents.onPlayerWin += ShowVictoryPanel;
         ZombieEvents.onPlayerWin += HideHud;
+
+        ZombieEvents.onResumeGame += ResumeGame;
+        ZombieEvents.onQuitGame += QuitGame;
     }
 
     public void OnDisable()
@@ -85,6 +88,9 @@ public class UiManager : MonoBehaviour
 
         ZombieEvents.onPlayerWin -= ShowVictoryPanel;
         ZombieEvents.onPlayerWin -= HideHud;
+
+        ZombieEvents.onResumeGame -= ResumeGame;
+        ZombieEvents.onQuitGame -= QuitGame;
 
     }
     public void Start()
